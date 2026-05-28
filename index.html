@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Părțile de Vorbire – Veronica 🌟</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink:#ff6eb4; --purple:#a855f7; --orange:#ff8c42;
+      --yellow:#ffd93d; --green:#4ade80; --blue:#38bdf8;
+      --red:#f87171; --teal:#2dd4bf; --bg:#fff8f0;
+      --shadow:0 8px 30px rgba(0,0,0,0.13);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);overflow-x:hidden;}
+
+    /* ── CONFETTI CANVAS ── */
+    #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+
+    /* ── DIPLOMA OVERLAY ── */
+    #diploma-overlay{
+      display:none;position:fixed;inset:0;z-index:9998;
+      background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);
+      align-items:center;justify-content:center;
+    }
+    #diploma-overlay.show{display:flex;animation:fadeIn .4s;}
+    .diploma-box{
+      background:linear-gradient(135deg,#fffbe6,#fff3cd);
+      border:8px solid #ffd700;border-radius:30px;
+      max-width:540px;width:90%;padding:40px 30px;text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.35);
+      position:relative;animation:popIn .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn{from{transform:scale(.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+    .diploma-box h2{font-family:'Baloo 2',cursive;font-size:2.2rem;color:#b45309;margin:14px 0 8px;}
+    .diploma-box p{font-size:1.15rem;color:#78350f;margin-bottom:18px;}
+    .diploma-box .diploma-emoji{font-size:4rem;animation:bounce 1s infinite;}
+    .diploma-stars{font-size:2rem;letter-spacing:4px;margin:10px 0;}
+    .diploma-name{font-family:'Baloo 2',cursive;font-size:2.6rem;color:#7c3aed;font-weight:900;}
+    .diploma-close{
+      background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;border:none;
+      border-radius:50px;padding:12px 32px;font-family:'Nunito',sans-serif;
+      font-weight:900;font-size:1.1rem;cursor:pointer;margin-top:16px;
+      transition:transform .2s;
+    }
+    .diploma-close:hover{transform:scale(1.06);}
+
+    /* ── MASCOT ── */
+    .mascot{
+      position:fixed;bottom:14px;right:14px;
+      cursor:pointer;z-index:500;animation:float 3s ease-in-out infinite;
+      filter:drop-shadow(0 6px 16px rgba(168,85,247,0.4));
+      transition:transform .2s;
+      width:180px;
+    }
+    .mascot img{width:100%;display:block;}
+    .mascot:hover{transform:scale(1.15) rotate(-5deg);}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    .mascot-bubble{
+      position:fixed;bottom:205px;right:14px;z-index:501;
+      background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;
+      border-radius:20px 20px 4px 20px;
+      padding:12px 18px;max-width:210px;font-weight:800;font-size:.95rem;
+      box-shadow:0 4px 20px rgba(168,85,247,0.35);
+      display:none;animation:fadeIn .3s;
+    }
+    .mascot-bubble.show{display:block;}
+
+    /* ── MUSIC BUTTON ── */
+    .music-btn{
+      position:fixed;bottom:14px;left:14px;z-index:502;
+      width:56px;height:56px;border-radius:50%;
+      background:linear-gradient(135deg,#a855f7,#ec4899);
+      border:none;cursor:pointer;
+      box-shadow:0 4px 18px rgba(168,85,247,.5);
+      font-size:1.6rem;color:#fff;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .2s,box-shadow .2s;
+    }
+    .music-btn:hover{transform:scale(1.12);box-shadow:0 8px 28px rgba(168,85,247,.7);}
+    .music-btn.playing{
+      animation:musicPulse 1.4s ease-in-out infinite;
+    }
+    @keyframes musicPulse{
+      0%,100%{box-shadow:0 4px 18px rgba(168,85,247,.5),0 0 0 0 rgba(168,85,247,.4);}
+      50%{box-shadow:0 4px 18px rgba(168,85,247,.5),0 0 0 14px rgba(168,85,247,0);}
+    }
+    .music-label{
+      position:fixed;bottom:78px;left:14px;z-index:502;
+      background:rgba(168,85,247,.92);color:#fff;
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;
+      padding:5px 12px;border-radius:20px;
+      white-space:nowrap;pointer-events:none;
+      opacity:0;transition:opacity .3s;
+    }
+    .music-label.show{opacity:1;}
+
+    /* ── HERO ── */
+    .hero{
+      background:linear-gradient(135deg,#ff6eb4 0%,#a855f7 50%,#38bdf8 100%);
+      padding:56px 20px 72px;text-align:center;position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    /* WAVE WRAPPER */
+    .wave-wrap{position:relative;display:inline-block;}
+    .hero-char{display:block;line-height:1;
+      width:clamp(220px,35vw,340px);margin:0 auto 4px;
+      filter:drop-shadow(0 10px 28px rgba(0,0,0,0.28));
+      animation:waveFloat 2.2s ease-in-out infinite;}
+    @keyframes waveFloat{
+      0%   {transform:translateY(0) rotate(-4deg);}
+      25%  {transform:translateY(-10px) rotate(4deg);}
+      50%  {transform:translateY(-16px) rotate(-3deg);}
+      75%  {transform:translateY(-8px) rotate(3deg);}
+      100% {transform:translateY(0) rotate(-4deg);}
+    }
+    @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+    /* SPEECH BUBBLE */
+    .buna-bubble{
+      position:absolute;top:-28px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,#a855f7,#ec4899);
+      color:#fff;font-family:'Baloo 2',cursive;font-weight:900;
+      font-size:clamp(1.1rem,3vw,1.5rem);
+      padding:8px 22px;border-radius:30px;
+      white-space:nowrap;
+      box-shadow:0 4px 18px rgba(168,85,247,.5);
+      animation:bubblePop 2.2s ease-in-out infinite;
+      pointer-events:none;
+      letter-spacing:1px;
+    }
+    .buna-bubble::after{
+      content:'';
+      position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);
+      border:7px solid transparent;
+      border-top-color:#ec4899;
+    }
+    @keyframes bubblePop{
+      0%,100%{transform:translateX(-50%) scale(1);opacity:1;}
+      30%    {transform:translateX(-50%) scale(1.12);opacity:1;}
+      60%    {transform:translateX(-50%) scale(.96);opacity:.9;}
+    }
+    /* WAVE for fairy-veronica-img */
+    .fairy-veronica-img{
+      width:clamp(140px,28vw,220px);
+      filter:drop-shadow(0 6px 18px rgba(168,85,247,.5));
+      animation:waveFloat 2.2s ease-in-out infinite;
+      display:block;margin:0 auto;
+    }
+    .hero h1{
+      font-family:'Baloo 2',cursive;font-size:clamp(2rem,7vw,4.2rem);
+      color:#fff;text-shadow:3px 4px 0 rgba(0,0,0,0.2);margin:6px 0 6px;
+    }
+    .hero-sub{font-size:clamp(1rem,3vw,1.4rem);color:rgba(255,255,255,.92);font-weight:700;}
+    .hero-stars{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+    .h-star{position:absolute;font-size:1.5rem;animation:twinkle 2s infinite;}
+    @keyframes twinkle{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
+
+    /* ── GLOBAL PROGRESS ── */
+    .global-progress{
+      background:linear-gradient(135deg,#e0c3fc,#d4f1ff);
+      padding:18px 20px;text-align:center;font-weight:800;color:#4c1d95;
+      font-size:1rem;
+    }
+    .gp-bar-wrap{background:rgba(255,255,255,.5);border-radius:50px;height:16px;
+      max-width:500px;margin:10px auto 0;overflow:hidden;}
+    .gp-bar{height:100%;background:linear-gradient(90deg,#a855f7,#38bdf8);
+      border-radius:50px;transition:width .5s ease;width:0%;}
+
+    /* ── NAV ── */
+    .nav-tabs{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:9px;
+      padding:24px 16px 12px;
+      background:linear-gradient(180deg,#d4f1ff 0%,var(--bg) 100%);
+    }
+    .tab-btn{
+      font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;
+      padding:9px 18px;border:none;border-radius:50px;cursor:pointer;
+      color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .22s;
+    }
+    .tab-btn:hover{transform:translateY(-3px) scale(1.05);}
+    .tab-btn.active{transform:translateY(-3px) scale(1.08);box-shadow:0 6px 20px rgba(0,0,0,.25);}
+    .tab-done::after{content:' ✅';font-size:.75rem;}
+
+    /* ── SECTION ── */
+    .section{display:none;padding:28px 16px 70px;max-width:980px;margin:0 auto;}
+    .section.visible{display:block;animation:fadeIn .4s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+    .section-title{
+      font-family:'Baloo 2',cursive;font-size:clamp(1.8rem,5vw,3rem);
+      text-align:center;margin-bottom:6px;
+    }
+    .section-subtitle{text-align:center;font-size:1.05rem;color:#555;margin-bottom:26px;}
+
+    /* ── INFO CARDS ── */
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-bottom:28px;}
+    .info-card{
+      border-radius:20px;padding:20px;color:#fff;
+      box-shadow:var(--shadow);transition:transform .2s;
+    }
+    .info-card:hover{transform:translateY(-5px);}
+    .info-card h3{font-size:1.15rem;margin-bottom:7px;font-weight:800;}
+    .info-card p{font-size:.93rem;opacity:.92;line-height:1.5;}
+    .info-card .emoji{font-size:2.1rem;margin-bottom:7px;display:block;}
+    .def-box{
+      border-radius:20px;padding:22px 26px;margin-bottom:26px;
+      font-size:1.05rem;line-height:1.7;box-shadow:var(--shadow);
+    }
+    .def-box strong{font-weight:900;}
+    .examples-list{list-style:none;display:flex;flex-wrap:wrap;gap:9px;margin:14px 0 26px;}
+    .examples-list li{
+      background:#fff;border-radius:50px;padding:7px 18px;
+      font-weight:700;box-shadow:0 3px 10px rgba(0,0,0,.1);
+      font-size:.97rem;transition:transform .2s;cursor:default;
+    }
+    .examples-list li:hover{transform:scale(1.08);}
+
+    /* ── RICH CONTENT BOXES ── */
+    .fun-fact{
+      border-radius:18px;padding:18px 22px;margin:16px 0;
+      font-size:1rem;line-height:1.65;font-weight:700;
+      display:flex;gap:14px;align-items:flex-start;
+      box-shadow:var(--shadow);
+    }
+    .fun-fact .ff-icon{font-size:2rem;flex-shrink:0;margin-top:2px;}
+    .fun-fact h4{font-size:1.05rem;font-weight:900;margin-bottom:4px;}
+    .fun-fact p{font-size:.95rem;font-weight:600;opacity:.92;}
+    .tip-box{
+      border-radius:18px;padding:16px 20px;margin:14px 0;
+      background:linear-gradient(135deg,#fef9c3,#fde68a);
+      border-left:6px solid #f59e0b;
+      font-size:.97rem;font-weight:700;color:#78350f;
+      box-shadow:0 4px 16px rgba(245,158,11,.2);
+    }
+    .tip-box strong{font-weight:900;}
+    .rule-box{
+      border-radius:18px;padding:16px 20px;margin:14px 0;
+      background:linear-gradient(135deg,#ede9fe,#ddd6fe);
+      border-left:6px solid #7c3aed;
+      font-size:.97rem;font-weight:700;color:#3b0764;
+      box-shadow:0 4px 16px rgba(124,58,237,.15);
+    }
+    .sentence-examples{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;margin:14px 0 20px;
+    }
+    .sent-card{
+      background:#fff;border-radius:16px;padding:14px 18px;
+      box-shadow:0 4px 16px rgba(0,0,0,.1);
+      border-top:5px solid;font-size:.95rem;
+      transition:transform .2s;
+    }
+    .sent-card:hover{transform:translateY(-4px);}
+    .sent-card .sent-label{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;opacity:.7;}
+    .sent-card .sent-text{font-weight:700;color:#222;line-height:1.5;}
+    .sent-card .sent-highlight{font-weight:900;padding:0 3px;border-radius:4px;}
+    .examples-title{font-family:'Baloo 2',cursive;font-size:1.3rem;font-weight:800;margin:22px 0 8px;}
+
+    /* ── SCORE BAR ── */
+    .score-bar{
+      background:#fff;border-radius:20px;padding:14px 22px;
+      text-align:center;box-shadow:var(--shadow);margin-bottom:22px;
+      font-size:1.05rem;font-weight:800;color:#555;
+    }
+    .score-num{font-size:1.7rem;font-weight:900;}
+    .progress-wrap{background:#f0f0f0;border-radius:50px;height:12px;
+      margin:8px auto 0;max-width:300px;overflow:hidden;}
+    .progress-fill{height:100%;background:linear-gradient(90deg,#4ade80,#22d3ee);
+      border-radius:50px;transition:width .4s ease;width:0%;}
+
+    /* ── EXERCISES ── */
+    .exercises-title{
+      font-family:'Baloo 2',cursive;font-size:1.75rem;
+      text-align:center;margin:38px 0 18px;
+    }
+    .exercise-card{
+      background:#fff;border-radius:20px;padding:22px 26px;
+      margin-bottom:18px;box-shadow:var(--shadow);border-left:8px solid;
+      transition:transform .15s;
+    }
+    .exercise-card:hover{transform:translateX(3px);}
+    .q-num{font-size:.82rem;font-weight:800;text-transform:uppercase;
+      letter-spacing:1px;margin-bottom:8px;}
+    .question{font-size:1.08rem;font-weight:700;margin-bottom:13px;color:#333;}
+    .options{display:flex;flex-wrap:wrap;gap:9px;}
+    .option-btn{
+      background:#f3f4f6;border:3px solid #e5e7eb;border-radius:12px;
+      padding:9px 17px;font-family:'Nunito',sans-serif;font-weight:700;
+      font-size:.97rem;cursor:pointer;transition:all .18s;
+    }
+    .option-btn:hover:not(:disabled){background:#e0e7ff;border-color:#6366f1;transform:scale(1.04);}
+    .option-btn.correct{background:#dcfce7;border-color:#22c55e;color:#15803d;}
+    .option-btn.wrong{background:#fee2e2;border-color:#ef4444;color:#b91c1c;}
+    .option-btn:disabled{cursor:default;}
+    .feedback{
+      margin-top:10px;padding:9px 15px;border-radius:12px;
+      font-weight:800;font-size:.97rem;display:none;
+    }
+    .feedback.show{display:block;animation:pop .3s;}
+    .feedback.ok{background:#dcfce7;color:#166534;}
+    .feedback.err{background:#fee2e2;color:#991b1b;}
+    @keyframes pop{0%{transform:scale(.75);}60%{transform:scale(1.1);}100%{transform:scale(1);}}
+    .fill-input{
+      border:3px solid #d1d5db;border-radius:12px;padding:8px 13px;
+      font-family:'Nunito',sans-serif;font-weight:700;font-size:.97rem;
+      width:160px;outline:none;transition:border-color .2s;
+    }
+    .fill-input:focus{border-color:#6366f1;}
+    .check-btn{
+      background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border:none;
+      border-radius:12px;padding:9px 19px;font-family:'Nunito',sans-serif;
+      font-weight:800;font-size:.97rem;cursor:pointer;margin-left:9px;transition:transform .2s;
+    }
+    .check-btn:hover{transform:scale(1.06);}
+
+    /* ── REWARD ── */
+    .reward{
+      display:none;text-align:center;padding:28px;
+      background:linear-gradient(135deg,#ffd93d,#ff8c42);
+      border-radius:24px;margin-top:28px;box-shadow:var(--shadow);
+    }
+    .reward.show{display:block;animation:fadeIn .5s;}
+    .reward h2{font-family:'Baloo 2',cursive;font-size:1.9rem;color:#fff;}
+    .reward p{font-size:1.15rem;color:#fff;margin-top:7px;}
+    .reward-stars{font-size:2rem;margin:8px 0;}
+
+    /* ── RESET BTN ── */
+    .reset-btn{
+      display:block;margin:18px auto 0;
+      background:#f3f4f6;border:3px solid #e5e7eb;border-radius:50px;
+      padding:9px 26px;font-family:'Nunito',sans-serif;font-weight:800;
+      font-size:.97rem;cursor:pointer;transition:all .2s;color:#555;
+    }
+    .reset-btn:hover{background:#e0e7ff;border-color:#6366f1;color:#4338ca;}
+
+    /* ── MENU ── */
+    .menu-hero{text-align:center;padding:20px 0 14px;}
+    .menu-hero h2{font-family:'Baloo 2',cursive;font-size:2rem;color:#a855f7;}
+    .menu-hero p{font-size:1.05rem;color:#555;margin-top:6px;}
+    .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:18px;padding:16px 0;}
+    .menu-card{
+      border-radius:24px;padding:28px 18px;text-align:center;color:#fff;
+      cursor:pointer;box-shadow:var(--shadow);transition:transform .22s,box-shadow .22s;
+      border:none;font-family:'Nunito',sans-serif;position:relative;overflow:hidden;
+    }
+    .menu-card::after{
+      content:'';position:absolute;inset:0;
+      background:rgba(255,255,255,0);transition:background .2s;
+    }
+    .menu-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 16px 40px rgba(0,0,0,.2);}
+    .menu-card:hover::after{background:rgba(255,255,255,.07);}
+    .menu-card .big-emoji{font-size:2.8rem;display:block;margin-bottom:9px;}
+    .menu-card h2{font-size:1.2rem;font-weight:900;}
+    .menu-card p{font-size:.84rem;opacity:.88;margin-top:3px;}
+    .menu-card .done-badge{
+      position:absolute;top:12px;right:12px;background:#fff;
+      border-radius:50%;width:28px;height:28px;display:none;
+      align-items:center;justify-content:center;font-size:1rem;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);
+    }
+    .menu-card .done-badge.show{display:flex;}
+
+    /* color utils */
+    .c-pink{color:var(--pink);}.c-purple{color:var(--purple);}
+    .c-orange{color:var(--orange);}.c-blue{color:var(--blue);}
+    .c-green{color:var(--green);}.c-red{color:var(--red);}
+    .c-teal{color:var(--teal);}.c-yellow{color:#ca8a04;}
+
+    @media(max-width:500px){
+      .nav-tabs{gap:6px;}
+      .tab-btn{padding:7px 12px;font-size:.82rem;}
+    }
+
+    /* ══ FAIRY TALE POSTER ══ */
+    .fairy-poster{
+      background:
+        radial-gradient(ellipse at top, #d4f5d4 0%, #a8edbb 40%, #7dd3a8 100%);
+      border-radius:28px;
+      padding:28px 20px 24px;
+      box-shadow:0 12px 40px rgba(0,0,0,0.18);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:20px;
+    }
+    .fairy-poster::before{
+      content:'☁️ ☁️ ☁️ ☁️';
+      position:absolute;top:12px;left:0;width:100%;
+      font-size:2.5rem;letter-spacing:40px;opacity:.5;
+      pointer-events:none;
+    }
+    .fairy-poster::after{
+      content:'🌳 🌲 🌴 🌲 🌳';
+      position:absolute;top:40px;right:0;
+      font-size:2rem;opacity:.4;pointer-events:none;
+    }
+
+    /* SCROLL BANNER */
+    .scroll-banner{
+      display:flex;align-items:center;justify-content:center;gap:12px;
+      background:linear-gradient(135deg,#fef9c3,#fde68a,#fef9c3);
+      border:4px solid #d97706;border-radius:50px;
+      padding:12px 30px;margin:0 auto 16px;
+      box-shadow:0 4px 16px rgba(217,119,6,.35),inset 0 2px 6px rgba(255,255,255,.6);
+      max-width:520px;
+    }
+    .scroll-title{
+      font-family:'Baloo 2',cursive;
+      font-size:clamp(1.6rem,5vw,2.6rem);
+      color:#92400e;
+      text-shadow:2px 2px 0 rgba(255,255,255,.6);
+      margin:0;
+      letter-spacing:1px;
+    }
+
+    /* VERONICA IMAGE in poster */
+    .fairy-veronica-img{
+      width:clamp(140px,28vw,220px);
+      filter:drop-shadow(0 6px 18px rgba(168,85,247,.5));
+      animation:bounce 2s ease-in-out infinite;
+      display:block;margin:0 auto;
+    }
+
+    /* ROWS */
+    .fairy-row{
+      display:flex;flex-wrap:wrap;justify-content:center;
+      gap:12px;margin:14px 0;
+    }
+
+    /* CHARACTER CARDS */
+    .fairy-card{
+      background:rgba(255,255,255,0.88);
+      backdrop-filter:blur(4px);
+      border:3px solid rgba(255,255,255,.9);
+      border-radius:20px;
+      padding:14px 10px 12px;
+      width:clamp(130px,17vw,176px);
+      text-align:center;
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(0,0,0,0.14);
+      transition:transform .22s,box-shadow .22s;
+      position:relative;
+      font-family:'Nunito',sans-serif;
+    }
+    .fairy-card:hover{
+      transform:translateY(-8px) scale(1.06);
+      box-shadow:0 14px 36px rgba(0,0,0,0.22);
+    }
+
+    /* NUMBER BADGE */
+    .fc-num{
+      position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+      width:28px;height:28px;border-radius:50%;
+      color:#fff;font-weight:900;font-size:.95rem;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 2px 8px rgba(0,0,0,.25);
+      border:2px solid rgba(255,255,255,.8);
+    }
+    .fc-char{font-size:2.4rem;line-height:1.2;margin:6px 0 4px;}
+    .fc-label{
+      font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;
+      margin-bottom:4px;
+    }
+    .fc-desc{font-size:.78rem;color:#444;line-height:1.35;font-weight:600;}
+    .fc-words{
+      margin-top:6px;font-size:.8rem;font-weight:900;
+      color:#6366f1;background:#ede9fe;
+      border-radius:8px;padding:3px 6px;display:inline-block;
+    }
+
+    /* MEADOW STRIP */
+    .meadow-strip{
+      font-size:1.5rem;text-align:center;
+      letter-spacing:4px;padding:6px 0;
+      opacity:.85;
+    }
+
+    /* RIBBON */
+    .fairy-ribbon{
+      background:linear-gradient(135deg,#fce7f3,#fbcfe8,#fce7f3);
+      border:3px solid #ec4899;border-radius:50px;
+      padding:10px 28px;text-align:center;
+      font-family:'Baloo 2',cursive;font-size:1.3rem;
+      color:#be185d;font-weight:800;
+      box-shadow:0 4px 14px rgba(236,72,153,.3);
+      margin:14px auto 0;max-width:400px;
+      letter-spacing:.5px;
+    }
+
+    @media(max-width:600px){
+      .fairy-card{width:clamp(110px,42vw,155px);}
+      .fc-char{font-size:2rem;}
+      .fc-label{font-size:.9rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- DIPLOMA -->
+<div id="diploma-overlay">
+  <div class="diploma-box">
+    <div class="diploma-emoji">🏆</div>
+    <div class="diploma-stars">⭐⭐⭐⭐⭐</div>
+    <h2>DIPLOMĂ DE EXCELENȚĂ</h2>
+    <p>Se acordă cu mândrie lui</p>
+    <div class="diploma-name">Veronica</div>
+    <p style="margin-top:10px;">pentru că a rezolvat cu succes<br><strong>toate exercițiile</strong> despre<br><span id="diploma-topic" style="color:#7c3aed;font-weight:900;"></span>!</p>
+    <div class="diploma-stars">🌟🌸💎🌟</div>
+    <button class="diploma-close" onclick="closeDiploma()">Mulțumesc! 🎉</button>
+  </div>
+</div>
+
+<!-- MASCOT -->
+<div class="mascot" id="mascot" onclick="mascotSpeak()">
+  <img src="veronica.png" alt="Veronica" />
+</div>
+<div class="mascot-bubble" id="mascot-bubble">Hai să învățăm! 📚✨</div>
+
+<!-- MUSIC BUTTON -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Muzică de fundal">🎵</button>
+<div class="music-label" id="musicLabel">Muzică pornită 🎶</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-stars" id="starContainer"></div>
+  <div class="wave-wrap">
+    <div class="buna-bubble">Bună! 👋</div>
+    <img class="hero-char" src="veronica.png" alt="Veronica" />
+  </div>
+  <h1>Părțile de Vorbire</h1>
+  <p class="hero-sub">Un site special pentru <strong>Veronica</strong> 💖</p>
+</header>
+
+<!-- GLOBAL PROGRESS -->
+<div class="global-progress">
+  <span id="gp-text">Progres total: <strong>0</strong> / <strong id="gp-total">0</strong> exerciții rezolvate</span>
+  <div class="gp-bar-wrap"><div class="gp-bar" id="gp-bar"></div></div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-tabs" id="mainNav">
+  <button class="tab-btn active" id="tab-home"       style="background:linear-gradient(135deg,#ff6eb4,#a855f7)" onclick="showSection('home')">🏠 Acasă</button>
+  <button class="tab-btn"        id="tab-substantiv" style="background:linear-gradient(135deg,#f87171,#fb923c)" onclick="showSection('substantiv')">📦 Substantiv</button>
+  <button class="tab-btn"        id="tab-pronume"    style="background:linear-gradient(135deg,#38bdf8,#6366f1)" onclick="showSection('pronume')">🙋 Pronume</button>
+  <button class="tab-btn"        id="tab-verb"       style="background:linear-gradient(135deg,#4ade80,#2dd4bf)" onclick="showSection('verb')">⚡ Verb</button>
+  <button class="tab-btn"        id="tab-adjectiv"   style="background:linear-gradient(135deg,#fbbf24,#f97316)" onclick="showSection('adjectiv')">🎨 Adjectiv</button>
+  <button class="tab-btn"        id="tab-adverb"     style="background:linear-gradient(135deg,#a78bfa,#ec4899)" onclick="showSection('adverb')">🚀 Adverb</button>
+  <button class="tab-btn"        id="tab-prepozitie" style="background:linear-gradient(135deg,#34d399,#0891b2)" onclick="showSection('prepozitie')">🔗 Prepoziție</button>
+  <button class="tab-btn"        id="tab-conjunctie" style="background:linear-gradient(135deg,#f472b6,#9333ea)" onclick="showSection('conjunctie')">🤝 Conjuncție</button>
+  <button class="tab-btn"        id="tab-interjectie"style="background:linear-gradient(135deg,#fb7185,#fbbf24)" onclick="showSection('interjectie')">😲 Interjecție</button>
+  <button class="tab-btn"        id="tab-exercitii"  style="background:linear-gradient(135deg,#22d3ee,#6366f1)" onclick="showSection('exercitii')">✏️ Exerciții Mari</button>
+  <button class="tab-btn" id="tab-vocabular" style="background:linear-gradient(135deg,#f43f5e,#fb923c)" onclick="showSection('vocabular')">📖 Vocabular - Relații Semantice</button>
+</nav>
+
+<!-- ══════════════ ACASĂ ══════════════ -->
+<section class="section visible" id="home">
+  <div class="fairy-poster">
+    <!-- SCROLL TITLE -->
+    <div class="scroll-banner">
+      <span>🌿</span>
+      <h2 class="scroll-title">Părțile de Vorbire</h2>
+      <span>🌿</span>
+    </div>
+    <!-- VERONICA -->
+    <div style="text-align:center;margin:10px 0 0;">
+      <div class="wave-wrap" style="margin:0 auto;">
+        <div class="buna-bubble">Bună! 👋</div>
+        <img src="veronica.png" alt="Veronica" class="fairy-veronica-img" onmouseover="playGreeting()" onclick="playGreeting()" style="cursor:pointer;" />
+      </div>
+    </div>
+    <!-- ROW 1 -->
+    <div class="fairy-row">
+      <button class="fairy-card" onclick="showSection('substantiv')">
+        <div class="fc-num" style="background:#a855f7;">1</div>
+        <div class="fc-char">🧚‍♀️</div>
+        <div class="fc-label" style="color:#7e22ce;">Substantivul</div>
+        <div class="fc-desc">numește persoane, animale, lucruri și locuri.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('adjectiv')">
+        <div class="fc-num" style="background:#22c55e;">2</div>
+        <div class="fc-char">🌸</div>
+        <div class="fc-label" style="color:#15803d;">Adjectivul</div>
+        <div class="fc-desc">adaugă frumusețe, culoare, mărime și calități.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('verb')">
+        <div class="fc-num" style="background:#3b82f6;">3</div>
+        <div class="fc-char">⚔️</div>
+        <div class="fc-label" style="color:#1d4ed8;">Verbul</div>
+        <div class="fc-desc">arată acțiune, mișcare și viață.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('pronume')">
+        <div class="fc-num" style="background:#ec4899;">4</div>
+        <div class="fc-char">🪄</div>
+        <div class="fc-label" style="color:#9d174d;">Pronumele</div>
+        <div class="fc-desc">înlocuiește un substantiv și poate lua locul lui.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('exercitii')">
+        <div class="fc-num" style="background:#f59e0b;">5</div>
+        <div class="fc-char">🧙‍♂️</div>
+        <div class="fc-label" style="color:#92400e;">Numeralul</div>
+        <div class="fc-desc">arată numărul, ordinea sau cantitatea.</div>
+      </button>
+    </div>
+    <!-- MEADOW STRIP -->
+    <div class="meadow-strip">🌿🌼🌷🌻🦋🌷🌼🌿🌸🍀🌿🌼🌷🌻🦋🌷🌼🌿</div>
+    <!-- ROW 2 -->
+    <div class="fairy-row">
+      <button class="fairy-card" onclick="showSection('exercitii')">
+        <div class="fc-num" style="background:#8b5cf6;">6</div>
+        <div class="fc-char">📜</div>
+        <div class="fc-label" style="color:#5b21b6;">Articolul</div>
+        <div class="fc-desc">însoțește substantivul și îl face să se potrivească în propoziție.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('prepozitie')">
+        <div class="fc-num" style="background:#10b981;">7</div>
+        <div class="fc-char">🌉</div>
+        <div class="fc-label" style="color:#065f46;">Prepoziția</div>
+        <div class="fc-desc">arată poziția: pe, sub, lângă, în spatele, între...</div>
+        <div class="fc-words">pe &nbsp; sub &nbsp; lângă</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('conjunctie')">
+        <div class="fc-num" style="background:#f59e0b;">8</div>
+        <div class="fc-char">🔮</div>
+        <div class="fc-label" style="color:#78350f;">Conjuncția</div>
+        <div class="fc-desc">leagă cuvinte, propoziții și idei.</div>
+        <div class="fc-words">și &nbsp; dar &nbsp; sau</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('adverb')">
+        <div class="fc-num" style="background:#06b6d4;">9</div>
+        <div class="fc-char">🧭</div>
+        <div class="fc-label" style="color:#164e63;">Adverbul</div>
+        <div class="fc-desc">arată cum, când, unde, cât de mult.</div>
+      </button>
+      <button class="fairy-card" onclick="showSection('interjectie')">
+        <div class="fc-num" style="background:#ef4444;">10</div>
+        <div class="fc-char">✨</div>
+        <div class="fc-label" style="color:#7f1d1d;">Interjecția</div>
+        <div class="fc-desc">exprimă emoții puternice și reacții spontane.</div>
+        <div class="fc-words">Ura! &nbsp; Bravo! &nbsp; Ah!</div>
+      </button>
+    </div>
+    <!-- RIBBON -->
+    <div class="fairy-ribbon">💖 Pentru tine, Veronica! 💖</div>
+  </div>
+  <div class="menu-grid" style="display:none;">
+    <button class="menu-card" style="background:linear-gradient(135deg,#f87171,#fb923c)" onclick="showSection('substantiv')">
+      <div class="done-badge" id="done-substantiv">✅</div>
+      <span class="big-emoji">📦</span><h2>Substantivul</h2><p>Numele lucrurilor, ființelor și locurilor</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#38bdf8,#6366f1)" onclick="showSection('pronume')">
+      <div class="done-badge" id="done-pronume">✅</div>
+      <span class="big-emoji">🙋</span><h2>Pronumele</h2><p>Înlocuiește substantivul</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#4ade80,#2dd4bf)" onclick="showSection('verb')">
+      <div class="done-badge" id="done-verb">✅</div>
+      <span class="big-emoji">⚡</span><h2>Verbul</h2><p>Acțiunea sau starea</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#fbbf24,#f97316)" onclick="showSection('adjectiv')">
+      <div class="done-badge" id="done-adjectiv">✅</div>
+      <span class="big-emoji">🎨</span><h2>Adjectivul</h2><p>Descrie o ființă sau un lucru</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#a78bfa,#ec4899)" onclick="showSection('adverb')">
+      <div class="done-badge" id="done-adverb">✅</div>
+      <span class="big-emoji">🚀</span><h2>Adverbul</h2><p>Cum, când sau unde se face ceva</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#34d399,#0891b2)" onclick="showSection('prepozitie')">
+      <div class="done-badge" id="done-prepozitie">✅</div>
+      <span class="big-emoji">🔗</span><h2>Prepoziția</h2><p>Leagă cuvintele între ele</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#f472b6,#9333ea)" onclick="showSection('conjunctie')">
+      <div class="done-badge" id="done-conjunctie">✅</div>
+      <span class="big-emoji">🤝</span><h2>Conjuncția</h2><p>Unește propoziții sau cuvinte</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#fb7185,#fbbf24)" onclick="showSection('interjectie')">
+      <div class="done-badge" id="done-interjectie">✅</div>
+      <span class="big-emoji">😲</span><h2>Interjecția</h2><p>Exprimă emoții și senzații</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#22d3ee,#6366f1)" onclick="showSection('exercitii')">
+      <div class="done-badge" id="done-exercitii">✅</div>
+      <span class="big-emoji">✏️</span><h2>Exerciții Mari</h2><p>Testează tot ce știi!</p>
+    </button>
+    <button class="menu-card" style="background:linear-gradient(135deg,#f43f5e,#fb923c)" onclick="showSection('vocabular')">
+      <div class="done-badge" id="done-vocabular">✅</div>
+      <span class="big-emoji">📖</span><h2>Vocabular</h2><p>Relații Semantice</p>
+    </button>
+  </div>
+</section>
+
+<!-- ══════════════ SUBSTANTIV ══════════════ -->
+<section class="section" id="substantiv">
+  <h2 class="section-title c-red">📦 Substantivul</h2>
+  <p class="section-subtitle">Substantivul este cuvântul care <strong>denumește</strong> o ființă, un lucru, un fenomen sau un loc.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#fff1f2,#ffe4e6);border-left:8px solid #f87171;">
+    <strong>🔑 Definiție:</strong> Substantivul este partea de vorbire care <strong>numește</strong> oameni, animale, lucruri, locuri sau fenomene ale naturii.<br><br>
+    ❓ <strong>Întrebări:</strong> <em>Cine? Ce?</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#f87171,#fb923c)"><span class="emoji">👤</span><h3>Ființe</h3><p>mama, copilul, pisica, câinele, profesoara</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#fb923c,#fbbf24)"><span class="emoji">🪑</span><h3>Lucruri</h3><p>masă, carte, creion, ghiozdan, minge</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#fbbf24,#a3e635)"><span class="emoji">🏔️</span><h3>Locuri</h3><p>școala, parcul, orașul, muntele, marea</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#4ade80,#22d3ee)"><span class="emoji">⛈️</span><h3>Fenomene</h3><p>ploaia, vântul, zăpada, tunetul, fulgerul</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#6366f1)"><span class="emoji">🏷️</span><h3>Substantive comune</h3><p>fată, câine, floare, școală, oraș</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#a855f7,#ec4899)"><span class="emoji">⭐</span><h3>Substantive proprii</h3><p>Veronica, România, București, Dunărea</p></div>
+  </div>
+  <div class="fun-fact" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);">
+    <span class="ff-icon">💡</span>
+    <div><h4 style="color:#be185d;">Știai că...?</h4>
+    <p>Substantivul poate fi <strong>singular</strong> (un singur lucru: <em>carte</em>) sau <strong>plural</strong> (mai multe: <em>cărți</em>). Poate fi <strong>masculin</strong> (câinele 🐕), <strong>feminin</strong> (pisica 🐈) sau <strong>neutru</strong> (scaunul 🪑).</p></div>
+  </div>
+  <div class="tip-box">💛 <strong>Trucul Veronicăi:</strong> Pune „<em>un</em>" sau „<em>o</em>" în față! Dacă sună bine → e substantiv! &nbsp; „<em>un câine</em>" ✅ &nbsp;|&nbsp; „<em>o floare</em>" ✅ &nbsp;|&nbsp; „<em>un aleargă</em>" ❌</div>
+  <div class="rule-box">📏 <strong>Regula de aur:</strong> Substantivele proprii (nume de persoane, orașe, țări) se scriu <strong>ÎNTOTDEAUNA cu literă MARE</strong>: <em>Veronica, București, România, Dunărea, Carpații</em>.</div>
+  <p class="examples-title" style="color:#f87171;">🗣️ Exemple în propoziții:</p>
+  <div class="sentence-examples">
+    <div class="sent-card" style="border-color:#f87171;"><div class="sent-label" style="color:#f87171;">Ființă</div><div class="sent-text"><span class="sent-highlight" style="background:#ffe4e6;color:#be123c;">Veronica</span> citește o poveste.</div></div>
+    <div class="sent-card" style="border-color:#fb923c;"><div class="sent-label" style="color:#fb923c;">Lucru</div><div class="sent-text">Am pus <span class="sent-highlight" style="background:#ffedd5;color:#c2410c;">cartea</span> pe masă.</div></div>
+    <div class="sent-card" style="border-color:#fbbf24;"><div class="sent-label" style="color:#b45309;">Loc</div><div class="sent-text">Mergem în <span class="sent-highlight" style="background:#fef9c3;color:#92400e;">parc</span> după masă.</div></div>
+    <div class="sent-card" style="border-color:#4ade80;"><div class="sent-label" style="color:#15803d;">Fenomen</div><div class="sent-text"><span class="sent-highlight" style="background:#dcfce7;color:#166534;">Ploaia</span> cade pe fereastră.</div></div>
+    <div class="sent-card" style="border-color:#38bdf8;"><div class="sent-label" style="color:#0284c7;">Propriu</div><div class="sent-text"><span class="sent-highlight" style="background:#e0f2fe;color:#0c4a6e;">România</span> este țara noastră.</div></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#f87171;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🌸 floare</li><li>🐱 pisică</li><li>📚 carte</li><li>🏡 casă</li>
+    <li>🌊 mare</li><li>👧 Veronica</li><li>🇷🇴 România</li><li>🌧️ ploaie</li>
+    <li>🐶 câine</li><li>⛰️ munte</li><li>🍎 măr</li><li>✏️ creion</li><li>🦋 fluture</li>
+  </ul>
+
+  <!-- ════ FELUL SUBSTANTIVELOR ════ -->
+  <div style="margin:32px 0 0;">
+    <h2 style="font-family:'Baloo 2',cursive;font-size:1.9rem;text-align:center;color:#a855f7;margin-bottom:6px;">🔍 Felul Substantivelor</h2>
+    <p style="text-align:center;color:#555;font-size:.97rem;margin-bottom:22px;">Substantivele se clasifică după <strong>gen</strong>, <strong>număr</strong> și <strong>tip</strong>.</p>
+
+    <!-- 1. GENUL -->
+    <div style="background:linear-gradient(135deg,#fdf4ff,#fae8ff);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(168,85,247,.15);border-left:7px solid #a855f7;">
+      <h3 style="font-family:'Baloo 2',cursive;font-size:1.4rem;color:#7e22ce;margin-bottom:14px;">🏷️ 1. Genul Substantivului</h3>
+      <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">În limba română, substantivele au <strong>trei genuri</strong>. Genul se recunoaște punând <em>„un"</em> sau <em>„o"</em> în față:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px;">
+        <div style="background:linear-gradient(135deg,#3b82f6,#6366f1);border-radius:18px;padding:18px;color:#fff;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:6px;">🧔</div>
+          <h4 style="font-size:1.1rem;font-weight:900;margin-bottom:6px;">Masculin</h4>
+          <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;font-size:.88rem;">
+            <strong>„un ___"</strong><br>
+            un <em>câine</em>, un <em>băiat</em>,<br>un <em>munte</em>, un <em>copac</em>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#ec4899,#f43f5e);border-radius:18px;padding:18px;color:#fff;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:6px;">👩</div>
+          <h4 style="font-size:1.1rem;font-weight:900;margin-bottom:6px;">Feminin</h4>
+          <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;font-size:.88rem;">
+            <strong>„o ___"</strong><br>
+            o <em>pisică</em>, o <em>fată</em>,<br>o <em>floare</em>, o <em>casă</em>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#10b981,#06b6d4);border-radius:18px;padding:18px;color:#fff;text-align:center;">
+          <div style="font-size:2.2rem;margin-bottom:6px;">🪑</div>
+          <h4 style="font-size:1.1rem;font-weight:900;margin-bottom:6px;">Neutru</h4>
+          <div style="background:rgba(255,255,255,.2);border-radius:12px;padding:8px 12px;font-size:.88rem;">
+            <strong>„un ___" → „niște ___uri"</strong><br>
+            un <em>scaun</em>, un <em>creion</em>,<br>un <em>geam</em>, un <em>ghiozdan</em>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.7);border-radius:14px;padding:12px 16px;font-size:.9rem;font-weight:700;color:#581c87;">
+        💡 <strong>Secretul neutrului:</strong> La singular se comportă ca <em>masculin</em> (un scaun), dar la plural se comportă ca <em>feminin</em> (niște scaune). Super interesant! 🤯
+      </div>
+    </div>
+
+    <!-- 2. NUMĂRUL -->
+    <div style="background:linear-gradient(135deg,#fffbeb,#fef9c3);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(245,158,11,.15);border-left:7px solid #f59e0b;">
+      <h3 style="font-family:'Baloo 2',cursive;font-size:1.4rem;color:#b45309;margin-bottom:14px;">🔢 2. Numărul Substantivului</h3>
+      <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Substantivele pot fi la <strong>singular</strong> (un singur lucru) sau <strong>plural</strong> (mai multe lucruri).</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:separate;border-spacing:0 8px;font-size:.93rem;">
+          <thead>
+            <tr>
+              <th style="background:#f59e0b;color:#fff;padding:10px 16px;border-radius:12px 0 0 12px;text-align:left;">Singular (1 lucru)</th>
+              <th style="background:#f59e0b;color:#fff;padding:10px 16px;border-radius:0 12px 12px 0;text-align:left;">Plural (mai multe)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#fff;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">🐱 o pisică</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">🐱🐱 niște pisici</td></tr>
+            <tr style="background:#fef9c3;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">📚 o carte</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">📚📚 niște cărți</td></tr>
+            <tr style="background:#fff;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">🌸 o floare</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">🌸🌸 niște flori</td></tr>
+            <tr style="background:#fef9c3;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">🏡 o casă</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">🏡🏡 niște case</td></tr>
+            <tr style="background:#fff;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">🐶 un câine</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">🐶🐶 niște câini</td></tr>
+            <tr style="background:#fef9c3;"><td style="padding:10px 16px;border-radius:10px 0 0 10px;font-weight:700;">✏️ un creion</td><td style="padding:10px 16px;border-radius:0 10px 10px 0;font-weight:700;color:#b45309;">✏️✏️ niște creioane</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="background:rgba(255,255,255,.7);border-radius:14px;padding:12px 16px;margin-top:12px;font-size:.9rem;font-weight:700;color:#78350f;">
+        💡 <strong>Atenție la neregulate!</strong> Unele cuvinte se schimbă mult la plural: <em>om → oameni</em>, <em>copil → copii</em>, <em>ochi → ochi</em> (rămâne la fel!).
+      </div>
+    </div>
+
+    <!-- 3. COMUN / PROPRIU -->
+    <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(16,185,129,.15);border-left:7px solid #10b981;">
+      <h3 style="font-family:'Baloo 2',cursive;font-size:1.4rem;color:#065f46;margin-bottom:14px;">📛 3. Comun și Propriu</h3>
+      <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Substantivele se împart în <strong>comune</strong> (pentru toți) și <strong>proprii</strong> (pentru unul singur, unic).</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:14px;">
+        <div style="background:#fff;border-radius:18px;padding:18px;border:3px solid #10b981;box-shadow:0 4px 14px rgba(16,185,129,.2);">
+          <div style="font-size:2rem;margin-bottom:8px;">🏷️</div>
+          <h4 style="font-size:1.05rem;font-weight:900;color:#065f46;margin-bottom:8px;">Substantiv COMUN</h4>
+          <p style="font-size:.88rem;color:#444;font-weight:600;margin-bottom:10px;">Denumește o categorie generală. Se scrie cu <strong style="color:#dc2626;">literă mică</strong>.</p>
+          <div style="background:#dcfce7;border-radius:10px;padding:8px 12px;font-size:.88rem;font-weight:700;color:#166534;">
+            fată, câine, oraș, floare,<br>carte, profesor, mașină
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:18px;padding:18px;border:3px solid #f59e0b;box-shadow:0 4px 14px rgba(245,158,11,.2);">
+          <div style="font-size:2rem;margin-bottom:8px;">⭐</div>
+          <h4 style="font-size:1.05rem;font-weight:900;color:#b45309;margin-bottom:8px;">Substantiv PROPRIU</h4>
+          <p style="font-size:.88rem;color:#444;font-weight:600;margin-bottom:10px;">Denumește ceva unic. Se scrie <strong style="color:#dc2626;">ÎNTOTDEAUNA cu literă MARE</strong>.</p>
+          <div style="background:#fef9c3;border-radius:10px;padding:8px 12px;font-size:.88rem;font-weight:700;color:#92400e;">
+            Veronica, București, România,<br>Dunărea, Carpații, Dacia
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.8);border-radius:14px;padding:14px 18px;font-size:.92rem;font-weight:700;color:#065f46;">
+        <table style="width:100%;border-collapse:collapse;font-size:.9rem;">
+          <tr>
+            <th style="text-align:left;padding:6px 10px;color:#065f46;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;">Comun</th>
+            <th style="text-align:left;padding:6px 10px;color:#b45309;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;">↔ Propriu</th>
+          </tr>
+          <tr style="background:#f0fdf4;"><td style="padding:8px 10px;border-radius:8px 0 0 8px;">🏙️ oraș</td><td style="padding:8px 10px;border-radius:0 8px 8px 0;color:#b45309;font-weight:800;">⭐ București, Cluj, Iași</td></tr>
+          <tr><td style="padding:8px 10px;">👧 fată</td><td style="padding:8px 10px;color:#b45309;font-weight:800;">⭐ Veronica, Maria, Ana</td></tr>
+          <tr style="background:#f0fdf4;"><td style="padding:8px 10px;border-radius:8px 0 0 8px;">🌊 râu</td><td style="padding:8px 10px;border-radius:0 8px 8px 0;color:#b45309;font-weight:800;">⭐ Dunărea, Prutul, Oltul</td></tr>
+          <tr><td style="padding:8px 10px;">🗻 munte</td><td style="padding:8px 10px;color:#b45309;font-weight:800;">⭐ Carpații, Bucegi, Retezat</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- end felul substantivelor -->
+
+  <h3 class="exercises-title" style="color:#f87171;">✏️ Exerciții – Substantivul</h3>
+  <div class="score-bar" id="score-Substantiv">⭐ Puncte: <span class="score-num" id="pts-Substantiv">0</span> / <span id="total-Substantiv">4</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-Substantiv"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#f87171;">
+    <div class="q-num" style="color:#f87171;">Exercițiul 1 – Alege răspunsul corect</div>
+    <div class="question">Care dintre acestea este un substantiv?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'s1',false,'Substantiv')">frumos</button>
+      <button class="option-btn" onclick="checkOption(this,'s1',true,'Substantiv')">casă</button>
+      <button class="option-btn" onclick="checkOption(this,'s1',false,'Substantiv')">aleargă</button>
+      <button class="option-btn" onclick="checkOption(this,'s1',false,'Substantiv')">repede</button>
+    </div>
+    <div class="feedback" id="fb-s1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#fb923c;">
+    <div class="q-num" style="color:#fb923c;">Exercițiul 2 – Alege răspunsul corect</div>
+    <div class="question">Care este substantivul propriu?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'s2',false,'Substantiv')">câine</button>
+      <button class="option-btn" onclick="checkOption(this,'s2',false,'Substantiv')">oraș</button>
+      <button class="option-btn" onclick="checkOption(this,'s2',true,'Substantiv')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'s2',false,'Substantiv')">floare</button>
+    </div>
+    <div class="feedback" id="fb-s2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#fbbf24;">
+    <div class="q-num" style="color:#ca8a04;">Exercițiul 3 – Completează</div>
+    <div class="question">Substantivul răspunde la întrebările <em>Cine?</em> și <em>___?</em></div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-s3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('s3','ce','Substantiv')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-s3"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#4ade80;">
+    <div class="q-num" style="color:#16a34a;">Exercițiul 4 – Gândește!</div>
+    <div class="question">Propoziție: <em>„Veronica citește o carte frumoasă în parc."</em><br>Care cuvânt NU este substantiv?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'s4',false,'Substantiv')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'s4',false,'Substantiv')">carte</button>
+      <button class="option-btn" onclick="checkOption(this,'s4',true,'Substantiv')">frumoasă</button>
+      <button class="option-btn" onclick="checkOption(this,'s4',false,'Substantiv')">parc</button>
+    </div>
+    <div class="feedback" id="fb-s4"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('Substantiv')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-Substantiv">
+    <div class="reward-stars">⭐⭐⭐⭐⭐</div>
+    <h2>🏆 Felicitări, Veronica!</h2>
+    <p>Ai rezolvat toate exercițiile despre substantiv! Ești super deșteaptă! 🌟</p>
+  </div>
+</section>
+
+<!-- ══════════════ PRONUME ══════════════ -->
+<section class="section" id="pronume">
+  <h2 class="section-title c-blue">🙋 Pronumele</h2>
+  <p class="section-subtitle">Pronumele înlocuiește substantivul ca să nu repetăm același cuvânt.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-left:8px solid #38bdf8;">
+    <strong>🔑 Definiție:</strong> Pronumele este partea de vorbire care <strong>ține locul unui substantiv</strong>.<br><br>
+    ❓ <strong>Întrebări:</strong> <em>Cine? Ce? (ca și substantivul)</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#6366f1)"><span class="emoji">👤</span><h3>Persoana I</h3><p><strong>eu, noi</strong> — despre mine / despre noi</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#818cf8,#a855f7)"><span class="emoji">👉</span><h3>Persoana a II-a</h3><p><strong>tu, voi</strong> — despre tine / despre voi</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#c084fc,#ec4899)"><span class="emoji">👫</span><h3>Persoana a III-a</h3><p><strong>el, ea, ei, ele</strong> — despre altcineva</p></div>
+  </div>
+  <div class="fun-fact" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+    <span class="ff-icon">🔄</span>
+    <div><h4 style="color:#1d4ed8;">De ce avem pronume?</h4>
+    <p>Fără pronume ar fi ciudat! Exemplu: „<em>Veronica merge. Veronica cântă. Veronica doarme.</em>" — Cu pronume: „<em>Veronica merge. <strong>Ea</strong> cântă. <strong>Ea</strong> doarme.</em>" — mult mai frumos! 🌟</p></div>
+  </div>
+  <div class="tip-box">💛 <strong>Cum recunoști pronumele?</strong> Înlocuiește substantivul cu pronumele și verifică dacă propoziția are același înțeles! <br>„<em>Mama gătește.</em>" → „<em><strong>Ea</strong> gătește.</em>" ✅</div>
+  <div class="rule-box">📋 <strong>Tabelul pronumelor personale:</strong><br>
+    👤 <strong>eu / noi</strong> &nbsp;·&nbsp; 👉 <strong>tu / voi</strong> &nbsp;·&nbsp; 👫 <strong>el, ea / ei, ele</strong>
+  </div>
+  <p class="examples-title" style="color:#38bdf8;">🗣️ Exemple în propoziții:</p>
+  <div class="sentence-examples">
+    <div class="sent-card" style="border-color:#38bdf8;"><div class="sent-label" style="color:#0284c7;">Persoana I</div><div class="sent-text"><span class="sent-highlight" style="background:#e0f2fe;color:#0c4a6e;">Eu</span> mănânc o prăjitură delicioasă.</div></div>
+    <div class="sent-card" style="border-color:#6366f1;"><div class="sent-label" style="color:#4338ca;">Persoana a II-a</div><div class="sent-text"><span class="sent-highlight" style="background:#e0e7ff;color:#312e81;">Tu</span> ai o voce frumoasă.</div></div>
+    <div class="sent-card" style="border-color:#a855f7;"><div class="sent-label" style="color:#7e22ce;">Persoana a III-a</div><div class="sent-text"><span class="sent-highlight" style="background:#f3e8ff;color:#581c87;">Ea</span> dansează în ploaie.</div></div>
+    <div class="sent-card" style="border-color:#ec4899;"><div class="sent-label" style="color:#be185d;">Plural</div><div class="sent-text"><span class="sent-highlight" style="background:#fce7f3;color:#831843;">Noi</span> mergem împreună la școală.</div></div>
+    <div class="sent-card" style="border-color:#2dd4bf;"><div class="sent-label" style="color:#0d9488;">Înlocuire</div><div class="sent-text">Tata lucrează. <span class="sent-highlight" style="background:#ccfbf1;color:#134e4a;">El</span> este harnic.</div></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#38bdf8;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🙋‍♀️ eu cânt</li><li>🙋 tu alergi</li><li>👦 el doarme</li>
+    <li>👧 ea citește</li><li>👨‍👩‍👧 noi mergem</li><li>🧑‍🤝‍🧑 voi vorbiți</li>
+    <li>👫 ei vin</li><li>👭 ele se joacă</li>
+    <li>💃 ea dansează</li><li>🏃 el aleargă</li><li>📖 noi citim</li><li>🎵 voi cântați</li><li>🌟 ei strălucesc</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#38bdf8;">✏️ Exerciții – Pronumele</h3>
+  <div class="score-bar" id="score-pronume">⭐ Puncte: <span class="score-num" id="pts-pronume">0</span> / <span id="total-pronume">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-pronume"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#38bdf8;">
+    <div class="q-num" style="color:#0284c7;">Exercițiul 1</div>
+    <div class="question">Ce parte de vorbire este cuvântul „<strong>ea</strong>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'p1',false,'pronume')">Substantiv</button>
+      <button class="option-btn" onclick="checkOption(this,'p1',true,'pronume')">Pronume</button>
+      <button class="option-btn" onclick="checkOption(this,'p1',false,'pronume')">Verb</button>
+      <button class="option-btn" onclick="checkOption(this,'p1',false,'pronume')">Adjectiv</button>
+    </div>
+    <div class="feedback" id="fb-p1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#6366f1;">
+    <div class="q-num" style="color:#4338ca;">Exercițiul 2</div>
+    <div class="question">Înlocuiește „<strong>Veronica</strong>" cu pronumele potrivit: „Veronica citește."</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'p2',false,'pronume')">El citește.</button>
+      <button class="option-btn" onclick="checkOption(this,'p2',true,'pronume')">Ea citește.</button>
+      <button class="option-btn" onclick="checkOption(this,'p2',false,'pronume')">Tu citești.</button>
+      <button class="option-btn" onclick="checkOption(this,'p2',false,'pronume')">Ei citesc.</button>
+    </div>
+    <div class="feedback" id="fb-p2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#a855f7;">
+    <div class="q-num" style="color:#7e22ce;">Exercițiul 3 – Completează</div>
+    <div class="question">Pronumele de persoana I plural este ___.</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-p3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('p3','noi','pronume')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-p3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('pronume')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-pronume">
+    <div class="reward-stars">💎💎💎💎💎</div>
+    <h2>🏆 Bravo, Veronica!</h2>
+    <p>Pronumele nu mai are secrete pentru tine! 💫</p>
+  </div>
+</section>
+
+<!-- ══════════════ VERB ══════════════ -->
+<section class="section" id="verb">
+  <h2 class="section-title c-green">⚡ Verbul</h2>
+  <p class="section-subtitle">Verbul arată ce face, ce este sau ce pățește cineva.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-left:8px solid #4ade80;">
+    <strong>🔑 Definiție:</strong> Verbul este partea de vorbire care exprimă o <strong>acțiune</strong>, o <strong>stare</strong> sau o <strong>existență</strong>.<br><br>
+    ❓ <strong>Întrebări:</strong> <em>Ce face? Ce este? Ce pățește?</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#4ade80,#22d3ee)"><span class="emoji">🏃</span><h3>Acțiune</h3><p>a merge, a citi, a sări, a dansa, a desena</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#22d3ee,#38bdf8)"><span class="emoji">💭</span><h3>Stare</h3><p>a dormi, a visa, a se gândi, a iubi</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#818cf8)"><span class="emoji">🌟</span><h3>Existență</h3><p>a fi, a exista, a se afla</p></div>
+  </div>
+  <div class="fun-fact" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);">
+    <span class="ff-icon">⚡</span>
+    <div><h4 style="color:#15803d;">De ce verbul e important?</h4>
+    <p>Verbul este <strong>inima propoziției</strong>! Fără verb, nu avem propoziție. Compară: „<em>Veronica carte</em>" (fără sens ❌) cu „<em>Veronica <strong>citește</strong> carte.</em>" ✅ Verbul îi dă viață propoziției!</p></div>
+  </div>
+  <div class="tip-box">💛 <strong>Cum recunoști verbul?</strong> Pune „<em>el/ea...</em>" în față! Dacă merge → e verb! <br>„<em>ea aleargă</em>" ✅ &nbsp;|&nbsp; „<em>ea frumos</em>" ❌ &nbsp;|&nbsp; „<em>el doarme</em>" ✅</div>
+  <div class="rule-box">📋 <strong>Verbul se conjugă!</strong> Se schimbă după persoană: <br>
+    <em>eu <strong>cânt</strong> · tu <strong>cânți</strong> · el <strong>cântă</strong> · noi <strong>cântăm</strong> · voi <strong>cântați</strong> · ei <strong>cântă</strong></em>
+  </div>
+  <p class="examples-title" style="color:#16a34a;">🗣️ Exemple în propoziții:</p>
+  <div class="sentence-examples">
+    <div class="sent-card" style="border-color:#4ade80;"><div class="sent-label" style="color:#15803d;">Acțiune</div><div class="sent-text">Veronica <span class="sent-highlight" style="background:#dcfce7;color:#166534;">desenează</span> un curcubeu colorat.</div></div>
+    <div class="sent-card" style="border-color:#22d3ee;"><div class="sent-label" style="color:#0891b2;">Stare</div><div class="sent-text">Pisica <span class="sent-highlight" style="background:#cffafe;color:#164e63;">doarme</span> pe canapea.</div></div>
+    <div class="sent-card" style="border-color:#818cf8;"><div class="sent-label" style="color:#4338ca;">Mișcare</div><div class="sent-text">Băiatul <span class="sent-highlight" style="background:#e0e7ff;color:#312e81;">aleargă</span> repede în parc.</div></div>
+    <div class="sent-card" style="border-color:#2dd4bf;"><div class="sent-label" style="color:#0d9488;">Simț</div><div class="sent-text">Eu <span class="sent-highlight" style="background:#ccfbf1;color:#134e4a;">iubesc</span> ciocolata cu lapte.</div></div>
+    <div class="sent-card" style="border-color:#f87171;"><div class="sent-label" style="color:#dc2626;">Existență</div><div class="sent-text">Ea <span class="sent-highlight" style="background:#fee2e2;color:#991b1b;">este</span> cea mai bună prietenă a mea.</div></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#16a34a;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🏃 aleargă</li><li>📖 citește</li><li>😴 doarme</li><li>🎵 cântă</li>
+    <li>✏️ scrie</li><li>🦘 sare</li><li>😊 zâmbește</li><li>🍎 mănâncă</li>
+    <li>🎨 desenează</li><li>💃 dansează</li><li>🌊 înoată</li><li>🏫 învață</li><li>❤️ iubește</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#16a34a;">✏️ Exerciții – Verbul</h3>
+  <div class="score-bar" id="score-verb">⭐ Puncte: <span class="score-num" id="pts-verb">0</span> / <span id="total-verb">4</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-verb"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#4ade80;">
+    <div class="q-num" style="color:#16a34a;">Exercițiul 1</div>
+    <div class="question">Care este verbul din: „<em>Veronica <strong>cântă</strong> frumos.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'v1',false,'verb')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'v1',true,'verb')">cântă</button>
+      <button class="option-btn" onclick="checkOption(this,'v1',false,'verb')">frumos</button>
+    </div>
+    <div class="feedback" id="fb-v1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#22d3ee;">
+    <div class="q-num" style="color:#0891b2;">Exercițiul 2</div>
+    <div class="question">La ce întrebare răspunde verbul?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'v2',false,'verb')">Cum este?</button>
+      <button class="option-btn" onclick="checkOption(this,'v2',false,'verb')">Ce fel de?</button>
+      <button class="option-btn" onclick="checkOption(this,'v2',true,'verb')">Ce face?</button>
+      <button class="option-btn" onclick="checkOption(this,'v2',false,'verb')">Al cui?</button>
+    </div>
+    <div class="feedback" id="fb-v2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#818cf8;">
+    <div class="q-num" style="color:#4338ca;">Exercițiul 3 – Completează</div>
+    <div class="question">Verbul exprimă o acțiune sau o ___.</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-v3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('v3','stare','verb')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-v3"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#f87171;">
+    <div class="q-num" style="color:#dc2626;">Exercițiul 4</div>
+    <div class="question">Care dintre acestea NU este verb?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'v4',false,'verb')">a citi</button>
+      <button class="option-btn" onclick="checkOption(this,'v4',false,'verb')">a dormi</button>
+      <button class="option-btn" onclick="checkOption(this,'v4',true,'verb')">frumos</button>
+      <button class="option-btn" onclick="checkOption(this,'v4',false,'verb')">a merge</button>
+    </div>
+    <div class="feedback" id="fb-v4"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('verb')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-verb">
+    <div class="reward-stars">🥇🥇🥇🥇🥇</div>
+    <h2>🏆 Super, Veronica!</h2>
+    <p>Ai stăpânit verbul! Ești o campioană! 🏆</p>
+  </div>
+</section>
+
+<!-- ══════════════ ADJECTIV ══════════════ -->
+<section class="section" id="adjectiv">
+  <h2 class="section-title c-orange">🎨 Adjectivul</h2>
+  <p class="section-subtitle">Adjectivul descrie cum este o ființă, un lucru sau un loc.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#fff7ed,#ffedd5);border-left:8px solid #fb923c;">
+    <strong>🔑 Definiție:</strong> Adjectivul este partea de vorbire care <strong>determină un substantiv</strong>, arătând cum este, de ce fel este sau al cui este.<br><br>
+    ❓ <strong>Întrebări:</strong> <em>Cum este? Ce fel de? Al cui?</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#fbbf24,#f97316)"><span class="emoji">🌈</span><h3>Culori</h3><p>roșu, albastru, galben, verde, roz, alb</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#f97316,#ef4444)"><span class="emoji">📏</span><h3>Dimensiuni</h3><p>mare, mic, înalt, scund, gras, slab</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#ef4444,#ec4899)"><span class="emoji">😊</span><h3>Calități</h3><p>frumos, bun, harnic, deștept, vesel, cuminte</p></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#ea580c;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🌺 frumoasă</li><li>😊 vesel</li><li>📏 mare</li><li>❄️ alb</li>
+    <li>💚 verde</li><li>🧠 deștept</li><li>🐱 pufos</li><li>📚 harnic</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#ea580c;">✏️ Exerciții – Adjectivul</h3>
+  <div class="score-bar" id="score-adjectiv">⭐ Puncte: <span class="score-num" id="pts-adjectiv">0</span> / <span id="total-adjectiv">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-adjectiv"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#fbbf24;">
+    <div class="q-num" style="color:#d97706;">Exercițiul 1</div>
+    <div class="question">Care este adjectivul din: „<em>Veronica are o rochie <strong>frumoasă</strong>.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'a1',false,'adjectiv')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'a1',false,'adjectiv')">rochie</button>
+      <button class="option-btn" onclick="checkOption(this,'a1',true,'adjectiv')">frumoasă</button>
+    </div>
+    <div class="feedback" id="fb-a1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#f97316;">
+    <div class="q-num" style="color:#c2410c;">Exercițiul 2</div>
+    <div class="question">La ce întrebare răspunde adjectivul „<em>mic</em>" în „câinele mic"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'a2',false,'adjectiv')">Ce face?</button>
+      <button class="option-btn" onclick="checkOption(this,'a2',true,'adjectiv')">Cum este?</button>
+      <button class="option-btn" onclick="checkOption(this,'a2',false,'adjectiv')">Cine?</button>
+    </div>
+    <div class="feedback" id="fb-a2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#ef4444;">
+    <div class="q-num" style="color:#b91c1c;">Exercițiul 3 – Completează</div>
+    <div class="question">Adjectivul determină întotdeauna un ___ (altă parte de vorbire).</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-a3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('a3','substantiv','adjectiv')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-a3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('adjectiv')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-adjectiv">
+    <div class="reward-stars">🎨🎨🎨🎨🎨</div>
+    <h2>🏆 Minunat, Veronica!</h2>
+    <p>Cunoști adjectivele ca un adevărat artist! ✨</p>
+  </div>
+</section>
+
+<!-- ══════════════ ADVERB ══════════════ -->
+<section class="section" id="adverb">
+  <h2 class="section-title c-purple">🚀 Adverbul</h2>
+  <p class="section-subtitle">Adverbul ne spune cum, când sau unde se petrece o acțiune.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#faf5ff,#ede9fe);border-left:8px solid #a855f7;">
+    <strong>🔑 Definiție:</strong> Adverbul este partea de vorbire care <strong>determină un verb</strong>, arătând cum, când, unde sau cât de mult se face ceva.<br><br>
+    ❓ <strong>Întrebări:</strong> <em>Cum? Când? Unde? Cât?</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#a855f7,#6366f1)"><span class="emoji">🏃</span><h3>Cum? (mod)</h3><p>frumos, repede, bine, rău, tare, încet</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#6366f1,#38bdf8)"><span class="emoji">📅</span><h3>Când? (timp)</h3><p>azi, mâine, ieri, acum, devreme, târziu</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#4ade80)"><span class="emoji">📍</span><h3>Unde? (loc)</h3><p>aici, acolo, sus, jos, aproape, departe</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#4ade80,#fbbf24)"><span class="emoji">⚖️</span><h3>Cât? (cantitate)</h3><p>mult, puțin, deloc, foarte, destul</p></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#7e22ce;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🏃 repede</li><li>🌅 azi</li><li>📍 aici</li><li>🌟 frumos</li>
+    <li>🔊 tare</li><li>🌙 ieri</li><li>⬆️ sus</li><li>💯 foarte</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#7e22ce;">✏️ Exerciții – Adverbul</h3>
+  <div class="score-bar" id="score-adverb">⭐ Puncte: <span class="score-num" id="pts-adverb">0</span> / <span id="total-adverb">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-adverb"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#a855f7;">
+    <div class="q-num" style="color:#7e22ce;">Exercițiul 1</div>
+    <div class="question">Ce tip de adverb este „<strong>ieri</strong>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'ad1',false,'adverb')">De mod</button>
+      <button class="option-btn" onclick="checkOption(this,'ad1',true,'adverb')">De timp</button>
+      <button class="option-btn" onclick="checkOption(this,'ad1',false,'adverb')">De loc</button>
+    </div>
+    <div class="feedback" id="fb-ad1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#6366f1;">
+    <div class="q-num" style="color:#4338ca;">Exercițiul 2</div>
+    <div class="question">Care este adverbul în: „<em>Veronica citește <strong>frumos</strong>.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'ad2',false,'adverb')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'ad2',false,'adverb')">citește</button>
+      <button class="option-btn" onclick="checkOption(this,'ad2',true,'adverb')">frumos</button>
+    </div>
+    <div class="feedback" id="fb-ad2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#38bdf8;">
+    <div class="q-num" style="color:#0284c7;">Exercițiul 3 – Completează</div>
+    <div class="question">Adverbul „<strong>acolo</strong>" răspunde la întrebarea ___.</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-ad3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('ad3','unde','adverb')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-ad3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('adverb')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-adverb">
+    <div class="reward-stars">🚀🚀🚀🚀🚀</div>
+    <h2>🏆 Extraordinar, Veronica!</h2>
+    <p>Ai zburat prin adverbe ca o rachetă! 🌌</p>
+  </div>
+</section>
+
+<!-- ══════════════ PREPOZIȚIE ══════════════ -->
+<section class="section" id="prepozitie">
+  <h2 class="section-title c-teal">🔗 Prepoziția</h2>
+  <p class="section-subtitle">Prepoziția leagă cuvintele și arată relații între ele.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-left:8px solid #2dd4bf;">
+    <strong>🔑 Definiție:</strong> Prepoziția este partea de vorbire <strong>neflexibilă</strong> care leagă cuvintele, arătând relații de loc, timp, scop etc.<br><br>
+    ❓ <strong>Rol:</strong> <em>Conectează substantive cu alte cuvinte din propoziție</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#2dd4bf,#22d3ee)"><span class="emoji">📍</span><h3>Loc</h3><p><strong>în, pe, la, sub, lângă, deasupra</strong> — Caietul e <em>pe</em> masă.</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#22d3ee,#38bdf8)"><span class="emoji">⏰</span><h3>Timp</h3><p><strong>după, înainte de, până la</strong> — Vin <em>după</em> masă.</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#6366f1)"><span class="emoji">🎯</span><h3>Scop</h3><p><strong>pentru, spre</strong> — Merg <em>spre</em> școală.</p></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#0d9488;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🏠 în casă</li><li>📚 pe masă</li><li>🎒 la școală</li><li>🌳 sub copac</li>
+    <li>👣 lângă ușă</li><li>🎁 pentru tine</li><li>🚶 spre parc</li><li>⬆️ deasupra</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#0d9488;">✏️ Exerciții – Prepoziția</h3>
+  <div class="score-bar" id="score-prepozitie">⭐ Puncte: <span class="score-num" id="pts-prepozitie">0</span> / <span id="total-prepozitie">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-prepozitie"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#2dd4bf;">
+    <div class="q-num" style="color:#0d9488;">Exercițiul 1</div>
+    <div class="question">Care este prepoziția în: „<em>Cartea este <strong>pe</strong> masă.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'pr1',false,'prepozitie')">Cartea</button>
+      <button class="option-btn" onclick="checkOption(this,'pr1',true,'prepozitie')">pe</button>
+      <button class="option-btn" onclick="checkOption(this,'pr1',false,'prepozitie')">masă</button>
+    </div>
+    <div class="feedback" id="fb-pr1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#22d3ee;">
+    <div class="q-num" style="color:#0891b2;">Exercițiul 2</div>
+    <div class="question">Prepoziția este o parte de vorbire:</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'pr2',false,'prepozitie')">Flexibilă (se schimbă)</button>
+      <button class="option-btn" onclick="checkOption(this,'pr2',true,'prepozitie')">Neflexibilă (nu se schimbă)</button>
+    </div>
+    <div class="feedback" id="fb-pr2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#38bdf8;">
+    <div class="q-num" style="color:#0284c7;">Exercițiul 3 – Completează</div>
+    <div class="question">„Veronica merge ___ școală." — prepoziția potrivită (la / în / pe).</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-pr3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('pr3','la','prepozitie')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-pr3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('prepozitie')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-prepozitie">
+    <div class="reward-stars">🔗🔗🔗🔗🔗</div>
+    <h2>🏆 Perfect, Veronica!</h2>
+    <p>Ești maestră la prepoziții! 💫</p>
+  </div>
+</section>
+
+<!-- ══════════════ CONJUNCȚIE ══════════════ -->
+<section class="section" id="conjunctie">
+  <h2 class="section-title c-pink">🤝 Conjuncția</h2>
+  <p class="section-subtitle">Conjuncția unește cuvinte sau propoziții.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#fff1f2,#fce7f3);border-left:8px solid #f472b6;">
+    <strong>🔑 Definiție:</strong> Conjuncția este partea de vorbire <strong>neflexibilă</strong> care <strong>leagă</strong> două cuvinte, două propoziții sau două fraze.<br><br>
+    ❓ <strong>Rol:</strong> <em>Conectează idei și cuvinte</em>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#f472b6,#ec4899)"><span class="emoji">➕</span><h3>Adunare</h3><p><strong>și</strong> — Mama <em>și</em> tata merg la piață.</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#ec4899,#a855f7)"><span class="emoji">🔀</span><h3>Alegere</h3><p><strong>sau, ori</strong> — Vrei suc <em>sau</em> apă?</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#a855f7,#6366f1)"><span class="emoji">↔️</span><h3>Opoziție</h3><p><strong>dar, însă, ci</strong> — Vreau să ies, <em>dar</em> plouă.</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#6366f1,#38bdf8)"><span class="emoji">🔍</span><h3>Cauză</h3><p><strong>pentru că, deoarece</strong> — Stau acasă <em>pentru că</em> sunt bolnavă.</p></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#be185d;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>🤝 și</li><li>🔀 sau</li><li>↔️ dar</li><li>🔍 pentru că</li>
+    <li>⚡ deoarece</li><li>🌿 ori</li><li>💡 însă</li><li>🎯 ci</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#be185d;">✏️ Exerciții – Conjuncția</h3>
+  <div class="score-bar" id="score-conjunctie">⭐ Puncte: <span class="score-num" id="pts-conjunctie">0</span> / <span id="total-conjunctie">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-conjunctie"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#f472b6;">
+    <div class="q-num" style="color:#be185d;">Exercițiul 1</div>
+    <div class="question">Ce conjuncție lipsește? „Mama ___ tata sunt acasă."</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'c1',false,'conjunctie')">sau</button>
+      <button class="option-btn" onclick="checkOption(this,'c1',true,'conjunctie')">și</button>
+      <button class="option-btn" onclick="checkOption(this,'c1',false,'conjunctie')">dar</button>
+    </div>
+    <div class="feedback" id="fb-c1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#a855f7;">
+    <div class="q-num" style="color:#7e22ce;">Exercițiul 2</div>
+    <div class="question">Ce exprimă conjuncția „<strong>dar</strong>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'c2',false,'conjunctie')">O adunare</button>
+      <button class="option-btn" onclick="checkOption(this,'c2',false,'conjunctie')">O alegere</button>
+      <button class="option-btn" onclick="checkOption(this,'c2',true,'conjunctie')">O opoziție</button>
+    </div>
+    <div class="feedback" id="fb-c2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#6366f1;">
+    <div class="q-num" style="color:#4338ca;">Exercițiul 3 – Completează</div>
+    <div class="question">„Nu merg afară, ___ plouă." (conjuncție de cauză)</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-c3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('c3','pentru că','conjunctie')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-c3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('conjunctie')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-conjunctie">
+    <div class="reward-stars">🤝🤝🤝🤝🤝</div>
+    <h2>🏆 Uau, Veronica!</h2>
+    <p>Conjuncțiile nu mai au secrete pentru tine! 🌈</p>
+  </div>
+</section>
+
+<!-- ══════════════ INTERJECȚIE ══════════════ -->
+<section class="section" id="interjectie">
+  <h2 class="section-title" style="color:#fb923c;">😲 Interjecția</h2>
+  <p class="section-subtitle">Interjecția exprimă emoții, senzații sau chemări.</p>
+  <div class="def-box" style="background:linear-gradient(135deg,#fff7ed,#ffedd5);border-left:8px solid #fb923c;">
+    <strong>🔑 Definiție:</strong> Interjecția este partea de vorbire <strong>neflexibilă</strong> care exprimă spontan o <strong>emoție</strong>, o <strong>senzație</strong>, un <strong>sunet</strong> sau o <strong>chemare</strong>.<br><br>
+    🔔 Se scrie de obicei urmată de <strong>semnul exclamării!</strong>
+  </div>
+  <div class="info-grid">
+    <div class="info-card" style="background:linear-gradient(135deg,#fb923c,#fbbf24)"><span class="emoji">😄</span><h3>Bucurie</h3><p><strong>Ura!</strong> — Am câștigat!</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#fbbf24,#a3e635)"><span class="emoji">😮</span><h3>Mirare</h3><p><strong>O! Vai!</strong> — Ce frumos!</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#f87171,#fb923c)"><span class="emoji">😢</span><h3>Durere</h3><p><strong>Au! Vai!</strong> — M-am lovit!</p></div>
+    <div class="info-card" style="background:linear-gradient(135deg,#38bdf8,#4ade80)"><span class="emoji">📣</span><h3>Chemare</h3><p><strong>Hei! Psst!</strong> — Vino aici!</p></div>
+  </div>
+  <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:9px;color:#c2410c;">📝 Exemple:</h3>
+  <ul class="examples-list">
+    <li>😄 Ura!</li><li>😮 O!</li><li>😢 Au!</li><li>😲 Vai!</li>
+    <li>📣 Hei!</li><li>🤫 Psst!</li><li>😱 Of!</li><li>🎉 Bravo!</li>
+  </ul>
+  <h3 class="exercises-title" style="color:#c2410c;">✏️ Exerciții – Interjecția</h3>
+  <div class="score-bar" id="score-interjectie">⭐ Puncte: <span class="score-num" id="pts-interjectie">0</span> / <span id="total-interjectie">3</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-interjectie"></div></div>
+  </div>
+  <div class="exercise-card" style="border-color:#fb923c;">
+    <div class="q-num" style="color:#c2410c;">Exercițiul 1</div>
+    <div class="question">Care este interjecția în: „<em><strong>Au!</strong> M-am lovit la picior.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'i1',true,'interjectie')">Au!</button>
+      <button class="option-btn" onclick="checkOption(this,'i1',false,'interjectie')">picior</button>
+      <button class="option-btn" onclick="checkOption(this,'i1',false,'interjectie')">lovit</button>
+    </div>
+    <div class="feedback" id="fb-i1"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#fbbf24;">
+    <div class="q-num" style="color:#b45309;">Exercițiul 2</div>
+    <div class="question">Ce emoție exprimă interjecția „<strong>Ura!</strong>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'i2',false,'interjectie')">Durere</button>
+      <button class="option-btn" onclick="checkOption(this,'i2',true,'interjectie')">Bucurie</button>
+      <button class="option-btn" onclick="checkOption(this,'i2',false,'interjectie')">Mirare</button>
+    </div>
+    <div class="feedback" id="fb-i2"></div>
+  </div>
+  <div class="exercise-card" style="border-color:#4ade80;">
+    <div class="q-num" style="color:#15803d;">Exercițiul 3 – Completează</div>
+    <div class="question">Interjecția exprimă o ___, o senzație sau o chemare.</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-i3" placeholder="scrie aici..."/>
+      <button class="check-btn" onclick="checkFill('i3','emoție','interjectie')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-i3"></div>
+  </div>
+  <button class="reset-btn" onclick="resetSection('interjectie')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-interjectie">
+    <div class="reward-stars">😄😄😄😄😄</div>
+    <h2>🏆 Bravo, Veronica!</h2>
+    <p>Interjecțiile le știi pe de rost! Ura! 🎊</p>
+  </div>
+</section>
+
+<!-- ══════════════ EXERCIȚII MARI ══════════════ -->
+<section class="section" id="exercitii">
+  <h2 class="section-title" style="color:#6366f1;">✏️ Exerciții Generale</h2>
+  <p class="section-subtitle">Testează <strong>toate</strong> cunoștințele despre părțile de vorbire!</p>
+  <div class="score-bar" id="score-exercitii">⭐ Puncte: <span class="score-num" id="pts-exercitii">0</span> / <span id="total-exercitii">10</span>
+    <div class="progress-wrap"><div class="progress-fill" id="prog-exercitii"></div></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#f87171;">
+    <div class="q-num" style="color:#dc2626;">Întrebarea 1</div>
+    <div class="question">Identifică <strong>substantivele</strong> din: „<em>Pisica doarme pe canapea.</em>"</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g1',false,'exercitii')">pisica, doarme</button>
+      <button class="option-btn" onclick="checkOption(this,'g1',true,'exercitii')">pisica, canapea</button>
+      <button class="option-btn" onclick="checkOption(this,'g1',false,'exercitii')">pe, canapea</button>
+    </div>
+    <div class="feedback" id="fb-g1"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#38bdf8;">
+    <div class="q-num" style="color:#0284c7;">Întrebarea 2</div>
+    <div class="question">Care este verbul din: „<em>Veronica <strong>desenează</strong> o floare.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g2',false,'exercitii')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'g2',true,'exercitii')">desenează</button>
+      <button class="option-btn" onclick="checkOption(this,'g2',false,'exercitii')">floare</button>
+    </div>
+    <div class="feedback" id="fb-g2"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#fbbf24;">
+    <div class="q-num" style="color:#d97706;">Întrebarea 3</div>
+    <div class="question">Ce parte de vorbire este „<strong>frumoasă</strong>" în „o floare frumoasă"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g3',false,'exercitii')">Substantiv</button>
+      <button class="option-btn" onclick="checkOption(this,'g3',false,'exercitii')">Verb</button>
+      <button class="option-btn" onclick="checkOption(this,'g3',true,'exercitii')">Adjectiv</button>
+      <button class="option-btn" onclick="checkOption(this,'g3',false,'exercitii')">Adverb</button>
+    </div>
+    <div class="feedback" id="fb-g3"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#a855f7;">
+    <div class="q-num" style="color:#7e22ce;">Întrebarea 4</div>
+    <div class="question">Cuvântul „<strong>repede</strong>" este:</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g4',false,'exercitii')">Verb</button>
+      <button class="option-btn" onclick="checkOption(this,'g4',false,'exercitii')">Adjectiv</button>
+      <button class="option-btn" onclick="checkOption(this,'g4',true,'exercitii')">Adverb de mod</button>
+      <button class="option-btn" onclick="checkOption(this,'g4',false,'exercitii')">Substantiv</button>
+    </div>
+    <div class="feedback" id="fb-g4"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#4ade80;">
+    <div class="q-num" style="color:#16a34a;">Întrebarea 5</div>
+    <div class="question">Ce parte de vorbire este „<strong>și</strong>" în „Ana <em>și</em> Maria sunt prietene"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g5',false,'exercitii')">Prepoziție</button>
+      <button class="option-btn" onclick="checkOption(this,'g5',true,'exercitii')">Conjuncție</button>
+      <button class="option-btn" onclick="checkOption(this,'g5',false,'exercitii')">Adverb</button>
+    </div>
+    <div class="feedback" id="fb-g5"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#2dd4bf;">
+    <div class="q-num" style="color:#0d9488;">Întrebarea 6</div>
+    <div class="question">„<strong>Vai!</strong> Mi-am uitat ghiozdanul!" — „Vai" este:</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g6',false,'exercitii')">Conjuncție</button>
+      <button class="option-btn" onclick="checkOption(this,'g6',false,'exercitii')">Adverb</button>
+      <button class="option-btn" onclick="checkOption(this,'g6',true,'exercitii')">Interjecție</button>
+    </div>
+    <div class="feedback" id="fb-g6"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#f472b6;">
+    <div class="q-num" style="color:#be185d;">Întrebarea 7</div>
+    <div class="question">Care este pronumele în: „<em><strong>Ea</strong> cântă la pian.</em>"?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g7',true,'exercitii')">Ea</button>
+      <button class="option-btn" onclick="checkOption(this,'g7',false,'exercitii')">cântă</button>
+      <button class="option-btn" onclick="checkOption(this,'g7',false,'exercitii')">pian</button>
+    </div>
+    <div class="feedback" id="fb-g7"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#fb923c;">
+    <div class="q-num" style="color:#c2410c;">Întrebarea 8 – Completează</div>
+    <div class="question">„Cartea este ___ masă." — completează cu prepoziția potrivită.</div>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <input class="fill-input" id="fill-g8" placeholder="pe / în / la"/>
+      <button class="check-btn" onclick="checkFill('g8','pe','exercitii')">Verifică ✓</button>
+    </div>
+    <div class="feedback" id="fb-g8"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#6366f1;">
+    <div class="q-num" style="color:#4338ca;">Întrebarea 9</div>
+    <div class="question">„<em>Veronica citește <strong>azi</strong>.</em>" — „azi" este:</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g9',false,'exercitii')">Substantiv</button>
+      <button class="option-btn" onclick="checkOption(this,'g9',false,'exercitii')">Adjectiv</button>
+      <button class="option-btn" onclick="checkOption(this,'g9',true,'exercitii')">Adverb de timp</button>
+      <button class="option-btn" onclick="checkOption(this,'g9',false,'exercitii')">Verb</button>
+    </div>
+    <div class="feedback" id="fb-g9"></div>
+  </div>
+
+  <div class="exercise-card" style="border-color:#ec4899;">
+    <div class="q-num" style="color:#9d174d;">Întrebarea 10</div>
+    <div class="question">Care dintre acestea este <strong>verb</strong>?</div>
+    <div class="options">
+      <button class="option-btn" onclick="checkOption(this,'g10',false,'exercitii')">Veronica</button>
+      <button class="option-btn" onclick="checkOption(this,'g10',false,'exercitii')">frumoasă</button>
+      <button class="option-btn" onclick="checkOption(this,'g10',true,'exercitii')">cântă</button>
+      <button class="option-btn" onclick="checkOption(this,'g10',false,'exercitii')">repede</button>
+    </div>
+    <div class="feedback" id="fb-g10"></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetSection('exercitii')">🔄 Resetează exercițiile</button>
+  <div class="reward" id="reward-exercitii">
+    <div class="reward-stars">🏆🌟💎🌟🏆</div>
+    <h2>🎊 CAMPIOANA VERONICA! 🎊</h2>
+    <p>Ai rezolvat TOATE exercițiile! Tăticul este FOARTE mândru de tine! 💖💪</p>
+  </div>
+</section>
+
+<section class="section" id="vocabular">
+  <h2 class="section-title" style="color:#f43f5e;">📖 Vocabular – Relații Semantice</h2>
+  <p class="section-subtitle">Hai să descoperim cum se înrudesc cuvintele între ele!</p>
+
+  <!-- SINONIME -->
+  <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(16,185,129,.15);border-left:7px solid #10b981;">
+    <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#065f46;margin-bottom:14px;">👯‍♀️ 1. Sinonimele</h3>
+    <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Sinonimele sunt cuvinte cu formă <strong>diferită</strong>, dar cu sens <strong>asemănător</strong> (înseamnă același lucru).</p>
+    <div class="tip-box" style="margin-top:0;">💛 <strong>Truc:</strong> Poți înlocui un cuvânt cu sinonimul lui în propoziție și sensul rămâne la fel!</div>
+    <div class="examples-list" style="margin-top:10px;">
+      <li>zăpadă = nea</li><li>vesel = bucuros</li><li>prieten = amic</li><li>steag = drapel</li><li>a alerga = a fugi</li>
+      <li>scund = mic</li><li>a privi = a se uita</li><li>dar = cadou</li><li>teamă = frică</li><li>a zice = a spune</li>
+    </div>
+  </div>
+
+  <!-- ANTONIME -->
+  <div style="background:linear-gradient(135deg,#fff1f2,#ffe4e6);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(225,29,72,.15);border-left:7px solid #e11d48;">
+    <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#9f1239;margin-bottom:14px;">⚔️ 2. Antonimele</h3>
+    <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Antonimele sunt cuvinte cu sens <strong>opus</strong>.</p>
+    <div class="tip-box" style="border-color:#e11d48;background:#fff5f5;color:#9f1239;">❤️ <strong>Truc:</strong> Gândește-te la contrariul cuvântului! Ziua și Noaptea sunt antonime.</div>
+    <div class="examples-list" style="margin-top:10px;">
+      <li>alb ≠ negru</li><li>mare ≠ mic</li><li>cald ≠ rece</li><li>a plânge ≠ a râde</li><li>bun ≠ rău</li>
+      <li>înalt ≠ scund</li><li>devreme ≠ târziu</li><li>aproape ≠ departe</li><li>nou ≠ vechi</li><li>subțire ≠ gros</li>
+    </div>
+  </div>
+
+  <!-- OMONIME -->
+  <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(37,99,235,.15);border-left:7px solid #2563eb;">
+    <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#1e3a8a;margin-bottom:14px;">🎭 3. Omonimele</h3>
+    <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Omonimele sunt cuvinte care se scriu și se pronunță <strong>identic</strong>, dar înseamnă lucruri <strong>complet diferite</strong>.</p>
+    <div class="tip-box" style="border-color:#2563eb;background:#eff6ff;color:#1e40af;">💙 <strong>Truc:</strong> Cuvântul arată la fel, dar sensul se schimbă în funcție de propoziție!</div>
+    <div class="sentence-examples">
+      <div class="sent-card"><div class="sent-label">Broscuță</div><div class="sent-text">O <span class="sent-highlight" style="background:#dbeafe;color:#1e3a8a;">broască</span> sare în lac.</div></div>
+      <div class="sent-card"><div class="sent-label">Încuietoare</div><div class="sent-text">Am stricat <span class="sent-highlight" style="background:#dbeafe;color:#1e3a8a;">broasca</span> de la ușă.</div></div>
+      <div class="sent-card"><div class="sent-label">Ochi vizual</div><div class="sent-text">Mă doare un <span class="sent-highlight" style="background:#dbeafe;color:#1e3a8a;">ochi</span>.</div></div>
+      <div class="sent-card"><div class="sent-label">Ochi aragaz</div><div class="sent-text">Mâncarea fierbe pe <span class="sent-highlight" style="background:#dbeafe;color:#1e3a8a;">ochi</span>.</div></div>
+    </div>
+    <div class="examples-list" style="margin-top:10px;">
+      <li><strong>sare</strong> (condiment) ↔ <strong>sare</strong> (acțiune)</li>
+      <li><strong>corn</strong> (de animal) ↔ <strong>corn</strong> (de mâncat)</li>
+      <li><strong>leu</strong> (animal) ↔ <strong>leu</strong> (bani)</li>
+      <li><strong>somn</strong> (pește) ↔ <strong>somn</strong> (de dormit)</li>
+      <li><strong>nouă</strong> (cifră) ↔ <strong>nouă</strong> (haină nouă)</li>
+    </div>
+  </div>
+
+  <!-- PARONIME -->
+  <div style="background:linear-gradient(135deg,#fdf4ff,#fae8ff);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(168,85,247,.15);border-left:7px solid #a855f7;">
+    <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#7e22ce;margin-bottom:14px;">🪞 4. Paronimele</h3>
+    <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Paronimele sunt cuvinte care <strong>seamănă foarte mult</strong> la formă (diferă printr-un sunet sau două), dar au sensuri <strong>diferite</strong>.</p>
+    <div class="tip-box" style="border-color:#a855f7;background:#faf5ff;color:#6b21a8;">💜 <strong>Truc:</strong> Fii atentă cum le scrii! O literă greșită schimbă tot sensul.</div>
+    <div class="examples-list" style="margin-top:10px;">
+      <li>familial (de familie) ↔ familiar (cunoscut)</li>
+      <li>oral (vorbit) ↔ orar (program)</li>
+      <li>a emigra (a pleca) ↔ a imigra (a veni)</li>
+      <li>eminent (remarcabil) ↔ iminent (pe cale să se întâmple)</li>
+      <li>original (propriu) ↔ originar (provenit din)</li>
+      <li>a investi (a plasa bani) ↔ a învesti (a da o funcție)</li>
+      <li>literar (despre literatură) ↔ literal (cuvânt cu cuvânt)</li>
+      <li>complement (parte de propoziție) ↔ compliment (laudă)</li>
+    </div>
+  </div>
+
+  <!-- OMOFONE -->
+  <div style="background:linear-gradient(135deg,#fffbeb,#fef9c3);border-radius:22px;padding:22px 24px;margin-bottom:22px;box-shadow:0 6px 24px rgba(245,158,11,.15);border-left:7px solid #f59e0b;">
+    <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#b45309;margin-bottom:14px;">🗣️ 5. Omofonele</h3>
+    <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Omofonele sunt cuvinte care <strong>se aud la fel</strong>, dar se <strong>scriu diferit</strong> și au sensuri diferite.</p>
+    <div class="tip-box" style="border-color:#f59e0b;background:#fffbeb;color:#92400e;">💛 <strong>Truc:</strong> Când le spui cu voce tare, sună la fel! Dar cratima face diferența în scris.</div>
+    <div class="examples-list" style="margin-top:10px;">
+      <li>s-a (s-a dus) ↔ sa (cartea sa)</li>
+      <li>m-ai (m-ai strigat) ↔ mai (luna mai)</li>
+      <li>nea (nea Ion) ↔ ne-a (ne-a dat)</li>
+      <li>neam (rudă) ↔ ne-am (ne-am jucat)</li>
+      <li>car (căruță) ↔ c-ar (c-ar merge)</li>
+      <li>iau (a lua) ↔ i-au (i-au spus)</li>
+      <li>la (prepoziție) ↔ l-a (l-a văzut)</li>
+      <li>cel (băiatul cel bun) ↔ ce-l (ce-l doare)</li>
+    </div>
+  </div>
+<h3 class='exercises-title' style='color:#10b981;margin-top:40px;'>✏️ Exerciții – Sinonime</h3>
+<div class='score-bar' id='score-sinonime'>⭐ Puncte: <span class='score-num' id='pts-sinonime'>0</span> / <span id='total-sinonime'>10</span>
+<div class='progress-wrap'><div class='progress-fill' id='prog-sinonime'></div></div></div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 1</div>
+<div class='question'>Care este sinonimul pentru "vesel"?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs1',false,'sinonime')">trist</button>
+<button class='option-btn' onclick="checkOption(this,'vs1',true,'sinonime')">bucuros</button>
+<button class='option-btn' onclick="checkOption(this,'vs1',false,'sinonime')">supărat</button>
+<button class='option-btn' onclick="checkOption(this,'vs1',false,'sinonime')">înalt</button>
+</div>
+<div class='feedback' id='fb-vs1'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 2</div>
+<div class='question'>Sinonimul lui "zăpadă" este:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs2',false,'sinonime')">apă</button>
+<button class='option-btn' onclick="checkOption(this,'vs2',false,'sinonime')">ploaie</button>
+<button class='option-btn' onclick="checkOption(this,'vs2',true,'sinonime')">nea</button>
+<button class='option-btn' onclick="checkOption(this,'vs2',false,'sinonime')">gheață</button>
+</div>
+<div class='feedback' id='fb-vs2'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 3</div>
+<div class='question'>Ce cuvânt înseamnă același lucru cu "amic"?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs3',false,'sinonime')">dușman</button>
+<button class='option-btn' onclick="checkOption(this,'vs3',true,'sinonime')">prieten</button>
+<button class='option-btn' onclick="checkOption(this,'vs3',false,'sinonime')">coleg</button>
+<button class='option-btn' onclick="checkOption(this,'vs3',false,'sinonime')">străin</button>
+</div>
+<div class='feedback' id='fb-vs3'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 4</div>
+<div class='question'>Sinonim pentru "a alerga":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs4',false,'sinonime')">a merge</button>
+<button class='option-btn' onclick="checkOption(this,'vs4',false,'sinonime')">a sta</button>
+<button class='option-btn' onclick="checkOption(this,'vs4',false,'sinonime')">a dormi</button>
+<button class='option-btn' onclick="checkOption(this,'vs4',true,'sinonime')">a fugi</button>
+</div>
+<div class='feedback' id='fb-vs4'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 5</div>
+<div class='question'>Sinonim pentru "steag":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs5',false,'sinonime')">hârtie</button>
+<button class='option-btn' onclick="checkOption(this,'vs5',true,'sinonime')">drapel</button>
+<button class='option-btn' onclick="checkOption(this,'vs5',false,'sinonime')">băț</button>
+<button class='option-btn' onclick="checkOption(this,'vs5',false,'sinonime')">tricou</button>
+</div>
+<div class='feedback' id='fb-vs5'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 6</div>
+<div class='question'>Sinonim pentru "scund":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs6',false,'sinonime')">înalt</button>
+<button class='option-btn' onclick="checkOption(this,'vs6',false,'sinonime')">mare</button>
+<button class='option-btn' onclick="checkOption(this,'vs6',true,'sinonime')">mic</button>
+<button class='option-btn' onclick="checkOption(this,'vs6',false,'sinonime')">gras</button>
+</div>
+<div class='feedback' id='fb-vs6'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 7</div>
+<div class='question'>Sinonim pentru "a privi":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs7',false,'sinonime')">a asculta</button>
+<button class='option-btn' onclick="checkOption(this,'vs7',true,'sinonime')">a se uita</button>
+<button class='option-btn' onclick="checkOption(this,'vs7',false,'sinonime')">a mirosi</button>
+<button class='option-btn' onclick="checkOption(this,'vs7',false,'sinonime')">a simți</button>
+</div>
+<div class='feedback' id='fb-vs7'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 8</div>
+<div class='question'>Sinonim pentru "dar":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs8',false,'sinonime')">jucărie</button>
+<button class='option-btn' onclick="checkOption(this,'vs8',true,'sinonime')">cadou</button>
+<button class='option-btn' onclick="checkOption(this,'vs8',false,'sinonime')">carte</button>
+<button class='option-btn' onclick="checkOption(this,'vs8',false,'sinonime')">dulce</button>
+</div>
+<div class='feedback' id='fb-vs8'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 9</div>
+<div class='question'>Sinonim pentru "teamă":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs9',false,'sinonime')">curaj</button>
+<button class='option-btn' onclick="checkOption(this,'vs9',true,'sinonime')">frică</button>
+<button class='option-btn' onclick="checkOption(this,'vs9',false,'sinonime')">bucurie</button>
+<button class='option-btn' onclick="checkOption(this,'vs9',false,'sinonime')">râs</button>
+</div>
+<div class='feedback' id='fb-vs9'></div>
+</div>
+<div class='exercise-card' style='border-color:#10b981;'>
+<div class='q-num' style='color:#10b981;'>Exercițiul 10</div>
+<div class='question'>Sinonim pentru "a zice":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vs10',false,'sinonime')">a asculta</button>
+<button class='option-btn' onclick="checkOption(this,'vs10',false,'sinonime')">a tăcea</button>
+<button class='option-btn' onclick="checkOption(this,'vs10',true,'sinonime')">a spune</button>
+<button class='option-btn' onclick="checkOption(this,'vs10',false,'sinonime')">a citi</button>
+</div>
+<div class='feedback' id='fb-vs10'></div>
+</div>
+<button class='reset-btn' onclick="resetSection('sinonime')">🔄 Resetează Sinonime</button>
+<div class='reward' id='reward-sinonime'>
+<div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+<h2>🏆 Felicitări, Veronica!</h2>
+<p>Ai terminat exercițiile pentru Sinonime!</p>
+</div>
+<h3 class='exercises-title' style='color:#e11d48;margin-top:40px;'>✏️ Exerciții – Antonime</h3>
+<div class='score-bar' id='score-antonime'>⭐ Puncte: <span class='score-num' id='pts-antonime'>0</span> / <span id='total-antonime'>10</span>
+<div class='progress-wrap'><div class='progress-fill' id='prog-antonime'></div></div></div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 1</div>
+<div class='question'>Antonimul pentru "alb":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va1',false,'antonime')">roșu</button>
+<button class='option-btn' onclick="checkOption(this,'va1',true,'antonime')">negru</button>
+<button class='option-btn' onclick="checkOption(this,'va1',false,'antonime')">gri</button>
+<button class='option-btn' onclick="checkOption(this,'va1',false,'antonime')">galben</button>
+</div>
+<div class='feedback' id='fb-va1'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 2</div>
+<div class='question'>Antonimul pentru "mare":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va2',false,'antonime')">uriaș</button>
+<button class='option-btn' onclick="checkOption(this,'va2',true,'antonime')">mic</button>
+<button class='option-btn' onclick="checkOption(this,'va2',false,'antonime')">înalt</button>
+<button class='option-btn' onclick="checkOption(this,'va2',false,'antonime')">rotund</button>
+</div>
+<div class='feedback' id='fb-va2'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 3</div>
+<div class='question'>Antonimul pentru "cald":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va3',false,'antonime')">fierbinte</button>
+<button class='option-btn' onclick="checkOption(this,'va3',false,'antonime')">răcoros</button>
+<button class='option-btn' onclick="checkOption(this,'va3',true,'antonime')">rece</button>
+<button class='option-btn' onclick="checkOption(this,'va3',false,'antonime')">soare</button>
+</div>
+<div class='feedback' id='fb-va3'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 4</div>
+<div class='question'>Antonimul pentru "a râde":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va4',false,'antonime')">a zâmbi</button>
+<button class='option-btn' onclick="checkOption(this,'va4',false,'antonime')">a chicoti</button>
+<button class='option-btn' onclick="checkOption(this,'va4',true,'antonime')">a plânge</button>
+<button class='option-btn' onclick="checkOption(this,'va4',false,'antonime')">a sta</button>
+</div>
+<div class='feedback' id='fb-va4'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 5</div>
+<div class='question'>Antonimul pentru "zi":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va5',false,'antonime')">dimineață</button>
+<button class='option-btn' onclick="checkOption(this,'va5',false,'antonime')">seară</button>
+<button class='option-btn' onclick="checkOption(this,'va5',true,'antonime')">noapte</button>
+<button class='option-btn' onclick="checkOption(this,'va5',false,'antonime')">amiază</button>
+</div>
+<div class='feedback' id='fb-va5'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 6</div>
+<div class='question'>Antonimul pentru "bun":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va6',false,'antonime')">drăguț</button>
+<button class='option-btn' onclick="checkOption(this,'va6',true,'antonime')">rău</button>
+<button class='option-btn' onclick="checkOption(this,'va6',false,'antonime')">dulce</button>
+<button class='option-btn' onclick="checkOption(this,'va6',false,'antonime')">amar</button>
+</div>
+<div class='feedback' id='fb-va6'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 7</div>
+<div class='question'>Antonimul pentru "înalt":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va7',false,'antonime')">mare</button>
+<button class='option-btn' onclick="checkOption(this,'va7',true,'antonime')">scund</button>
+<button class='option-btn' onclick="checkOption(this,'va7',false,'antonime')">lung</button>
+<button class='option-btn' onclick="checkOption(this,'va7',false,'antonime')">gros</button>
+</div>
+<div class='feedback' id='fb-va7'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 8</div>
+<div class='question'>Antonimul pentru "devreme":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va8',true,'antonime')">târziu</button>
+<button class='option-btn' onclick="checkOption(this,'va8',false,'antonime')">acum</button>
+<button class='option-btn' onclick="checkOption(this,'va8',false,'antonime')">niciodată</button>
+<button class='option-btn' onclick="checkOption(this,'va8',false,'antonime')">mâine</button>
+</div>
+<div class='feedback' id='fb-va8'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 9</div>
+<div class='question'>Antonimul pentru "aproape":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va9',false,'antonime')">lângă</button>
+<button class='option-btn' onclick="checkOption(this,'va9',false,'antonime')">aici</button>
+<button class='option-btn' onclick="checkOption(this,'va9',true,'antonime')">departe</button>
+<button class='option-btn' onclick="checkOption(this,'va9',false,'antonime')">sus</button>
+</div>
+<div class='feedback' id='fb-va9'></div>
+</div>
+<div class='exercise-card' style='border-color:#e11d48;'>
+<div class='q-num' style='color:#e11d48;'>Exercițiul 10</div>
+<div class='question'>Antonimul pentru "nou":</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'va10',false,'antonime')">strălucitor</button>
+<button class='option-btn' onclick="checkOption(this,'va10',true,'antonime')">vechi</button>
+<button class='option-btn' onclick="checkOption(this,'va10',false,'antonime')">curat</button>
+<button class='option-btn' onclick="checkOption(this,'va10',false,'antonime')">frumos</button>
+</div>
+<div class='feedback' id='fb-va10'></div>
+</div>
+<button class='reset-btn' onclick="resetSection('antonime')">🔄 Resetează Antonime</button>
+<div class='reward' id='reward-antonime'>
+<div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+<h2>🏆 Felicitări, Veronica!</h2>
+<p>Ai terminat exercițiile pentru Antonime!</p>
+</div>
+<h3 class='exercises-title' style='color:#2563eb;margin-top:40px;'>✏️ Exerciții – Omonime</h3>
+<div class='score-bar' id='score-omonime'>⭐ Puncte: <span class='score-num' id='pts-omonime'>0</span> / <span id='total-omonime'>10</span>
+<div class='progress-wrap'><div class='progress-fill' id='prog-omonime'></div></div></div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 1</div>
+<div class='question'>"Sare" din propoziția "Băiatul sare mingea" este:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo1',false,'omonime')">condiment</button>
+<button class='option-btn' onclick="checkOption(this,'vo1',true,'omonime')">verb</button>
+<button class='option-btn' onclick="checkOption(this,'vo1',false,'omonime')">substantiv</button>
+</div>
+<div class='feedback' id='fb-vo1'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 2</div>
+<div class='question'>"Sare" din "Am pus sare în mâncare" este:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo2',false,'omonime')">verb</button>
+<button class='option-btn' onclick="checkOption(this,'vo2',true,'omonime')">substantiv</button>
+<button class='option-btn' onclick="checkOption(this,'vo2',false,'omonime')">adjectiv</button>
+</div>
+<div class='feedback' id='fb-vo2'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 3</div>
+<div class='question'>"Broască" (animal) și "broască" (la ușă) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo3',false,'omonime')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo3',false,'omonime')">Antonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo3',true,'omonime')">Omonime</button>
+</div>
+<div class='feedback' id='fb-vo3'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 4</div>
+<div class='question'>"Corn" (de mâncat) și "corn" (de animal) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo4',false,'omonime')">Omofone</button>
+<button class='option-btn' onclick="checkOption(this,'vo4',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo4',false,'omonime')">Antonime</button>
+</div>
+<div class='feedback' id='fb-vo4'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 5</div>
+<div class='question'>"Liliac" (floare) și "liliac" (animal) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo5',false,'omonime')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo5',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo5',false,'omonime')">Paronime</button>
+</div>
+<div class='feedback' id='fb-vo5'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 6</div>
+<div class='question'>"Ochi" (corp) și "ochi" (de aragaz) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo6',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo6',false,'omonime')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo6',false,'omonime')">Omofone</button>
+</div>
+<div class='feedback' id='fb-vo6'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 7</div>
+<div class='question'>Ce sunt omonimele?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo7',false,'omonime')">Sens opus</button>
+<button class='option-btn' onclick="checkOption(this,'vo7',false,'omonime')">Același sens</button>
+<button class='option-btn' onclick="checkOption(this,'vo7',true,'omonime')">Se scriu la fel, sens diferit</button>
+</div>
+<div class='feedback' id='fb-vo7'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 8</div>
+<div class='question'>"Leu" (animal) și "leu" (bani) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo8',false,'omonime')">Antonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo8',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo8',false,'omonime')">Sinonime</button>
+</div>
+<div class='feedback' id='fb-vo8'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 9</div>
+<div class='question'>"Somn" (pește) și "somn" (de dormit) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo9',false,'omonime')">Omofone</button>
+<button class='option-btn' onclick="checkOption(this,'vo9',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo9',false,'omonime')">Paronime</button>
+</div>
+<div class='feedback' id='fb-vo9'></div>
+</div>
+<div class='exercise-card' style='border-color:#2563eb;'>
+<div class='q-num' style='color:#2563eb;'>Exercițiul 10</div>
+<div class='question'>"Nouă" (cifră) și "nouă" (haina nouă) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vo10',true,'omonime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo10',false,'omonime')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vo10',false,'omonime')">Antonime</button>
+</div>
+<div class='feedback' id='fb-vo10'></div>
+</div>
+<button class='reset-btn' onclick="resetSection('omonime')">🔄 Resetează Omonime</button>
+<div class='reward' id='reward-omonime'>
+<div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+<h2>🏆 Felicitări, Veronica!</h2>
+<p>Ai terminat exercițiile pentru Omonime!</p>
+</div>
+<h3 class='exercises-title' style='color:#a855f7;margin-top:40px;'>✏️ Exerciții – Paronime</h3>
+<div class='score-bar' id='score-paronime'>⭐ Puncte: <span class='score-num' id='pts-paronime'>0</span> / <span id='total-paronime'>10</span>
+<div class='progress-wrap'><div class='progress-fill' id='prog-paronime'></div></div></div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 1</div>
+<div class='question'>Cuvintele "oral" și "orar" sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp1',false,'paronime')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vp1',true,'paronime')">Paronime</button>
+<button class='option-btn' onclick="checkOption(this,'vp1',false,'paronime')">Antonime</button>
+</div>
+<div class='feedback' id='fb-vp1'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 2</div>
+<div class='question'>"Familiar" înseamnă:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp2',false,'paronime')">De familie</button>
+<button class='option-btn' onclick="checkOption(this,'vp2',true,'paronime')">Cunoscut</button>
+<button class='option-btn' onclick="checkOption(this,'vp2',false,'paronime')">Străin</button>
+</div>
+<div class='feedback' id='fb-vp2'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 3</div>
+<div class='question'>"Familial" înseamnă:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp3',true,'paronime')">De familie</button>
+<button class='option-btn' onclick="checkOption(this,'vp3',false,'paronime')">Cunoscut</button>
+<button class='option-btn' onclick="checkOption(this,'vp3',false,'paronime')">Depărtat</button>
+</div>
+<div class='feedback' id='fb-vp3'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 4</div>
+<div class='question'>Ce sunt paronimele?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp4',false,'paronime')">Același sens</button>
+<button class='option-btn' onclick="checkOption(this,'vp4',false,'paronime')">Sens opus</button>
+<button class='option-btn' onclick="checkOption(this,'vp4',true,'paronime')">Seamănă ca formă, sens diferit</button>
+</div>
+<div class='feedback' id='fb-vp4'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 5</div>
+<div class='question'>"Eminent" (bun) și "iminent" (stă să se întâmple) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp5',false,'paronime')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vp5',true,'paronime')">Paronime</button>
+<button class='option-btn' onclick="checkOption(this,'vp5',false,'paronime')">Omofone</button>
+</div>
+<div class='feedback' id='fb-vp5'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 6</div>
+<div class='question'>El este foarte ... (cunoscut) cu noi.</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp6',false,'paronime')">familial</button>
+<button class='option-btn' onclick="checkOption(this,'vp6',true,'paronime')">familiar</button>
+</div>
+<div class='feedback' id='fb-vp6'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 7</div>
+<div class='question'>Medicul a recomandat un tratament ... (pe gură).</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp7',false,'paronime')">orar</button>
+<button class='option-btn' onclick="checkOption(this,'vp7',true,'paronime')">oral</button>
+</div>
+<div class='feedback' id='fb-vp7'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 8</div>
+<div class='question'>Am un ... foarte încărcat la școală azi.</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp8',false,'paronime')">oral</button>
+<button class='option-btn' onclick="checkOption(this,'vp8',true,'paronime')">orar</button>
+</div>
+<div class='feedback' id='fb-vp8'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 9</div>
+<div class='question'>Sărbătoarea a avut un caracter ... (de familie).</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp9',false,'paronime')">familiar</button>
+<button class='option-btn' onclick="checkOption(this,'vp9',true,'paronime')">familial</button>
+</div>
+<div class='feedback' id='fb-vp9'></div>
+</div>
+<div class='exercise-card' style='border-color:#a855f7;'>
+<div class='q-num' style='color:#a855f7;'>Exercițiul 10</div>
+<div class='question'>Paronimele se deosebesc prin:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vp10',false,'paronime')">Sunt identice</button>
+<button class='option-btn' onclick="checkOption(this,'vp10',true,'paronime')">1-2 sunete</button>
+<button class='option-btn' onclick="checkOption(this,'vp10',false,'paronime')">Au sens opus</button>
+</div>
+<div class='feedback' id='fb-vp10'></div>
+</div>
+<button class='reset-btn' onclick="resetSection('paronime')">🔄 Resetează Paronime</button>
+<div class='reward' id='reward-paronime'>
+<div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+<h2>🏆 Felicitări, Veronica!</h2>
+<p>Ai terminat exercițiile pentru Paronime!</p>
+</div>
+<h3 class='exercises-title' style='color:#f59e0b;margin-top:40px;'>✏️ Exerciții – Omofone</h3>
+<div class='score-bar' id='score-omofone'>⭐ Puncte: <span class='score-num' id='pts-omofone'>0</span> / <span id='total-omofone'>10</span>
+<div class='progress-wrap'><div class='progress-fill' id='prog-omofone'></div></div></div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 1</div>
+<div class='question'>Cuvintele "sa" și "s-a" sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf1',false,'omofone')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vf1',true,'omofone')">Omofone</button>
+<button class='option-btn' onclick="checkOption(this,'vf1',false,'omofone')">Antonime</button>
+</div>
+<div class='feedback' id='fb-vf1'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 2</div>
+<div class='question'>Cum scrii corect? Fata a luat cartea ...</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf2',true,'omofone')">sa</button>
+<button class='option-btn' onclick="checkOption(this,'vf2',false,'omofone')">s-a</button>
+</div>
+<div class='feedback' id='fb-vf2'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 3</div>
+<div class='question'>Cum scrii corect? El ... dus la școală.</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf3',false,'omofone')">sa</button>
+<button class='option-btn' onclick="checkOption(this,'vf3',true,'omofone')">s-a</button>
+</div>
+<div class='feedback' id='fb-vf3'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 4</div>
+<div class='question'>"Mai" (luna) și "m-ai" (m-ai strigat) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf4',false,'omofone')">Omonime</button>
+<button class='option-btn' onclick="checkOption(this,'vf4',false,'omofone')">Paronime</button>
+<button class='option-btn' onclick="checkOption(this,'vf4',true,'omofone')">Omofone</button>
+</div>
+<div class='feedback' id='fb-vf4'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 5</div>
+<div class='question'>Cum scrii corect? De ce ... supărat?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf5',false,'omofone')">mai</button>
+<button class='option-btn' onclick="checkOption(this,'vf5',true,'omofone')">m-ai</button>
+</div>
+<div class='feedback' id='fb-vf5'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 6</div>
+<div class='question'>Cum scrii corect? Suntem în luna ...</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf6',true,'omofone')">mai</button>
+<button class='option-btn' onclick="checkOption(this,'vf6',false,'omofone')">m-ai</button>
+</div>
+<div class='feedback' id='fb-vf6'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 7</div>
+<div class='question'>"Neam" (rude) și "ne-am" (ne-am dus) sunt:</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf7',true,'omofone')">Omofone</button>
+<button class='option-btn' onclick="checkOption(this,'vf7',false,'omofone')">Sinonime</button>
+<button class='option-btn' onclick="checkOption(this,'vf7',false,'omofone')">Antonime</button>
+</div>
+<div class='feedback' id='fb-vf7'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 8</div>
+<div class='question'>Cum scrii corect? Noi ... jucat în parc.</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf8',false,'omofone')">neam</button>
+<button class='option-btn' onclick="checkOption(this,'vf8',true,'omofone')">ne-am</button>
+</div>
+<div class='feedback' id='fb-vf8'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 9</div>
+<div class='question'>Cum scrii corect? Avem un ... mare.</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf9',true,'omofone')">neam</button>
+<button class='option-btn' onclick="checkOption(this,'vf9',false,'omofone')">ne-am</button>
+</div>
+<div class='feedback' id='fb-vf9'></div>
+</div>
+<div class='exercise-card' style='border-color:#f59e0b;'>
+<div class='q-num' style='color:#f59e0b;'>Exercițiul 10</div>
+<div class='question'>Ce sunt omofonele?</div>
+<div class='options'>
+<button class='option-btn' onclick="checkOption(this,'vf10',false,'omofone')">Se scriu și aud la fel</button>
+<button class='option-btn' onclick="checkOption(this,'vf10',true,'omofone')">Se aud la fel, se scriu diferit</button>
+</div>
+<div class='feedback' id='fb-vf10'></div>
+</div>
+<button class='reset-btn' onclick="resetSection('omofone')">🔄 Resetează Omofone</button>
+<div class='reward' id='reward-omofone'>
+<div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+<h2>🏆 Felicitări, Veronica!</h2>
+<p>Ai terminat exercițiile pentru Omofone!</p>
+</div>
+
+</section>
+
+<!-- ════════════════════ JAVASCRIPT ════════════════════ -->
+<script>
+// ── STARS ──
+(function(){
+  const c=document.getElementById('starContainer');
+  const e=['⭐','🌟','✨','💫','🌸','🎀','🦋','💎','🌈'];
+  for(let i=0;i<22;i++){
+    const s=document.createElement('span');
+    s.className='h-star';
+    s.textContent=e[Math.floor(Math.random()*e.length)];
+    s.style.left=Math.random()*95+'%';
+    s.style.top=Math.random()*88+'%';
+    s.style.animationDelay=Math.random()*2+'s';
+    s.style.fontSize=(1+Math.random()*.8)+'rem';
+    c.appendChild(s);
+  }
+})();
+
+// ── AUDIO (Web Audio API) ──
+const AC=new(window.AudioContext||window.webkitAudioContext)();
+function playTone(freq,dur,type='sine',vol=.18){
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.connect(g);g.connect(AC.destination);
+  o.type=type;o.frequency.value=freq;
+  g.gain.setValueAtTime(vol,AC.currentTime);
+  g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+dur);
+  o.start();o.stop(AC.currentTime+dur);
+}
+function soundCorrect(){
+  [523,659,784].forEach((f,i)=>setTimeout(()=>playTone(f,.18,'triangle',.22),i*100));
+}
+function soundWrong(){
+  playTone(220,.35,'sawtooth',.15);
+}
+function soundFanfare(){
+  const notes=[523,659,784,1046,784,1046];
+  notes.forEach((f,i)=>setTimeout(()=>playTone(f,.2,'triangle',.3),i*130));
+}
+
+// ── BACKGROUND MUSIC (procedural lullaby) ──
+let musicPlaying = false;
+let musicNodes = [];
+let musicScheduler = null;
+
+let forestFilter = null;
+let forestGain = null;
+
+function playBirdChirp() {
+  if(!musicPlaying) return;
+  try {
+    const osc = AC.createOscillator();
+    const gain = AC.createGain();
+    
+    osc.type = 'sine';
+    const baseFreq = 2500 + Math.random() * 2000;
+    osc.frequency.setValueAtTime(baseFreq, AC.currentTime);
+    
+    const sweepDir = Math.random() > 0.5 ? 1 : -1;
+    osc.frequency.exponentialRampToValueAtTime(baseFreq + sweepDir * 800, AC.currentTime + 0.15);
+    
+    const dur = 0.1 + Math.random() * 0.1;
+    gain.gain.setValueAtTime(0, AC.currentTime);
+    gain.gain.linearRampToValueAtTime(0.08, AC.currentTime + 0.02); // volume of birds
+    gain.gain.exponentialRampToValueAtTime(0.0001, AC.currentTime + dur);
+    
+    // add a bit of spatial panning/echo to the bird
+    const delay = AC.createDelay();
+    delay.delayTime.value = 0.2;
+    const delayGain = AC.createGain();
+    delayGain.gain.value = 0.2;
+    osc.connect(gain);
+    gain.connect(AC.destination);
+    gain.connect(delay);
+    delay.connect(delayGain);
+    delayGain.connect(AC.destination);
+    
+    osc.start(AC.currentTime);
+    osc.stop(AC.currentTime + dur + 0.5);
+    
+    const nodeObj = { stop: () => { try{osc.stop();}catch(e){} } };
+    musicNodes.push(nodeObj);
+    setTimeout(() => {
+      const idx = musicNodes.indexOf(nodeObj);
+      if(idx > -1) musicNodes.splice(idx, 1);
+    }, (dur + 0.5) * 1000);
+    
+    // chance for a double chirp
+    if(Math.random() > 0.6) {
+      setTimeout(playBirdChirp, 100 + Math.random() * 150);
+    }
+  } catch(e){}
+}
+
+function startForestNoise() {
+  try {
+    const bufferSize = AC.sampleRate * 2;
+    const buffer = AC.createBuffer(1, bufferSize, AC.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1; // white noise
+    }
+    
+    const noise = AC.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+    
+    forestFilter = AC.createBiquadFilter();
+    forestFilter.type = 'lowpass';
+    forestFilter.frequency.value = 400; // sounds like wind/leaves
+    
+    forestGain = AC.createGain();
+    forestGain.gain.value = 0.06; // very quiet background wind
+    
+    noise.connect(forestFilter);
+    forestFilter.connect(forestGain);
+    forestGain.connect(AC.destination);
+    
+    noise.start();
+    const nodeObj = { stop: () => { try{noise.stop();}catch(e){} } };
+    musicNodes.push(nodeObj);
+  } catch(e){}
+}
+
+function scheduleMelody(){
+  if(!musicPlaying) return;
+  AC.resume();
+  
+  if(musicNodes.length === 0) {
+    startForestNoise();
+  }
+  
+  // Modulate the wind
+  if(forestFilter && forestGain) {
+    const targetFreq = 200 + Math.random() * 500;
+    forestFilter.frequency.linearRampToValueAtTime(targetFreq, AC.currentTime + 2);
+    const targetVol = 0.03 + Math.random() * 0.05;
+    forestGain.gain.linearRampToValueAtTime(targetVol, AC.currentTime + 2);
+  }
+  
+  // Play birds occasionally
+  if(Math.random() > 0.3) {
+    playBirdChirp();
+  }
+  
+  const nextTick = 1500 + Math.random() * 2500;
+  musicScheduler = setTimeout(scheduleMelody, nextTick);
+}
+
+function stopMusicNodes(){
+  musicNodes.forEach(n=>{ try{ n.stop(); }catch(e){} });
+  musicNodes = [];
+  forestFilter = null;
+  forestGain = null;
+  if(musicScheduler){ clearTimeout(musicScheduler); musicScheduler = null; }
+}
+
+function toggleMusic(){
+  const btn = document.getElementById('musicBtn');
+  const lbl = document.getElementById('musicLabel');
+  if(!musicPlaying){
+    musicPlaying = true;
+    AC.resume().then(()=>{ scheduleMelody(); });
+    btn.textContent = '🎶';
+    btn.classList.add('playing');
+    lbl.textContent = 'Muzică pornită 🎶';
+    lbl.classList.add('show');
+    setTimeout(()=>lbl.classList.remove('show'), 2200);
+  } else {
+    musicPlaying = false;
+    stopMusicNodes();
+    btn.textContent = '🎵';
+    btn.classList.remove('playing');
+    lbl.textContent = 'Muzică oprită 🔇';
+    lbl.classList.add('show');
+    setTimeout(()=>lbl.classList.remove('show'), 2200);
+  }
+}
+
+// ── CONFETTI ──
+const cvs=document.getElementById('confetti-canvas');
+const ctx2=cvs.getContext('2d');
+cvs.width=window.innerWidth; cvs.height=window.innerHeight;
+window.addEventListener('resize',()=>{cvs.width=window.innerWidth;cvs.height=window.innerHeight;});
+let confettiParts=[];
+const COLORS=['#ff6eb4','#a855f7','#38bdf8','#4ade80','#ffd93d','#f87171','#fb923c','#2dd4bf'];
+function launchConfetti(){
+  for(let i=0;i<120;i++){
+    confettiParts.push({
+      x:Math.random()*cvs.width, y:-10,
+      r:Math.random()*8+4,
+      color:COLORS[Math.floor(Math.random()*COLORS.length)],
+      vx:(Math.random()-0.5)*6, vy:Math.random()*4+2,
+      angle:Math.random()*360, spin:Math.random()*8-4,
+      shape:Math.random()>.5?'circle':'rect'
+    });
+  }
+  animateConfetti();
+}
+let confettiRaf;
+function animateConfetti(){
+  ctx2.clearRect(0,0,cvs.width,cvs.height);
+  confettiParts=confettiParts.filter(p=>p.y<cvs.height+20);
+  confettiParts.forEach(p=>{
+    p.y+=p.vy; p.x+=p.vx; p.angle+=p.spin; p.vy+=.07;
+    ctx2.save();ctx2.translate(p.x,p.y);ctx2.rotate(p.angle*Math.PI/180);
+    ctx2.fillStyle=p.color;
+    if(p.shape==='circle'){ctx2.beginPath();ctx2.arc(0,0,p.r,0,Math.PI*2);ctx2.fill();}
+    else{ctx2.fillRect(-p.r/2,-p.r/2,p.r,p.r);}
+    ctx2.restore();
+  });
+  if(confettiParts.length>0) confettiRaf=requestAnimationFrame(animateConfetti);
+  else ctx2.clearRect(0,0,cvs.width,cvs.height);
+}
+
+// ── DIPLOMA ──
+function showDiploma(topic){
+  document.getElementById('diploma-topic').textContent=topic;
+  document.getElementById('diploma-overlay').classList.add('show');
+  launchConfetti(); soundFanfare();
+}
+function closeDiploma(){
+  document.getElementById('diploma-overlay').classList.remove('show');
+}
+
+// ── MASCOT ──
+const msgs=[
+  'Hai să învățăm! 📚✨','Ești super deșteaptă! 🌟','Bravo, continuă! 💪',
+  'Te descurci minunat! 🎉','Ai curaj, poți! 🦋','Sunt mândru de tine! 💖',
+  'Exercițiile sunt fun! 😄','România e frumoasă! 🇷🇴','Știi tot ce trebuie! 🎓'
+];
+let msgIdx=0;
+function mascotSpeak(){
+  AC.resume();
+  const b=document.getElementById('mascot-bubble');
+  b.textContent=msgs[msgIdx++ % msgs.length];
+  b.classList.add('show');
+  playTone(880,.1,'sine',.1);
+  clearTimeout(window._mascotTimer);
+  window._mascotTimer=setTimeout(()=>b.classList.remove('show'),2800);
+}
+setTimeout(mascotSpeak,2000);
+
+// ── NAV ──
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.getElementById(id).classList.add('visible');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const tb=document.getElementById('tab-'+id);
+  if(tb) tb.classList.add('active');
+  AC.resume();
+  // scroll DOWN to the section content
+  setTimeout(()=>{
+    document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+  }, 60);
+}
+
+// ── SCORE STATE ──
+const scores={},answered={};
+// section question counts
+const qCounts={
+  Substantiv:4, pronume:3, verb:4, adjectiv:3,
+  adverb:3, prepozitie:3, conjunctie:3, interjectie:3, exercitii:10,
+  sinonime:10, antonime:10, omonime:10, paronime:10, omofone:10
+};
+
+function getTotal(sec){ return qCounts[sec]||0; }
+
+function updateScore(sec){
+  const pts=scores[sec]||0;
+  const tot=getTotal(sec);
+  const pel=document.getElementById('pts-'+sec);
+  const tel=document.getElementById('total-'+sec);
+  const bar=document.getElementById('prog-'+sec);
+  if(pel) pel.textContent=pts;
+  if(tel) tel.textContent=tot;
+  if(bar) bar.style.width=(tot>0?Math.round(pts/tot*100):0)+'%';
+  updateGlobalProgress();
+}
+
+function updateGlobalProgress(){
+  let total=0,done=0;
+  Object.keys(qCounts).forEach(sec=>{
+    total+=qCounts[sec];
+    done+=(scores[sec]||0);
+  });
+  document.getElementById('gp-text').innerHTML=
+    'Progres total: <strong>'+done+'</strong> / <strong>'+total+'</strong> exerciții rezolvate 🌟';
+  document.getElementById('gp-bar').style.width=(total>0?Math.round(done/total*100):0)+'%';
+}
+
+function sectionOf(qid){
+  if(qid.startsWith('ad')) return 'adverb';
+  if(qid.startsWith('pr')) return 'prepozitie';
+  if(qid.startsWith('vs')) return 'sinonime';
+  if(qid.startsWith('va')) return 'antonime';
+  if(qid.startsWith('vo')) return 'omonime';
+  if(qid.startsWith('vp')) return 'paronime';
+  if(qid.startsWith('vf')) return 'omofone';
+  const map={s:'Substantiv',p:'pronume',v:'verb',a:'adjectiv',c:'conjunctie',i:'interjectie',g:'exercitii'};
+  for(const [k,v] of Object.entries(map)) if(qid.startsWith(k)) return v;
+  return 'exercitii';
+}
+
+function checkAllDone(sec){
+  // count answered questions in this section
+  const secQs=Object.keys(answered).filter(k=>sectionOf(k)===sec && answered[k]===true);
+  if(secQs.length>=getTotal(sec)){
+    // show reward
+    setTimeout(()=>{
+      const r=document.getElementById('reward-'+sec);
+      if(r&&!r.classList.contains('show')){
+        r.classList.add('show');
+        r.scrollIntoView({behavior:'smooth',block:'center'});
+        showDiploma(sec==='Substantiv'?'Substantiv':sec==='pronume'?'Pronume':
+          sec==='verb'?'Verb':sec==='adjectiv'?'Adjectiv':
+          sec==='adverb'?'Adverb':sec==='prepozitie'?'Prepoziție':
+          sec==='conjunctie'?'Conjuncție':sec==='interjectie'?'Interjecție':
+          sec==='sinonime'?'Sinonime':sec==='antonime'?'Antonime':
+          sec==='omonime'?'Omonime':sec==='paronime'?'Paronime':
+          sec==='omofone'?'Omofone':'toate Exercițiile Generale');
+        // mark tab done
+        const tab=document.getElementById('tab-'+sec.toLowerCase());
+        if(tab&&!tab.classList.contains('tab-done')) tab.classList.add('tab-done');
+        // show done badge on menu
+        const badge=document.getElementById('done-'+sec.toLowerCase());
+        if(badge) badge.classList.add('show');
+      }
+    },400);
+  }
+}
+
+// ── CHECK OPTION ──
+function checkOption(btn,qid,isCorrect,sec){
+  if(answered[qid]) return;
+  AC.resume();
+  answered[qid]=true;
+  if(!scores[sec]) scores[sec]=0;
+  const fb=document.getElementById('fb-'+qid);
+  btn.parentElement.querySelectorAll('.option-btn').forEach(b=>b.disabled=true);
+  if(isCorrect){
+    btn.classList.add('correct');
+    fb.textContent='✅ Corect! Bravo, Veronica! 🎉';
+    fb.className='feedback ok show';
+    scores[sec]++;
+    soundCorrect();
+    // mini confetti burst
+    for(let i=0;i<30;i++){
+      confettiParts.push({
+        x:btn.getBoundingClientRect().left+btn.offsetWidth/2+window.scrollX,
+        y:btn.getBoundingClientRect().top+window.scrollY,
+        r:Math.random()*6+3,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)],
+        vx:(Math.random()-0.5)*8, vy:Math.random()*-6-2,
+        angle:0,spin:Math.random()*10-5,
+        shape:'circle'
+      });
+    }
+    if(confettiParts.length>0) { cancelAnimationFrame(confettiRaf); animateConfetti(); }
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent='❌ Nu e corect... Dar poți! Încearcă la resetare! 💪';
+    fb.className='feedback err show';
+    soundWrong();
+  }
+  updateScore(sec);
+  checkAllDone(sec);
+}
+
+// ── CHECK FILL ──
+function checkFill(qid,answer,sec){
+  if(answered[qid]) return;
+  AC.resume();
+  answered[qid]=true;
+  if(!scores[sec]) scores[sec]=0;
+  const input=document.getElementById('fill-'+qid);
+  const fb=document.getElementById('fb-'+qid);
+  const val=input.value.trim().toLowerCase();
+  if(val===answer.toLowerCase()){
+    fb.textContent='✅ Corect! Super Veronica! 🌟';
+    fb.className='feedback ok show';
+    input.style.borderColor='#22c55e';
+    scores[sec]++;
+    soundCorrect();
+  } else {
+    fb.textContent='❌ Nu e corect. Răspunsul e: „'+answer+'"';
+    fb.className='feedback err show';
+    input.style.borderColor='#ef4444';
+    soundWrong();
+  }
+  input.disabled=true;
+  updateScore(sec);
+  checkAllDone(sec);
+}
+
+// ── RESET ──
+function resetSection(sec){
+  // clear answered flags for this section
+  Object.keys(answered).forEach(k=>{ if(sectionOf(k)===sec) delete answered[k]; });
+  scores[sec]=0;
+  // reset UI in this section
+  const sectionEl=document.getElementById(sec.toLowerCase())||document.getElementById(sec);
+  if(sectionEl){
+    sectionEl.querySelectorAll('.option-btn').forEach(b=>{b.disabled=false;b.classList.remove('correct','wrong');});
+    sectionEl.querySelectorAll('.fill-input').forEach(inp=>{inp.disabled=false;inp.value='';inp.style.borderColor='';});
+    sectionEl.querySelectorAll('.feedback').forEach(fb=>{fb.className='feedback';fb.textContent='';});
+    const r=sectionEl.querySelector('.reward');
+    if(r) r.classList.remove('show');
+  }
+  updateScore(sec);
+}
+
+// init progress display
+updateGlobalProgress();
+
+// Sistem audio ultra-natural (Fisiere MP3 locale pre-generate)
+let currentTTSAudio = null;
+
+function playGreeting() {
+  if (currentTTSAudio && !currentTTSAudio.paused) return; // Nu suprapune
+  
+  currentTTSAudio = new Audio('greeting.mp3');
+  currentTTSAudio.play().catch(e => console.log('Audio Error:', e));
+  
+  // Bubble animation
+  const bubble = document.querySelector('.buna-bubble');
+  if(bubble) {
+    bubble.style.animation = 'none';
+    setTimeout(() => bubble.style.animation = 'floatB 3s ease-in-out infinite', 10);
+  }
+}
+
+// Autoplay pe prima interacțiune
+
+// Citire butoane la hover
+const mp3Map = {
+  'acasă': 'acasa.mp3',
+  'substantiv': 'substantiv.mp3',
+  'substantivul': 'substantiv.mp3',
+  'pronume': 'pronume.mp3',
+  'pronumele': 'pronume.mp3',
+  'verb': 'verb.mp3',
+  'verbul': 'verb.mp3',
+  'adjectiv': 'adjectiv.mp3',
+  'adjectivul': 'adjectiv.mp3',
+  'adverb': 'adverb.mp3',
+  'adverbul': 'adverb.mp3',
+  'prepoziție': 'prepozitie.mp3',
+  'prepoziția': 'prepozitie.mp3',
+  'conjuncție': 'conjunctie.mp3',
+  'conjuncția': 'conjunctie.mp3',
+  'interjecție': 'interjectie.mp3',
+  'interjecția': 'interjectie.mp3',
+  'exerciții mari': 'exercitii.mp3',
+  'vocabular': 'vocabular.mp3',
+  'vocabular - relații semantice': 'vocabular.mp3'
+};
+
+function speakWord(word) {
+  if (currentTTSAudio) {
+    currentTTSAudio.pause(); // Oprim vocea anterioară
+  }
+  let key = word.toLowerCase().trim();
+  let file = mp3Map[key];
+  if (!file && key.includes('vocabular')) file = 'vocabular.mp3';
+  if (!file) return;
+
+  currentTTSAudio = new Audio(file);
+  currentTTSAudio.play().catch(e => console.log('Audio Error:', e));
+}
+
+function attachMenuSpeech() {
+  // Bara de sus
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      let text = btn.innerText.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF]|\u200D/g, '').trim(); // elimină emoji
+      if(text) speakWord(text);
+    });
+  });
+
+  // Cartonașele din pagină
+  document.querySelectorAll('.fairy-card, .menu-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const label = card.querySelector('.fc-label, h2');
+      if(label && label.innerText) speakWord(label.innerText);
+    });
+  });
+}
+setTimeout(attachMenuSpeech, 500);
+
+let musicAutoplayed = false;
+function attemptAutoplay() {
+  if (musicAutoplayed || musicPlaying) return;
+  musicAutoplayed = true;
+  toggleMusic();
+  ['click','touchstart','keydown'].forEach(evt => document.removeEventListener(evt, attemptAutoplay));
+}
+['click','touchstart','keydown'].forEach(evt => document.addEventListener(evt, attemptAutoplay));
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+sec==='interjectie'?'Interjecție':
+          sec==='sinonime'?'Sinonime':sec==='antonime'?'Antonime':sec==='omonime'?'Omonime':sec==='paronime'?'Paronime':sec==='omofone'?'Omofone':
+          

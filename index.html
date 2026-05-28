@@ -2177,7 +2177,7 @@ const MELODY = [
   [NOTE.G4, 1], [NOTE.E4, 1], [NOTE.D4, 1], [NOTE.C4, 1], [NOTE.E4, 4]
 ];
 
-function playMusicNote(freq, startTime, dur, vol=0.04){
+function playMusicNote(freq, startTime, dur, vol=0.08){
   try{
     const osc = AC.createOscillator();
     const gain = AC.createGain();
@@ -2216,10 +2216,10 @@ function scheduleMelody(){
   const beatDur = 1.0; // Ritm foarte lent, 1 notă pe secundă
   
   MELODY.forEach(([freq, beats])=>{
-    playMusicNote(freq, t, beats * beatDur, 0.04);
+    playMusicNote(freq, t, beats * beatDur, 0.08);
     // Armonie subtilă la notele lungi
     if (beats === 2) {
-      playMusicNote(freq * 1.5, t, beats * beatDur, 0.015);
+      playMusicNote(freq * 1.5, t, beats * beatDur, 0.03);
     }
     t += beats * beatDur;
   });

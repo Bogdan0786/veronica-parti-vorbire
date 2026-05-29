@@ -1559,7 +1559,20 @@
     <h3 style="font-family:'Baloo 2',cursive;font-size:1.6rem;color:#1e3a8a;margin-bottom:14px;">🎭 3. Omonimele</h3>
     <p style="font-size:.95rem;color:#444;margin-bottom:16px;font-weight:600;">Omonimele sunt cuvinte care se scriu și se pronunță <strong>identic</strong>, dar înseamnă lucruri <strong>complet diferite</strong>.</p>
     <div class="tip-box" style="border-color:#2563eb;background:#eff6ff;color:#1e40af;">💙 <strong>Truc:</strong> Cuvântul arată la fel, dar sensul se schimbă în funcție de propoziție!</div>
-    <div class="sentence-examples">
+    <style>
+      .omonime-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 14px 0 20px;
+      }
+      @media (max-width: 550px) {
+        .omonime-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <div class="omonime-grid">
       <div class="sent-card" style="text-align:center;">
         <div class="sent-label">Broscuță</div>
         <div class="sent-text">O <span class="sent-highlight" style="background:#dbeafe;color:#1e3a8a;">broască</span> sare în lac.</div>

@@ -3560,7 +3560,7 @@
     <h3 style="color:#2563eb; text-align:center; margin-bottom: 15px;">🎮 Provocarea Cuvintelor</h3>
     
     <div id="game-start-screen" style="padding: 30px; background:white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-       <p style="font-size: 1.2rem; color: #444; margin-bottom: 20px;">Ești gata să-ți testezi cunoștințele? Veronica îți va arăta 10 cuvinte și propoziții, iar tu trebuie să alegi varianta corectă.</p>
+       <p style="font-size: 1.2rem; color: #444; margin-bottom: 20px;">Ești gata să-ți testezi cunoștințele? Veronica îți va arăta 10 cuvinte și propoziții, iar tu trebuie să alegi varianta corectă (după DOOM3-Dicționarul ortografic, ortoepic și morfologic).</p>
        <button class="tab-btn" onclick="startGame()" style="background:linear-gradient(135deg,#3b82f6,#2563eb); font-size:1.3rem; padding:12px 35px;">▶️ Începe Jocul!</button>
     </div>
 
@@ -4107,11 +4107,11 @@ function startGame() {
   document.getElementById('game-end-screen').style.display = 'none';
   document.getElementById('game-play-screen').style.display = 'block';
   
-  if (gameQuestionPool.length < 20) {
+  if (gameQuestionPool.length < 10) {
       gameQuestionPool = [...probWordsDB].sort(() => 0.5 - Math.random());
   }
   
-  gameQuestions = gameQuestionPool.splice(0, 20);
+  gameQuestions = gameQuestionPool.splice(0, 10);
   
   currentQuestionIndex = 0;
   gameScore = 0;

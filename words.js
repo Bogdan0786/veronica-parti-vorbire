@@ -96,4 +96,6 @@ const probWordsDB = [
   { c: "ouă", w: "ouăle" },
   { c: "chibrit", w: "chibrite" },
   { c: "roșcove", w: "roșcove" }
+  { c: "pancartă", w: "pancardă" },
+  { c: "tobogan", w: "topogan" }
 ];

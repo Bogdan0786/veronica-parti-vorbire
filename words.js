@@ -174,5 +174,21 @@ const probWordsDB = [
   { c: "Fetița mănâncă o pâine caldă.", w: "Fetița mănâncă o pîine caldă." },
   { c: "A refuzat a coborî în beci.", w: "A refuzat a coborâ în beci." },
   { c: "Profesorul va hotărî data testului.", w: "Profesorul va hotărâ data testului." },
-  { c: "S-a apucat de un lucru neînceput.", w: "S-a apucat de un lucru neânceput." }
+  { c: "S-a apucat de un lucru neînceput.", w: "S-a apucat de un lucru neânceput." },
+  
+  { c: "eclere", w: "ecleruri" },
+  { c: "croasante", w: "croasanți" },
+  { c: "linkul", w: "link-ul" },
+  { c: "weekendul", w: "weekend-ul" },
+  { c: "trendul", w: "trend-ul" },
+  { c: "kebap", w: "kebab" },
+  { c: "binevenit", w: "bine-venit" },
+  { c: "întrucâtva", w: "întrucât-va" },
+  
+  { c: "Am mâncat două eclere cu ciocolată.", w: "Am mâncat două ecleruri cu ciocolată." },
+  { c: "Am cumpărat niște croasante proaspete.", w: "Am cumpărat niște croasanți proaspeți." },
+  { c: "Te rog să îmi trimiți linkul pe e-mail.", w: "Te rog să îmi trimiți link-ul pe e-mail." },
+  { c: "Am petrecut weekendul la munte.", w: "Am petrecut weekend-ul la munte." },
+  { c: "Am mâncat un kebap delicios.", w: "Am mâncat un kebab delicios." },
+  { c: "Orice sfat este binevenit.", w: "Orice sfat este bine-venit." }
 ];

@@ -95,9 +95,9 @@ const probWordsDB = [
   { c: "făraș", w: "făraș (accent)" },
   { c: "ouă", w: "ouăle" },
   { c: "chibrit", w: "chibrite" },
-  { c: "roșcove", w: "roșcove" }
+  { c: "roșcove", w: "roșcove" },
   { c: "pancartă", w: "pancardă" },
-  { c: "tobogan", w: "topogan" }
+  { c: "tobogan", w: "topogan" },
   { c: "rucsac", w: "ruzsac / ruczac" },
   { c: "vise (imagini în somn)", w: "visuri (imagini în somn)" },
   { c: "visuri (idealuri)", w: "vise (idealuri)" },

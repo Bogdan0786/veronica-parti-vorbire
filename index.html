@@ -2007,11 +2007,11 @@
   <p class="section-subtitle">Hai să descoperim cum se înrudesc cuvintele între ele!</p>
 
 <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px;">
-  <button onclick="document.getElementById('score-sinonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); font-weight: bold; flex: 1; min-width: 200px;">✏️ Exerciții – Sinonime</button>
-  <button onclick="document.getElementById('score-antonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #e11d48, #be123c); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3); font-weight: bold; flex: 1; min-width: 200px;">⚔️ Exerciții – Antonime</button>
-  <button onclick="document.getElementById('score-omonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); font-weight: bold; flex: 1; min-width: 200px;">👯 Exerciții – Omonime</button>
-  <button onclick="document.getElementById('score-paronime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3); font-weight: bold; flex: 1; min-width: 200px;">🔤 Exerciții – Paronime</button>
-  <button onclick="document.getElementById('score-omofone').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); font-weight: bold; flex: 1; min-width: 200px;">🎧 Exerciții – Omofone</button>
+  <button onclick="document.getElementById('div-sinonime').style.display='block'; document.getElementById('score-sinonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); font-weight: bold; flex: 1; min-width: 200px;">✏️ Exerciții – Sinonime</button>
+  <button onclick="document.getElementById('div-antonime').style.display='block'; document.getElementById('score-antonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #e11d48, #be123c); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3); font-weight: bold; flex: 1; min-width: 200px;">⚔️ Exerciții – Antonime</button>
+  <button onclick="document.getElementById('div-omonime').style.display='block'; document.getElementById('score-omonime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); font-weight: bold; flex: 1; min-width: 200px;">👯 Exerciții – Omonime</button>
+  <button onclick="document.getElementById('div-paronime').style.display='block'; document.getElementById('score-paronime').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #a855f7, #9333ea); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3); font-weight: bold; flex: 1; min-width: 200px;">🔤 Exerciții – Paronime</button>
+  <button onclick="document.getElementById('div-omofone').style.display='block'; document.getElementById('score-omofone').scrollIntoView({behavior: 'smooth', block: 'center'})" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 12px 20px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); font-weight: bold; flex: 1; min-width: 200px;">🎧 Exerciții – Omofone</button>
 </div>
 
 
@@ -2267,6 +2267,7 @@
       <li>cel (băiatul cel bun) ↔ ce-l (ce-l doare)</li>
     </div>
   </div>
+<div id="div-sinonime" style="display:none; margin-top:20px;">
 <h3 class='exercises-title' style='color:#10b981;margin-top:40px;'>✏️ Exerciții – Sinonime</h3>
 <div class='score-bar' id='score-sinonime'>⭐ Puncte: <span class='score-num' id='pts-sinonime'>0</span> / <span id='total-sinonime'>10</span>
 <div class='progress-wrap'><div class='progress-fill' id='prog-sinonime'></div></div></div>
@@ -2383,9 +2384,11 @@
 <button class='reset-btn' onclick="resetSection('sinonime')">🔄 Resetează Sinonime</button>
 <div class='reward' id='reward-sinonime'>
 <div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+</div>
 <h2>🏆 Felicitări, Veronica!</h2>
 <p>Ai terminat exercițiile pentru Sinonime!</p>
 </div>
+<div id="div-antonime" style="display:none; margin-top:20px;">
 <h3 class='exercises-title' style='color:#e11d48;margin-top:40px;'>✏️ Exerciții – Antonime</h3>
 <div class='score-bar' id='score-antonime'>⭐ Puncte: <span class='score-num' id='pts-antonime'>0</span> / <span id='total-antonime'>10</span>
 <div class='progress-wrap'><div class='progress-fill' id='prog-antonime'></div></div></div>
@@ -2502,9 +2505,11 @@
 <button class='reset-btn' onclick="resetSection('antonime')">🔄 Resetează Antonime</button>
 <div class='reward' id='reward-antonime'>
 <div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+</div>
 <h2>🏆 Felicitări, Veronica!</h2>
 <p>Ai terminat exercițiile pentru Antonime!</p>
 </div>
+<div id="div-omonime" style="display:none; margin-top:20px;">
 <h3 class='exercises-title' style='color:#2563eb;margin-top:40px;'>✏️ Exerciții – Omonime</h3>
 <div class='score-bar' id='score-omonime'>⭐ Puncte: <span class='score-num' id='pts-omonime'>0</span> / <span id='total-omonime'>10</span>
 <div class='progress-wrap'><div class='progress-fill' id='prog-omonime'></div></div></div>
@@ -2611,9 +2616,11 @@
 <button class='reset-btn' onclick="resetSection('omonime')">🔄 Resetează Omonime</button>
 <div class='reward' id='reward-omonime'>
 <div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+</div>
 <h2>🏆 Felicitări, Veronica!</h2>
 <p>Ai terminat exercițiile pentru Omonime!</p>
 </div>
+<div id="div-paronime" style="display:none; margin-top:20px;">
 <h3 class='exercises-title' style='color:#a855f7;margin-top:40px;'>✏️ Exerciții – Paronime</h3>
 <div class='score-bar' id='score-paronime'>⭐ Puncte: <span class='score-num' id='pts-paronime'>0</span> / <span id='total-paronime'>10</span>
 <div class='progress-wrap'><div class='progress-fill' id='prog-paronime'></div></div></div>
@@ -2716,9 +2723,11 @@
 <button class='reset-btn' onclick="resetSection('paronime')">🔄 Resetează Paronime</button>
 <div class='reward' id='reward-paronime'>
 <div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+</div>
 <h2>🏆 Felicitări, Veronica!</h2>
 <p>Ai terminat exercițiile pentru Paronime!</p>
 </div>
+<div id="div-omofone" style="display:none; margin-top:20px;">
 <h3 class='exercises-title' style='color:#f59e0b;margin-top:40px;'>✏️ Exerciții – Omofone</h3>
 <div class='score-bar' id='score-omofone'>⭐ Puncte: <span class='score-num' id='pts-omofone'>0</span> / <span id='total-omofone'>10</span>
 <div class='progress-wrap'><div class='progress-fill' id='prog-omofone'></div></div></div>
@@ -2818,6 +2827,7 @@
 <button class='reset-btn' onclick="resetSection('omofone')">🔄 Resetează Omofone</button>
 <div class='reward' id='reward-omofone'>
 <div class='reward-stars'>⭐⭐⭐⭐⭐</div>
+</div>
 <h2>🏆 Felicitări, Veronica!</h2>
 <p>Ai terminat exercițiile pentru Omofone!</p>
 </div>

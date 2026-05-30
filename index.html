@@ -4013,7 +4013,7 @@ function endGame() {
     document.getElementById('game-end-title').style.color = '#ea580c';
     document.getElementById('game-end-msg').innerText += ' dar ești pe drumul cel bun!';
   }
-  const charV = '👧';
+  const charV = '<img src="veronica.png" style="width: 75px; height: auto; display: block; margin-bottom: -5px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));">';
   const charB = '👦';
   const charG = '👱‍♀️';
 
@@ -4025,23 +4025,23 @@ function endGame() {
   pOff.style.display = 'none';
 
   if (gameScore === 10) {
-    p1.innerText = charV;
-    p2.innerText = charB;
-    p3.innerText = charG;
+    p1.innerHTML = charV;
+    p2.innerHTML = charB;
+    p3.innerHTML = charG;
   } else if (gameScore === 9) {
-    p1.innerText = charB;
-    p2.innerText = charV;
-    p3.innerText = charG;
+    p1.innerHTML = charB;
+    p2.innerHTML = charV;
+    p3.innerHTML = charG;
   } else if (gameScore === 8) {
-    p1.innerText = charB;
-    p2.innerText = charG;
-    p3.innerText = charV;
+    p1.innerHTML = charB;
+    p2.innerHTML = charG;
+    p3.innerHTML = charV;
   } else {
-    p1.innerText = charB;
-    p2.innerText = charG;
-    p3.innerText = '🧑';
-    pOff.innerText = '👧😢';
-    pOff.style.display = 'block';
+    p1.innerHTML = charB;
+    p2.innerHTML = charG;
+    p3.innerHTML = '🧑';
+    pOff.innerHTML = '<img src="veronica.png" style="width: 60px; height: auto; display: inline-block; filter: grayscale(80%) drop-shadow(0 4px 6px rgba(0,0,0,0.2)); margin-right: 10px;"> 😢';
+    pOff.style.display = 'flex';
   }
 }
 

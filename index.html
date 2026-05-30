@@ -1122,7 +1122,7 @@
         snScore++;
         document.getElementById('sn-score').innerText = snScore;
         document.getElementById('sn-feedback').innerHTML = '<span style="color:#10b981;">✔️ Perfect analizat! Ești o campioană!</span>';
-        if(window.confetti) confetti({particleCount:70, spread:70});
+        try { launchConfetti(); } catch(e) {}
       } else {
         document.getElementById('sn-feedback').innerHTML = '<span style="color:#ef4444;">❌ Oops! Trebuia să fie: ' + errors.join(', ') + '.</span>';
       }
@@ -1140,7 +1140,7 @@
       else msg = "Nu te lăsa! Orice greșeală e o lecție! 📚";
       
       document.getElementById('sn-end-msg').innerText = msg;
-      if(snScore >= 7 && window.confetti) confetti({particleCount:200, spread:120});
+      if(snScore >= 7) { try { launchConfetti(); } catch(e) {} }
     }
   </script>
 

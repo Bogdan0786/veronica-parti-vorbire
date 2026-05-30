@@ -4107,11 +4107,11 @@ function startGame() {
   document.getElementById('game-end-screen').style.display = 'none';
   document.getElementById('game-play-screen').style.display = 'block';
   
-  if (gameQuestionPool.length < 10) {
+  if (gameQuestionPool.length < 20) {
       gameQuestionPool = [...probWordsDB].sort(() => 0.5 - Math.random());
   }
   
-  gameQuestions = gameQuestionPool.splice(0, 10);
+  gameQuestions = gameQuestionPool.splice(0, 20);
   
   currentQuestionIndex = 0;
   gameScore = 0;

@@ -912,6 +912,239 @@
   <div class="reward" id="reward-Substantiv">
     <div class="reward-stars">⭐⭐⭐⭐⭐</div>
 
+  <!-- SUPER JOCUL SUBSTANTIVELOR V2 -->
+  <div style="background:linear-gradient(135deg,#fdf4ff,#fae8ff); border-radius:24px; padding:30px 20px; margin-top:40px; box-shadow:0 10px 30px rgba(192,38,211,0.2); border:4px solid #e879f9;" id="super-noun-game">
+    <h2 style="text-align:center; color:#c026d3; font-size:2rem; font-family:'Baloo 2',cursive; margin-bottom:10px;">🕹️ Super-Testul Substantivelor V2!</h2>
+    <p style="text-align:center; color:#86198f; font-size:1.1rem; margin-bottom:25px;">Acum analizăm și Forma și Articolul! Alege toate cele 5 variante corecte.</p>
+    
+    <!-- Game Start Screen -->
+    <div id="sn-start-screen" style="text-align:center;">
+      <button onclick="startNounGame()" style="background:linear-gradient(135deg,#d946ef,#9333ea); color:#fff; font-size:1.4rem; padding:15px 40px; border:none; border-radius:50px; font-weight:800; cursor:pointer; box-shadow:0 8px 20px rgba(147,51,234,0.4); transition:transform 0.2s;">Începe Jocul! 🚀</button>
+    </div>
+
+    <!-- Game Active Screen -->
+    <div id="sn-game-screen" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-weight:800; color:#a21caf; font-size:1.1rem;">
+        <span>🎯 Runda: <span id="sn-round">1</span> / 10</span>
+        <span>⭐ Puncte: <span id="sn-score">0</span></span>
+      </div>
+
+      <div style="text-align:center; margin-bottom:30px;">
+        <div id="sn-word-display" style="display:inline-block; background:#fff; padding:20px 40px; border-radius:20px; font-size:2.8rem; font-family:'Baloo 2',cursive; color:#db2777; font-weight:900; box-shadow:0 8px 25px rgba(219,39,119,0.2); border:3px dashed #f472b6;">carte</div>
+      </div>
+
+      <!-- Categories -->
+      <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-bottom:30px;">
+        <!-- TYPE -->
+        <div style="background:#fff; border-radius:15px; padding:12px; flex:1 1 180px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); border-top:5px solid #3b82f6;">
+          <h4 style="color:#2563eb; margin-bottom:10px;">🏷️ Felul</h4>
+          <button class="sn-btn sn-type" onclick="selectSnProp('t', 'comun', this)">Comun</button>
+          <button class="sn-btn sn-type" onclick="selectSnProp('t', 'propriu', this)">Propriu</button>
+        </div>
+        <!-- FORM -->
+        <div style="background:#fff; border-radius:15px; padding:12px; flex:1 1 180px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); border-top:5px solid #8b5cf6;">
+          <h4 style="color:#7c3aed; margin-bottom:10px;">🧩 Forma</h4>
+          <button class="sn-btn sn-form" onclick="selectSnProp('f', 'simplu', this)">Simplu</button>
+          <button class="sn-btn sn-form" onclick="selectSnProp('f', 'compus', this)">Compus</button>
+        </div>
+        <!-- NUMBER -->
+        <div style="background:#fff; border-radius:15px; padding:12px; flex:1 1 180px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); border-top:5px solid #10b981;">
+          <h4 style="color:#059669; margin-bottom:10px;">🔢 Numărul</h4>
+          <button class="sn-btn sn-num" onclick="selectSnProp('n', 'singular', this)">Singular</button>
+          <button class="sn-btn sn-num" onclick="selectSnProp('n', 'plural', this)">Plural</button>
+        </div>
+        <!-- GENDER -->
+        <div style="background:#fff; border-radius:15px; padding:12px; flex:1 1 180px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); border-top:5px solid #f59e0b;">
+          <h4 style="color:#d97706; margin-bottom:10px;">👫 Genul</h4>
+          <button class="sn-btn sn-gen" onclick="selectSnProp('g', 'masculin', this)">Masculin</button>
+          <button class="sn-btn sn-gen" onclick="selectSnProp('g', 'feminin', this)">Feminin</button>
+          <button class="sn-btn sn-gen" onclick="selectSnProp('g', 'neutru', this)">Neutru</button>
+        </div>
+        <!-- ARTICULATION -->
+        <div style="background:#fff; border-radius:15px; padding:12px; flex:1 1 180px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); border-top:5px solid #ec4899;">
+          <h4 style="color:#db2777; margin-bottom:10px;">🔗 Articol</h4>
+          <button class="sn-btn sn-art" onclick="selectSnProp('a', 'nearticulat', this)">Nearticulat</button>
+          <button class="sn-btn sn-art" onclick="selectSnProp('a', 'hotarat', this)">Articulat Hotărât (ul, le, a, i)</button>
+          <button class="sn-btn sn-art" onclick="selectSnProp('a', 'nehotarat', this)">Articulat Nehotărât (un, o, niște)</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <button id="sn-check-btn" onclick="checkSnAnswers()" style="background:linear-gradient(135deg,#22c55e,#15803d); color:#fff; font-size:1.3rem; padding:12px 35px; border:none; border-radius:50px; font-weight:800; cursor:pointer; box-shadow:0 6px 15px rgba(34,197,94,0.4); transition:transform 0.2s; opacity:0.5; pointer-events:none;">Verifică! ✔️</button>
+        <button id="sn-next-btn" onclick="nextSnRound()" style="display:none; background:linear-gradient(135deg,#38bdf8,#0284c7); color:#fff; font-size:1.3rem; padding:12px 35px; border:none; border-radius:50px; font-weight:800; cursor:pointer; box-shadow:0 6px 15px rgba(56,189,248,0.4); transition:transform 0.2s;">Următorul ➡️</button>
+      </div>
+      <div id="sn-feedback" style="text-align:center; font-size:1.1rem; font-weight:800; margin-top:20px; min-height:30px;"></div>
+    </div>
+
+    <!-- Game End Screen -->
+    <div id="sn-end-screen" style="display:none; text-align:center; padding:20px;">
+      <h2 style="color:#c026d3; font-size:2.5rem; font-family:'Baloo 2',cursive; margin-bottom:10px;">🎉 Gata!</h2>
+      <p style="font-size:1.3rem; color:#86198f; margin-bottom:20px;">Ai făcut <strong id="sn-final-score" style="font-size:2rem; color:#ec4899;">7</strong> puncte din 10!</p>
+      <div id="sn-end-msg" style="font-size:1.2rem; font-weight:800; color:#10b981; margin-bottom:30px;">Ești grozavă!</div>
+      <button onclick="startNounGame()" style="background:linear-gradient(135deg,#f59e0b,#d97706); color:#fff; font-size:1.3rem; padding:15px 40px; border:none; border-radius:50px; font-weight:800; cursor:pointer; box-shadow:0 8px 20px rgba(245,158,11,0.4); transition:transform 0.2s;">Joacă din nou 🔄</button>
+    </div>
+  </div>
+
+  <style>
+    .sn-btn {
+      display:inline-block; width:100%; margin-bottom:6px; padding:8px; border-radius:10px;
+      border:2px solid #e2e8f0; background:#f8fafc; color:#475569; font-weight:800;
+      font-size:0.95rem; cursor:pointer; transition:all 0.2s; font-family:'Nunito',sans-serif; line-height:1.2;
+    }
+    .sn-btn:hover { background:#f1f5f9; transform:scale(1.02); }
+    .sn-btn.selected { border-color:#8b5cf6; background:#ede9fe; color:#6d28d9; transform:scale(1.05); box-shadow:0 4px 10px rgba(139,92,246,0.3); }
+    .sn-btn.correct { border-color:#22c55e !important; background:#dcfce7 !important; color:#166534 !important; }
+    .sn-btn.wrong { border-color:#ef4444 !important; background:#fee2e2 !important; color:#991b1b !important; }
+  </style>
+
+  <script>
+    const nounDb = [{"w": "băiat", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "băiatul", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "hotarat"}, {"w": "un băiat", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "nehotarat"}, {"w": "băieți", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "nearticulat"}, {"w": "băieții", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "hotarat"}, {"w": "niște băieți", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "nehotarat"}, {"w": "câine", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "câinele", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "hotarat"}, {"w": "un câine", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "nehotarat"}, {"w": "câini", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "nearticulat"}, {"w": "câinii", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "hotarat"}, {"w": "niște câini", "t": "comun", "f": "simplu", "n": "plural", "g": "masculin", "a": "nehotarat"}, {"w": "câine-lup", "t": "comun", "f": "compus", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "câinele-lup", "t": "comun", "f": "compus", "n": "singular", "g": "masculin", "a": "hotarat"}, {"w": "un câine-lup", "t": "comun", "f": "compus", "n": "singular", "g": "masculin", "a": "nehotarat"}, {"w": "Făt-Frumos", "t": "propriu", "f": "compus", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "Andrei", "t": "propriu", "f": "simplu", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "Grivei", "t": "propriu", "f": "simplu", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "Mihai", "t": "propriu", "f": "simplu", "n": "singular", "g": "masculin", "a": "nearticulat"}, {"w": "un leu", "t": "comun", "f": "simplu", "n": "singular", "g": "masculin", "a": "nehotarat"}, {"w": "fată", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "fata", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o fată", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "fete", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nearticulat"}, {"w": "fetele", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "hotarat"}, {"w": "niște fete", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nehotarat"}, {"w": "carte", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "cartea", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o carte", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "cărți", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nearticulat"}, {"w": "cărțile", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "hotarat"}, {"w": "niște cărți", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nehotarat"}, {"w": "floarea-soarelui", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "floare-de-colț", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "o floare-de-colț", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "viță-de-vie", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "vița-de-vie", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o viță-de-vie", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "bunăvoință", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "bunăvoința", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o bunăvoință", "t": "comun", "f": "compus", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "Veronica", "t": "propriu", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "România", "t": "propriu", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "Marea Neagră", "t": "propriu", "f": "compus", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "Alba Iulia", "t": "propriu", "f": "compus", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "Câmpulung", "t": "propriu", "f": "compus", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "pisică", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "pisica", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o pisică", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "pisici", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nearticulat"}, {"w": "pisicile", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "hotarat"}, {"w": "niște pisici", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nehotarat"}, {"w": "școală", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "școala", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "hotarat"}, {"w": "o școală", "t": "comun", "f": "simplu", "n": "singular", "g": "feminin", "a": "nehotarat"}, {"w": "școli", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nearticulat"}, {"w": "școlile", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "hotarat"}, {"w": "niște școli", "t": "comun", "f": "simplu", "n": "plural", "g": "feminin", "a": "nehotarat"}, {"w": "Maria", "t": "propriu", "f": "simplu", "n": "singular", "g": "feminin", "a": "nearticulat"}, {"w": "scaun", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "scaunul", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un scaun", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "scaune", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nearticulat"}, {"w": "scaunele", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "hotarat"}, {"w": "niște scaune", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nehotarat"}, {"w": "caiet", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "caietul", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un caiet", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "caiete", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nearticulat"}, {"w": "caietele", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "hotarat"}, {"w": "niște caiete", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nehotarat"}, {"w": "untdelemn", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "untdelemnul", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un untdelemn", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "oraș", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "orașul", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un oraș", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "orașe", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nearticulat"}, {"w": "orașele", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "hotarat"}, {"w": "niște orașe", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nehotarat"}, {"w": "drum-de-fier", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "drumul-de-fier", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un drum-de-fier", "t": "comun", "f": "compus", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "Cluj-Napoca", "t": "propriu", "f": "compus", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "București", "t": "propriu", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "Câmpulung", "t": "propriu", "f": "compus", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "Satul Mare", "t": "propriu", "f": "compus", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "sat", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "satul", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un sat", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "sate", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nearticulat"}, {"w": "satele", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "hotarat"}, {"w": "niște sate", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nehotarat"}, {"w": "măr", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nearticulat"}, {"w": "mărul", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "hotarat"}, {"w": "un măr", "t": "comun", "f": "simplu", "n": "singular", "g": "neutru", "a": "nehotarat"}, {"w": "mere", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nearticulat"}, {"w": "merele", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "hotarat"}, {"w": "niște mere", "t": "comun", "f": "simplu", "n": "plural", "g": "neutru", "a": "nehotarat"}];
+    let snCurrentRound = 0;
+    let snScore = 0;
+    let snCurrentWord = null;
+    let snSelection = { t: null, f: null, n: null, g: null, a: null };
+    let snUsedWords = [];
+
+    function startNounGame() {
+      document.getElementById('sn-start-screen').style.display = 'none';
+      document.getElementById('sn-end-screen').style.display = 'none';
+      document.getElementById('sn-game-screen').style.display = 'block';
+      snCurrentRound = 0;
+      snScore = 0;
+      snUsedWords = [];
+      document.getElementById('sn-score').innerText = '0';
+      nextSnRound();
+    }
+
+    function nextSnRound() {
+      if (snCurrentRound >= 10) {
+        endNounGame();
+        return;
+      }
+      snCurrentRound++;
+      document.getElementById('sn-round').innerText = snCurrentRound;
+      
+      // Reset UI
+      document.getElementById('sn-check-btn').style.display = 'inline-block';
+      document.getElementById('sn-check-btn').style.opacity = '0.5';
+      document.getElementById('sn-check-btn').style.pointerEvents = 'none';
+      document.getElementById('sn-next-btn').style.display = 'none';
+      document.getElementById('sn-feedback').innerText = '';
+      
+      document.querySelectorAll('.sn-btn').forEach(b => {
+        b.classList.remove('selected', 'correct', 'wrong');
+        b.style.pointerEvents = 'auto';
+      });
+      
+      snSelection = { t: null, f: null, n: null, g: null, a: null };
+
+      // Pick random word
+      let wordObj;
+      do {
+        wordObj = nounDb[Math.floor(Math.random() * nounDb.length)];
+      } while (snUsedWords.includes(wordObj.w));
+      snUsedWords.push(wordObj.w);
+      snCurrentWord = wordObj;
+
+      document.getElementById('sn-word-display').innerText = wordObj.w;
+    }
+
+    function selectSnProp(cat, val, btnElem) {
+      snSelection[cat] = val;
+      // map category to class
+      let cls = 'sn-type';
+      if(cat==='f') cls='sn-form';
+      if(cat==='n') cls='sn-num';
+      if(cat==='g') cls='sn-gen';
+      if(cat==='a') cls='sn-art';
+
+      // deselect others in same category
+      document.querySelectorAll('.' + cls).forEach(b => b.classList.remove('selected'));
+      btnElem.classList.add('selected');
+
+      // Check if all 5 are selected
+      if (snSelection.t && snSelection.f && snSelection.n && snSelection.g && snSelection.a) {
+        document.getElementById('sn-check-btn').style.opacity = '1';
+        document.getElementById('sn-check-btn').style.pointerEvents = 'auto';
+      }
+    }
+
+    function checkSnAnswers() {
+      // Disable buttons
+      document.querySelectorAll('.sn-btn').forEach(b => b.style.pointerEvents = 'none');
+      document.getElementById('sn-check-btn').style.display = 'none';
+      document.getElementById('sn-next-btn').style.display = 'inline-block';
+
+      let isPerfect = true;
+      let errors = [];
+
+      // Check helper
+      function checkProp(cat, label, cls) {
+        let selectedBtn = document.querySelector('.' + cls + '.selected');
+        let currentVal = snCurrentWord[cat];
+        if (snSelection[cat] === currentVal) {
+          selectedBtn.classList.add('correct');
+        } else {
+          selectedBtn.classList.add('wrong');
+          // Try to highlight the correct one
+          document.querySelectorAll('.' + cls).forEach(b => {
+            if (b.innerText.toLowerCase().replace(/[^a-zăâîșț]/g, '').includes(currentVal.replace(/[^a-zăâîșț]/g, ''))) {
+                b.classList.add('correct');
+            }
+          });
+          isPerfect = false;
+          errors.push(label + " (" + currentVal + ")");
+        }
+      }
+
+      checkProp('t', 'Felul', 'sn-type');
+      checkProp('f', 'Forma', 'sn-form');
+      checkProp('n', 'Numărul', 'sn-num');
+      checkProp('g', 'Genul', 'sn-gen');
+      
+      // Articulation logic for highlighting the correct text manually because of text matching issues
+      let artSelectedBtn = document.querySelector('.sn-art.selected');
+      if (snSelection.a === snCurrentWord.a) {
+          artSelectedBtn.classList.add('correct');
+      } else {
+          artSelectedBtn.classList.add('wrong');
+          document.querySelectorAll('.sn-art').forEach(b => {
+             let txt = b.innerText.toLowerCase();
+             if (snCurrentWord.a === 'nearticulat' && txt.includes('nearticulat') && !txt.includes('hotărât')) b.classList.add('correct');
+             if (snCurrentWord.a === 'hotarat' && txt.includes('hotărât') && !txt.includes('nehotărât')) b.classList.add('correct');
+             if (snCurrentWord.a === 'nehotarat' && txt.includes('nehotărât')) b.classList.add('correct');
+          });
+          isPerfect = false;
+          errors.push("Articolul (" + snCurrentWord.a + ")");
+      }
+
+      if (isPerfect) {
+        snScore++;
+        document.getElementById('sn-score').innerText = snScore;
+        document.getElementById('sn-feedback').innerHTML = '<span style="color:#10b981;">✔️ Perfect analizat! Ești o campioană!</span>';
+        if(window.confetti) confetti({particleCount:70, spread:70});
+      } else {
+        document.getElementById('sn-feedback').innerHTML = '<span style="color:#ef4444;">❌ Oops! Trebuia să fie: ' + errors.join(', ') + '.</span>';
+      }
+    }
+
+    function endNounGame() {
+      document.getElementById('sn-game-screen').style.display = 'none';
+      document.getElementById('sn-end-screen').style.display = 'block';
+      document.getElementById('sn-final-score').innerText = snScore;
+      
+      let msg = "";
+      if (snScore === 10) msg = "Analiză impecabilă! Nota 10! 🌟";
+      else if (snScore >= 7) msg = "Bravo, Veronica! Te descurci minunat! 👍";
+      else if (snScore >= 4) msg = "Ești pe drumul cel bun! Hai să mai facem o tură! 💪";
+      else msg = "Nu te lăsa! Orice greșeală e o lecție! 📚";
+      
+      document.getElementById('sn-end-msg').innerText = msg;
+      if(snScore >= 7 && window.confetti) confetti({particleCount:200, spread:120});
+    }
+  </script>
+
+
   <!-- SUPER JOCUL SUBSTANTIVELOR -->
   <div style="background:linear-gradient(135deg,#fdf4ff,#fae8ff); border-radius:24px; padding:30px 20px; margin-top:40px; box-shadow:0 10px 30px rgba(192,38,211,0.2); border:4px solid #e879f9;" id="super-noun-game">
     <h2 style="text-align:center; color:#c026d3; font-size:2rem; font-family:'Baloo 2',cursive; margin-bottom:10px;">🕹️ Super-Testul Substantivelor!</h2>

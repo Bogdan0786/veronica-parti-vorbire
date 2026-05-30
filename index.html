@@ -3066,10 +3066,87 @@
     <div class="speech-bubble">Aici vom rezolva cele mai mari capcane ale limbii române! ⚠️</div>
   </div>
   <h2 class="section-title" style="color:#be185d;">Cuvinte Problematice !!!</h2>
-  <div style="text-align:center; padding: 50px; background:white; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 20px;">
-    <h3 style="font-size: 2rem; color: #ec4899;">În curând! 🚀</h3>
-    <p style="font-size: 1.2rem; color: #666; margin-top: 15px;">Veronica pregătește o listă specială cu cele mai enervante și ușor de greșit cuvinte pe care nu le vei mai scrie niciodată greșit!</p>
+  <div style="display:flex; flex-direction:column; gap:10px; align-items:center; margin-bottom: 25px;">
+    <button class="tab-btn" onclick="showProb('prob-1')" style="background:linear-gradient(135deg,#ec4899,#be185d); width: 100%; max-width: 600px; padding: 15px; font-size: 1.1rem; white-space: normal; line-height: 1.3;">1. Cuvinte care sună ciudat și se scriu (aproape) mereu greșit</button>
+    <button class="tab-btn" onclick="showProb('prob-2')" style="background:linear-gradient(135deg,#d946ef,#a21caf); width: 100%; max-width: 600px; padding: 15px; font-size: 1.1rem; white-space: normal; line-height: 1.3;">2. Plurale ciudate care pun probleme</button>
+    <button class="tab-btn" onclick="showProb('prob-3')" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9); width: 100%; max-width: 600px; padding: 15px; font-size: 1.1rem; white-space: normal; line-height: 1.3;">3. Capcanele cuvintelor care încep cu litera „E”</button>
   </div>
+
+  <div id="prob-1" class="prob-content" style="display:block;">
+    <h3 style="color:#be185d; text-align:center; margin-bottom: 15px;">Cuvinte care sună ciudat și se scriu (aproape) mereu greșit</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; min-width: 600px; border-collapse: collapse; margin: 0 0 20px 0; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: white; border-radius: 12px; overflow: hidden;">
+        <thead>
+          <tr style="background: linear-gradient(135deg,#ec4899,#be185d); color: white; text-align: left;">
+            <th style="padding: 15px; border-bottom: 2px solid #f9a8d4; width: 20%;">Varianta CORECTĂ ✅</th>
+            <th style="padding: 15px; border-bottom: 2px solid #f9a8d4; width: 20%;">Varianta GREȘITĂ ❌</th>
+            <th style="padding: 15px; border-bottom: 2px solid #f9a8d4;">De ce ne păcălește? 💡</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 15px; font-weight: bold; color: #15803d;">Repercusiune</td>
+            <td style="padding: 15px; color: #dc2626; text-decoration: line-through;">Repercursiune</td>
+            <td style="padding: 15px; color: #444;">Majoritatea oamenilor adaugă un „r” din obișnuință (repercursiune), dar corect este fără primul „r”.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #f3f4f6; background-color: #fdf2f8;">
+            <td style="padding: 15px; font-weight: bold; color: #15803d;">Președinție</td>
+            <td style="padding: 15px; color: #dc2626; text-decoration: line-through;">Președenție</td>
+            <td style="padding: 15px; color: #444;">Din cauza cuvântului „președinte”, tindem să punem „e”. Corect este cu i (de la președinți).</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 15px; font-weight: bold; color: #15803d;">Incomod</td>
+            <td style="padding: 15px; color: #dc2626; text-decoration: line-through;">Disconfortabil</td>
+            <td style="padding: 15px; color: #444;">Aici problema e la adjectiv: mulți spun disconfortabil (copiat din englezescul uncomfortable). În română există doar incomod.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #f3f4f6; background-color: #fdf2f8;">
+            <td style="padding: 15px; font-weight: bold; color: #15803d;">Escroc</td>
+            <td style="padding: 15px; color: #dc2626; text-decoration: line-through;">Excroc</td>
+            <td style="padding: 15px; color: #444;">Multă lume pune un „x” acolo unde se aude „s” strident. Corect este cu s.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="prob-2" class="prob-content" style="display:none;">
+    <h3 style="color:#a21caf; text-align:center; margin-bottom: 15px;">Plurale ciudate care pun probleme</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; min-width: 600px; border-collapse: collapse; margin: 0 0 20px 0; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: white; border-radius: 12px; overflow: hidden;">
+        <thead>
+          <tr style="background: linear-gradient(135deg,#d946ef,#a21caf); color: white; text-align: left;">
+            <th style="padding: 15px; width: 20%;">Varianta CORECTĂ ✅</th>
+            <th style="padding: 15px; width: 20%;">Varianta GREȘITĂ ❌</th>
+            <th style="padding: 15px;">Explicație 💡</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 15px; font-weight: bold; color: #15803d;">Complee</td>
+            <td style="padding: 15px; color: #dc2626; text-decoration: line-through;">Compleuri</td>
+            <td style="padding: 15px; color: #444;">Pluralul de la compleu (costum format din două piese) nu este compleuri, ci complee.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="prob-3" class="prob-content" style="display:none;">
+    <h3 style="color:#6d28d9; text-align:center; margin-bottom: 15px;">Capcanele cuvintelor care încep cu litera „E”</h3>
+    <div style="text-align:center; padding: 30px; background:white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+       <h3 style="font-size: 1.5rem; color: #8b5cf6;">În curând! 🚀</h3>
+    </div>
+  </div>
+
+  <script>
+    function showProb(id) {
+      document.querySelectorAll('.prob-content').forEach(function(el) {
+        el.style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+
 </section>
 
 <!-- ════════════════════ JAVASCRIPT ════════════════════ -->

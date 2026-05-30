@@ -533,6 +533,19 @@
       .question { font-size: 1.05rem; }
       .option-btn { padding: 12px; font-size: 0.95rem; }
     }
+
+    /* PODIUM */
+    .game-end-flex { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px; align-items: center; }
+    .podium-wrapper { display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; justify-content: center; }
+    .podium-container { display: flex; align-items: flex-end; gap: 4px; }
+    .podium-spot { display: flex; flex-direction: column; align-items: center; }
+    .p-char { font-size: 3.5rem; animation: bounce 2s infinite; }
+    .p-step { width: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white; border-radius: 8px 8px 0 0; box-shadow: inset 0 2px 5px rgba(255,255,255,0.4); }
+    .step-1 { height: 120px; background: linear-gradient(135deg, #fbbf24, #d97706); }
+    .step-2 { height: 80px; background: linear-gradient(135deg, #94a3b8, #64748b); }
+    .step-3 { height: 50px; background: linear-gradient(135deg, #b45309, #78350f); }
+    .p-off { font-size: 3rem; margin-bottom: 0px; filter: grayscale(50%); display:flex; align-items:flex-end; padding-bottom:10px; }
+
   </style>
 </head>
 <body>
@@ -1014,6 +1027,19 @@
     .sn-btn.selected { border-color:#8b5cf6; background:#ede9fe; color:#6d28d9; transform:scale(1.05); box-shadow:0 4px 10px rgba(139,92,246,0.3); }
     .sn-btn.correct { border-color:#22c55e !important; background:#dcfce7 !important; color:#166534 !important; }
     .sn-btn.wrong { border-color:#ef4444 !important; background:#fee2e2 !important; color:#991b1b !important; }
+
+    /* PODIUM */
+    .game-end-flex { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px; align-items: center; }
+    .podium-wrapper { display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; justify-content: center; }
+    .podium-container { display: flex; align-items: flex-end; gap: 4px; }
+    .podium-spot { display: flex; flex-direction: column; align-items: center; }
+    .p-char { font-size: 3.5rem; animation: bounce 2s infinite; }
+    .p-step { width: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white; border-radius: 8px 8px 0 0; box-shadow: inset 0 2px 5px rgba(255,255,255,0.4); }
+    .step-1 { height: 120px; background: linear-gradient(135deg, #fbbf24, #d97706); }
+    .step-2 { height: 80px; background: linear-gradient(135deg, #94a3b8, #64748b); }
+    .step-3 { height: 50px; background: linear-gradient(135deg, #b45309, #78350f); }
+    .p-off { font-size: 3rem; margin-bottom: 0px; filter: grayscale(50%); display:flex; align-items:flex-end; padding-bottom:10px; }
+
   </style>
 
   <script>
@@ -1978,7 +2004,20 @@
         margin: 14px 0 20px;
       }
       @media (max-width: 550px) { .omonime-grid { grid-template-columns: 1fr 1fr; gap: 8px; } .omonime-grid .sent-card { padding: 10px 8px; } }
-    </style>
+  
+    /* PODIUM */
+    .game-end-flex { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px; align-items: center; }
+    .podium-wrapper { display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; justify-content: center; }
+    .podium-container { display: flex; align-items: flex-end; gap: 4px; }
+    .podium-spot { display: flex; flex-direction: column; align-items: center; }
+    .p-char { font-size: 3.5rem; animation: bounce 2s infinite; }
+    .p-step { width: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; color: white; border-radius: 8px 8px 0 0; box-shadow: inset 0 2px 5px rgba(255,255,255,0.4); }
+    .step-1 { height: 120px; background: linear-gradient(135deg, #fbbf24, #d97706); }
+    .step-2 { height: 80px; background: linear-gradient(135deg, #94a3b8, #64748b); }
+    .step-3 { height: 50px; background: linear-gradient(135deg, #b45309, #78350f); }
+    .p-off { font-size: 3rem; margin-bottom: 0px; filter: grayscale(50%); display:flex; align-items:flex-end; padding-bottom:10px; }
+
+  </style>
     <div class="omonime-grid">
       <div class="sent-card" style="text-align:center;">
         <div class="sent-label">Broscuță</div>
@@ -3376,11 +3415,34 @@
     </div>
 
     <div id="game-end-screen" style="display:none; padding: 30px; background:white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-       <div id="game-end-emoji" style="font-size: 4rem; margin-bottom: 10px;">🏆</div>
-       <h3 id="game-end-title" style="font-size: 2rem; color: #1e40af; margin-bottom: 15px;">Felicitări!</h3>
-       <p id="game-end-msg" style="font-size: 1.3rem; color: #444; margin-bottom: 25px;">Ai răspuns corect la 8 din 10 cuvinte!</p>
-       <button class="tab-btn" onclick="startGame()" style="background:linear-gradient(135deg,#10b981,#059669); font-size:1.2rem; padding:12px 30px;">🔄 Joacă din nou</button>
+<div class="game-end-flex">
+  <div style="flex: 1; min-width: 250px; text-align: center;">
+    <div id="game-end-emoji" style="font-size: 4rem; margin-bottom: 10px;">🏆</div>
+    <h3 id="game-end-title" style="font-size: 2rem; color: #1e40af; margin-bottom: 15px;">Felicitări!</h3>
+    <p id="game-end-msg" style="font-size: 1.3rem; color: #444; margin-bottom: 25px;">Ai răspuns corect la 8 din 10 cuvinte!</p>
+    <button class="tab-btn" onclick="startGame()" style="background:linear-gradient(135deg,#10b981,#059669); font-size:1.2rem; padding:12px 30px;">🔄 Joacă din nou</button>
+  </div>
+  <div style="flex: 1; min-width: 250px;">
+    <div class="podium-wrapper">
+      <div class="podium-container">
+        <div class="podium-spot spot-2">
+          <div class="p-char" id="p-char-2">👦</div>
+          <div class="p-step step-2">2</div>
+        </div>
+        <div class="podium-spot spot-1">
+          <div class="p-char" id="p-char-1">👧</div>
+          <div class="p-step step-1">1</div>
+        </div>
+        <div class="podium-spot spot-3">
+          <div class="p-char" id="p-char-3">👱‍♀️</div>
+          <div class="p-step step-3">3</div>
+        </div>
+      </div>
+      <div class="p-off" id="p-char-off" style="display:none;">👧😭</div>
     </div>
+  </div>
+</div>
+</div>
 </section>
 <script src="words.js"></script>
 <script>
@@ -3950,6 +4012,36 @@ function endGame() {
     document.getElementById('game-end-title').innerText = 'Mai ai puțin de învățat...';
     document.getElementById('game-end-title').style.color = '#ea580c';
     document.getElementById('game-end-msg').innerText += ' dar ești pe drumul cel bun!';
+  }
+  const charV = '👧';
+  const charB = '👦';
+  const charG = '👱‍♀️';
+
+  let p1 = document.getElementById('p-char-1');
+  let p2 = document.getElementById('p-char-2');
+  let p3 = document.getElementById('p-char-3');
+  let pOff = document.getElementById('p-char-off');
+  
+  pOff.style.display = 'none';
+
+  if (gameScore === 10) {
+    p1.innerText = charV;
+    p2.innerText = charB;
+    p3.innerText = charG;
+  } else if (gameScore === 9) {
+    p1.innerText = charB;
+    p2.innerText = charV;
+    p3.innerText = charG;
+  } else if (gameScore === 8) {
+    p1.innerText = charB;
+    p2.innerText = charG;
+    p3.innerText = charV;
+  } else {
+    p1.innerText = charB;
+    p2.innerText = charG;
+    p3.innerText = '🧑';
+    pOff.innerText = '👧😢';
+    pOff.style.display = 'block';
   }
 }
 

@@ -145,7 +145,7 @@ const probWordsDB = [
   { c: "Ochii ei sunt albaștri.", w: "Ochii ei sunt albaștrii." },
   { c: "Băieții s-au dus la munte.", w: "Băieții sau dus la munte." },
   { c: "A intrat dintr-odată pe ușă.", w: "A intrat dintr-o dată pe ușă." },
-  { c: "Pisica se ascunde dedesubt.", w: "Pisica se ascunde dedesupt." }
+  { c: "Pisica se ascunde dedesubt.", w: "Pisica se ascunde dedesupt." },
 
   { c: "Afară s-a înnorat puternic.", w: "Afară s-a înorat puternic." },
   { c: "A început să se înnopteze.", w: "A început să se înopteze." },

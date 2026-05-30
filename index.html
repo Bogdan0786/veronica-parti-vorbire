@@ -618,10 +618,17 @@
 <section class="section visible" id="home">
   <div class="fairy-poster">
     <!-- SCROLL TITLE -->
-    <div class="scroll-banner" onclick="toggleFairyCards()" style="cursor:pointer;" title="Apasă pentru a vedea părțile de vorbire!">
-      <span>🌿</span>
-      <h2 class="scroll-title">Părțile de Vorbire</h2>
-      <span>🌿</span>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+      <div class="scroll-banner" onclick="toggleFairyCards()" style="cursor:pointer;" title="Apasă pentru a vedea părțile de vorbire!">
+        <span>🌿</span>
+        <h2 class="scroll-title">Părțile de Vorbire</h2>
+        <span>🌿</span>
+      </div>
+      <div class="scroll-banner" onclick="showSection('propozitie')" style="cursor:pointer;" title="Apasă pentru a vedea părțile de propoziție!">
+        <span>🌟</span>
+        <h2 class="scroll-title">Părțile de Propoziție</h2>
+        <span>🌟</span>
+      </div>
     </div>
     <!-- ROW 1 -->
     <div class="fairy-row" id="fairy-cards-container" style="display:none;">
@@ -2928,6 +2935,21 @@
     </div>
 </div>
 </section>
+
+<!-- ══════════════ PROPOZIȚIE ══════════════ -->
+<section class="section" id="propozitie">
+  <button class="home-btn" onclick="goTopAndHome()">🏠 Acasă</button>
+  <div class="mascot-container">
+    <img src="veronica.png" alt="Veronica" class="mascot">
+    <div class="speech-bubble">Aici vom învăța Părțile de Propoziție foarte curând! 🌟</div>
+  </div>
+  <h2 class="section-title" style="color:#d946ef;">Părțile de Propoziție</h2>
+  <div style="text-align:center; padding: 50px; background:white; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 20px;">
+    <h3 style="font-size: 2rem; color: #a855f7;">În curând! 🚀</h3>
+    <p style="font-size: 1.2rem; color: #666; margin-top: 15px;">Veronica pregătește cele mai distractive exerciții pentru Subiect, Predicat, Atribut și Complement.</p>
+  </div>
+</section>
+
 <!-- ════════════════════ JAVASCRIPT ════════════════════ -->
 <script>
 // ── STARS ──

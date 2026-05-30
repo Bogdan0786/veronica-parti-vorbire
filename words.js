@@ -146,4 +146,16 @@ const probWordsDB = [
   { c: "Băieții s-au dus la munte.", w: "Băieții sau dus la munte." },
   { c: "A intrat dintr-odată pe ușă.", w: "A intrat dintr-o dată pe ușă." },
   { c: "Pisica se ascunde dedesubt.", w: "Pisica se ascunde dedesupt." }
+
+  { c: "Afară s-a înnorat puternic.", w: "Afară s-a înorat puternic." },
+  { c: "A început să se înnopteze.", w: "A început să se înopteze." },
+  { c: "Hainele s-au înnegrit de fum.", w: "Hainele s-au înegrit de fum." },
+  { c: "Vrea să-și înnoiască garderoba.", w: "Vrea să-și înoiască garderoba." },
+  { c: "Nu vreau să te înnebunesc cu asta.", w: "Nu vreau să te înebunesc cu asta." },
+  { c: "Gestul lui l-a înnobilat.", w: "Gestul lui l-a înobilat." },
+  { c: "Mașina s-a înnămolit pe drum.", w: "Mașina s-a înămolit pe drum." },
+  { c: "Cerul este tare înnegurat azi.", w: "Cerul este tare înegurat azi." },
+  { c: "El are un talent înnăscut la desen.", w: "El are un talent înăscut la desen." },
+  { c: "Peștele înoată foarte rapid.", w: "Peștele înnoată foarte rapid." },
+  { c: "Competiția de înot a fost grea.", w: "Competiția de înnot a fost grea." }
 ];

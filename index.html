@@ -618,13 +618,13 @@
 <section class="section visible" id="home">
   <div class="fairy-poster">
     <!-- SCROLL TITLE -->
-    <div class="scroll-banner">
+    <div class="scroll-banner" onclick="toggleFairyCards()" style="cursor:pointer;" title="Apasă pentru a vedea părțile de vorbire!">
       <span>🌿</span>
       <h2 class="scroll-title">Părțile de Vorbire</h2>
       <span>🌿</span>
     </div>
     <!-- ROW 1 -->
-    <div class="fairy-row">
+    <div class="fairy-row" id="fairy-cards-container" style="display:none;">
       <button class="fairy-card" onclick="showSection('substantiv')">
         <div class="fc-num" style="background:#a855f7;">1</div>
         <div class="fc-char">🧚‍♀️</div>
@@ -3135,6 +3135,15 @@ function goTopAndHome() {
   setTimeout(() => {
     window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   }, 100);
+}
+
+function toggleFairyCards() {
+  const container = document.getElementById('fairy-cards-container');
+  if (container.style.display === 'none') {
+    container.style.display = 'flex';
+  } else {
+    container.style.display = 'none';
+  }
 }
 
 function showSection(id){

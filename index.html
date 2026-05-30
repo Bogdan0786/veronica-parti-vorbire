@@ -699,7 +699,16 @@
       </button>
     </div>
     <!-- MEADOW STRIP -->
-    <div class="meadow-strip">🌿🌼🌷🌻🦋🌷🌼🌿🌸🍀🌿🌼🌷🌻🦋🌷🌼🌿</div>
+    <div class="fairy-row" id="propozitie-cards-container" style="display:none;">
+  <button class="fairy-card" onclick="showSection('predicat')">
+    <div class="fc-num" style="background:#ef4444;">1</div>
+    <div class="fc-char">👑</div>
+    <div class="fc-label" style="color:#b91c1c;">Predicatul</div>
+    <div class="fc-desc">arată ce face subiectul (acțiunea).</div>
+  </button>
+  <button class="fairy-card" onclick="showSection('subiect')">
+    <div class="fc-num" style="background:#3b82f6;">2</div>
+<div class="meadow-strip">🌿🌼🌷🌻🦋🌷🌼🌿🌸🍀🌿🌼🌷🌻🦋🌷🌼🌿</div>
     <!-- RIBBON -->
     <div class="fairy-ribbon">💖 Pentru tine, Veronica! 💖</div>
   </div>
@@ -1800,15 +1809,7 @@
 
 
 
-<div class="fairy-row" id="propozitie-cards-container" style="display:none;">
-  <button class="fairy-card" onclick="showSection('predicat')">
-    <div class="fc-num" style="background:#ef4444;">1</div>
-    <div class="fc-char">👑</div>
-    <div class="fc-label" style="color:#b91c1c;">Predicatul</div>
-    <div class="fc-desc">arată ce face subiectul (acțiunea).</div>
-  </button>
-  <button class="fairy-card" onclick="showSection('subiect')">
-    <div class="fc-num" style="background:#3b82f6;">2</div>
+
     <div class="fc-char">👤</div>
     <div class="fc-label" style="color:#1d4ed8;">Subiectul</div>
     <div class="fc-desc">arată cine face acțiunea.</div>
@@ -3831,8 +3832,10 @@ function goTopAndHome() {
 
 function togglePropozitieCards() {
   const container = document.getElementById('propozitie-cards-container');
+  const fairyContainer = document.getElementById('fairy-cards-container');
   if (container.style.display === 'none') {
     container.style.display = 'flex';
+    if(fairyContainer) fairyContainer.style.display = 'none';
   } else {
     container.style.display = 'none';
   }
@@ -3840,8 +3843,10 @@ function togglePropozitieCards() {
 
 function toggleFairyCards() {
   const container = document.getElementById('fairy-cards-container');
+  const propContainer = document.getElementById('propozitie-cards-container');
   if (container.style.display === 'none') {
     container.style.display = 'flex';
+    if(propContainer) propContainer.style.display = 'none';
   } else {
     container.style.display = 'none';
   }

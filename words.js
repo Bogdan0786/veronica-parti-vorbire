@@ -18,8 +18,6 @@ const probWordsDB = [
   { c: "boschete", w: "boscheți" },
   { c: "colonei", w: "coloneli" },
   { c: "pancarte", w: "pancărți" },
-  { c: "sindroame", w: "sindromuri" },
-  { c: "sloganuri", w: "slogane" },
   { c: "morminte", w: "mormânturi" },
   { c: "snoabe", w: "snobe" },
   { c: "parbrize", w: "parbrizuri" },
@@ -88,7 +86,6 @@ const probWordsDB = [
   { c: "marșarier", w: "marșalier" },
   { c: "compleuri", w: "complee" },
   { c: "mijloc", w: "miljoc" },
-  { c: "pieri", w: "pierii" },
   { c: "ouă", w: "ouo" },
   { c: "roșcove", w: "roșcoave" },
   { c: "pancartă", w: "pancardă" },
@@ -118,7 +115,7 @@ const probWordsDB = [
   { c: "Zidarii au adus noi vopsele.", w: "Zidarii au adus noi vopseluri." },
   { c: "Fata se înșală amarnic.", w: "Fata se înșeală amarnic." },
   { c: "Ea creează rochii de seară.", w: "Ea crează rochii de seară." },
-  { c: "Te rog, nu înnoada șireturile așa!", w: "Te rog, nu înoada șireturile așa!" },
+  { c: "Băiatul înnoadă șireturile.", w: "Băiatul înoadă șireturile." },
   { c: "Băiatul merge la cursuri de înot.", w: "Băiatul merge la cursuri de înnot." },
   { c: "Ne vedem deseară în parc.", w: "Ne vedem de seară în parc." },
   { c: "Nu a fost nicidecum vina ei.", w: "Nu a fost nici de cum vina ei." },
@@ -147,6 +144,6 @@ const probWordsDB = [
   { c: "El se duce zilnic la serviciu.", w: "El se duce zilnic la servici." },
   { c: "Ochii ei sunt albaștri.", w: "Ochii ei sunt albaștrii." },
   { c: "Băieții s-au dus la munte.", w: "Băieții sau dus la munte." },
-  { c: "A intrat dintr-o dată pe ușă.", w: "A intrat dintro dată pe ușă." },
+  { c: "A intrat dintr-odată pe ușă.", w: "A intrat dintr-o dată pe ușă." },
   { c: "Pisica se ascunde dedesubt.", w: "Pisica se ascunde dedesupt." }
 ];

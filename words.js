@@ -98,4 +98,10 @@ const probWordsDB = [
   { c: "roșcove", w: "roșcove" }
   { c: "pancartă", w: "pancardă" },
   { c: "tobogan", w: "topogan" }
+  { c: "rucsac", w: "ruzsac / ruczac" },
+  { c: "vise (imagini în somn)", w: "visuri (imagini în somn)" },
+  { c: "visuri (idealuri)", w: "vise (idealuri)" },
+  { c: "chitare", w: "chitări" },
+  { c: "va veni", w: "v-a veni" },
+  { c: "ați", w: "a-ți (când e verb auxiliar)" },
 ];

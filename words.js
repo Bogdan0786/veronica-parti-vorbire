@@ -157,5 +157,22 @@ const probWordsDB = [
   { c: "Cerul este tare înnegurat azi.", w: "Cerul este tare înegurat azi." },
   { c: "El are un talent înnăscut la desen.", w: "El are un talent înăscut la desen." },
   { c: "Peștele înoată foarte rapid.", w: "Peștele înnoată foarte rapid." },
-  { c: "Competiția de înot a fost grea.", w: "Competiția de înnot a fost grea." }
+  { c: "Competiția de înot a fost grea.", w: "Competiția de înnot a fost grea." },
+  
+  { c: "început", w: "ânceput" },
+  { c: "înghețată", w: "ânghețată" },
+  { c: "român", w: "romîn" },
+  { c: "pâine", w: "pîine" },
+  { c: "a coborî", w: "a coborâ" },
+  { c: "a hotărî", w: "a hotărâ" },
+  { c: "neînceput", w: "neânceput" },
+  { c: "reîncălzit", w: "reâncălzit" },
+
+  { c: "Am mâncat o înghețată delicioasă.", w: "Am mâncat o ânghețată delicioasă." },
+  { c: "El a ajuns la începutul drumului.", w: "El a ajuns la ânceputul drumului." },
+  { c: "Acest cântec este foarte frumos.", w: "Acest cîntec este foarte frumos." },
+  { c: "Fetița mănâncă o pâine caldă.", w: "Fetița mănâncă o pîine caldă." },
+  { c: "A refuzat a coborî în beci.", w: "A refuzat a coborâ în beci." },
+  { c: "Profesorul va hotărî data testului.", w: "Profesorul va hotărâ data testului." },
+  { c: "S-a apucat de un lucru neînceput.", w: "S-a apucat de un lucru neânceput." }
 ];

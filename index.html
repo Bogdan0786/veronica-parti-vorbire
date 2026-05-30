@@ -3584,12 +3584,12 @@
     <h3 style="color:#2563eb; text-align:center; margin-bottom: 15px;">🎮 Provocarea Cuvintelor</h3>
     
     <div id="game-start-screen" style="padding: 30px; background:white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-       <p style="font-size: 1.2rem; color: #444; margin-bottom: 20px;">Ești gata să-ți testezi cunoștințele? Veronica îți va arăta 20 de cuvinte și propoziții, iar tu trebuie să alegi varianta corectă.</p>
+       <p style="font-size: 1.2rem; color: #444; margin-bottom: 20px;">Ești gata să-ți testezi cunoștințele? Veronica îți va arăta 10 cuvinte și propoziții, iar tu trebuie să alegi varianta corectă.</p>
        <button class="tab-btn" onclick="startGame()" style="background:linear-gradient(135deg,#3b82f6,#2563eb); font-size:1.3rem; padding:12px 35px;">▶️ Începe Jocul!</button>
     </div>
 
     <div id="game-play-screen" style="display:none; padding: 20px; background:white; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-       <div style="font-size: 1.1rem; color: #666; margin-bottom: 15px; font-weight: bold;">Întrebarea <span id="game-q-num">1</span> din 20</div>
+       <div style="font-size: 1.1rem; color: #666; margin-bottom: 15px; font-weight: bold;">Întrebarea <span id="game-q-num">1</span> din 10</div>
        <h4 style="font-size: 1.5rem; color: #1e40af; margin-bottom: 25px;">Care este varianta corectă?</h4>
        
        <div style="display:flex; justify-content:center; gap: 15px; flex-wrap: wrap;">
@@ -3604,7 +3604,7 @@
   <div style="flex: 1; min-width: 250px; text-align: center;">
     <div id="game-end-emoji" style="font-size: 4rem; margin-bottom: 10px;">🏆</div>
     <h3 id="game-end-title" style="font-size: 2rem; color: #1e40af; margin-bottom: 15px;">Felicitări!</h3>
-    <p id="game-end-msg" style="font-size: 1.3rem; color: #444; margin-bottom: 25px;">Ai răspuns corect la 16 din 20 cuvinte!</p>
+    <p id="game-end-msg" style="font-size: 1.3rem; color: #444; margin-bottom: 25px;">Ai răspuns corect la 8 din 10 cuvinte!</p>
     <button class="tab-btn" onclick="startGame()" style="background:linear-gradient(135deg,#10b981,#059669); font-size:1.2rem; padding:12px 30px;">🔄 Joacă din nou</button>
   </div>
   <div style="flex: 1; min-width: 250px;">
@@ -4131,11 +4131,11 @@ function startGame() {
   document.getElementById('game-end-screen').style.display = 'none';
   document.getElementById('game-play-screen').style.display = 'block';
   
-  if (gameQuestionPool.length < 20) {
+  if (gameQuestionPool.length < 10) {
       gameQuestionPool = [...probWordsDB].sort(() => 0.5 - Math.random());
   }
   
-  gameQuestions = gameQuestionPool.splice(0, 20);
+  gameQuestions = gameQuestionPool.splice(0, 10);
   
   currentQuestionIndex = 0;
   gameScore = 0;
@@ -4191,7 +4191,7 @@ function checkAnswer(opt) {
   
   setTimeout(() => {
     currentQuestionIndex++;
-    if (currentQuestionIndex < 20) {
+    if (currentQuestionIndex < 10) {
       loadQuestion();
     } else {
       endGame();
@@ -4227,7 +4227,7 @@ function endGame() {
   
   pOff.style.display = 'none';
 
-  if (gameScore === 20) {
+  if (gameScore === 10) {
     p1.innerHTML = charV;
     p2.innerHTML = charB;
     p3.innerHTML = charG;

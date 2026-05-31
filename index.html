@@ -4390,7 +4390,7 @@ function updateWrongCount() {
   const el = document.getElementById('hg-wrong-count');
   if (el) {
     const remaining = hgMaxWrong - hgWrong;
-    el.textContent = `Greșeli: ${hgWrong} / ${hgMaxWrong}  |  Mai ai ${remaining} șansă${remaining === 1 ? '' : 'e'}`;
+    el.textContent = `Greșeli: ${hgWrong} / ${hgMaxWrong}  |  Mai ai ${remaining} ${remaining === 1 ? 'șansă' : 'șanse'}`;
     el.style.color = hgWrong >= 4 ? '#ef4444' : '#7c3aed';
   }
 }

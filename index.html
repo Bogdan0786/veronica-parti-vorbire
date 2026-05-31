@@ -613,6 +613,7 @@
     <button class="tab-btn" id="tab-terminologie" style="background:linear-gradient(135deg,#06b6d4,#0369a1)" onclick="showSection('terminologie')">📚 Terminologie gramaticală</button>
     <button class="tab-btn" id="tab-problematice" style="background:linear-gradient(135deg,#ec4899,#be185d)" onclick="showSection('problematice')">⚠️ Cuvinte problematice !!!</button>
     <button class="tab-btn" id="tab-joc" style="background:linear-gradient(135deg,#3b82f6,#2563eb)" onclick="showSection('joc')">🎮 Provocarea Cuvintelor</button>
+    <button class="tab-btn" id="tab-spanzuratoarea" style="background:linear-gradient(135deg,#7c3aed,#1e1b4b)" onclick="showSection('spanzuratoarea')">🪢 Spânzurătoarea</button>
   </div>
 </nav>
 
@@ -3605,6 +3606,99 @@
 </div>
 </div>
 </section>
+
+<!-- ════════════════════ SPÂNZURĂTOAREA ════════════════════ -->
+<section class="section" id="spanzuratoarea">
+  <h3 style="color:#7c3aed; text-align:center; margin-bottom:5px;">🪢 Spânzurătoarea</h3>
+  <p style="text-align:center; color:#6b7280; font-size:0.95rem; margin-bottom:18px;">Ghicește cuvântul ascuns alegând literele! Ai 6 greșeli înainte ca figura să fie completă.</p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center; align-items:flex-start;">
+    
+    <!-- Canvas spânzurătoare -->
+    <div style="background:white; border-radius:18px; box-shadow:0 4px 20px rgba(124,58,237,0.15); padding:15px; text-align:center; min-width:220px;">
+      <canvas id="hg-canvas" width="200" height="240" style="display:block; margin:0 auto;"></canvas>
+      <div id="hg-wrong-count" style="margin-top:8px; font-size:0.9rem; color:#7c3aed; font-weight:700;"></div>
+    </div>
+
+    <!-- Zona de joc -->
+    <div style="flex:1; min-width:280px; max-width:500px;">
+      
+      <!-- Indiciu -->
+      <div id="hg-hint" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe); border-left:4px solid #7c3aed; border-radius:10px; padding:12px 16px; margin-bottom:18px; font-size:1rem; color:#4c1d95; font-weight:600; min-height:48px;">
+        💡 Apasă "Joc Nou" pentru a începe!
+      </div>
+
+      <!-- Cuvântul de ghicit -->
+      <div id="hg-word" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; min-height:60px; align-items:center; margin-bottom:18px; font-size:1.8rem; font-weight:800; letter-spacing:4px; color:#1e1b4b;">
+        — — — — —
+      </div>
+
+      <!-- Mesaj final -->
+      <div id="hg-message" style="text-align:center; font-size:1.15rem; font-weight:800; min-height:32px; margin-bottom:14px;"></div>
+
+      <!-- Buton Joc Nou -->
+      <div style="text-align:center; margin-bottom:18px;">
+        <button onclick="startHangman()" style="background:linear-gradient(135deg,#7c3aed,#1e1b4b); color:white; border:none; border-radius:50px; padding:12px 32px; font-size:1.1rem; font-weight:800; cursor:pointer; box-shadow:0 6px 20px rgba(124,58,237,0.4); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.07)'" onmouseout="this.style.transform='scale(1)'">
+          🎲 Joc Nou
+        </button>
+      </div>
+
+      <!-- Tastatura -->
+      <div id="hg-keyboard" style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center;"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hg-letter {
+    display:inline-block;
+    font-size:1.6rem;
+    font-weight:900;
+    color:#1e1b4b;
+    border-bottom:3px solid #7c3aed;
+    min-width:28px;
+    text-align:center;
+    padding:0 4px;
+    transition: color 0.3s;
+  }
+  .hg-letter.revealed {
+    color:#059669;
+    animation: popIn 0.3s ease;
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.5); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .hg-key {
+    width:40px; height:40px;
+    border-radius:10px;
+    border:2px solid #c4b5fd;
+    background:white;
+    color:#1e1b4b;
+    font-weight:800;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .hg-key:hover:not(:disabled) {
+    background:#ede9fe;
+    border-color:#7c3aed;
+    transform:scale(1.1);
+  }
+  .hg-key:disabled { cursor:default; opacity:0.6; }
+  .hg-key.correct {
+    background:linear-gradient(135deg,#059669,#10b981);
+    color:white; border-color:#059669;
+  }
+  .hg-key.wrong {
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    color:white; border-color:#ef4444;
+    text-decoration:line-through;
+  }
+</style>
+
 <script src="words.js"></script>
 <script>
 // ── STARS ──
@@ -4225,6 +4319,276 @@ function endGame() {
     p3.innerHTML = '🧑';
     pOff.innerHTML = '<img src="veronica.png" style="width: 60px; height: auto; display: inline-block; filter: grayscale(80%) drop-shadow(0 4px 6px rgba(0,0,0,0.2)); margin-right: 10px;"> 😢';
     pOff.style.display = 'flex';
+  }
+}
+
+
+// ════════════════════ SPÂNZURĂTOAREA ════════════════════
+const HANGMAN_WORDS = [
+  // [cuvânt, indiciu]
+  ["soare",      "Sinonimul lui 'astru luminos'; substantiv"],
+  ["noapte",     "Antonimul cuvântului 'zi'; substantiv"],
+  ["fericit",    "Sinonimul lui 'bucuros'; adjectiv"],
+  ["trist",      "Antonimul lui 'vesel'; adjectiv"],
+  ["a alerga",   "Sinonimul verbului 'a fugi'; verb"],
+  ["a citi",     "Sinonimul verbului 'a lectura'; verb"],
+  ["frumos",     "Antonimul lui 'urât'; adjectiv"],
+  ["bogat",      "Antonimul lui 'sărac'; adjectiv"],
+  ["rapid",      "Sinonimul lui 'iute'; adjectiv"],
+  ["lent",       "Antonimul lui 'rapid'; adjectiv"],
+  ["iubire",     "Sinonimul lui 'dragoste'; substantiv"],
+  ["dușman",     "Antonimul lui 'prieten'; substantiv"],
+  ["lumină",     "Antonimul lui 'întuneric'; substantiv"],
+  ["cald",       "Antonimul lui 'rece'; adjectiv"],
+  ["a plânge",   "Antonimul verbului 'a râde'; verb"],
+  ["a munci",    "Sinonimul verbului 'a lucra'; verb"],
+  ["a dormi",    "Sinonimul verbului 'a se odihni'; verb"],
+  ["a cumpăra",  "Antonimul verbului 'a vinde'; verb"],
+  ["a urca",     "Antonimul verbului 'a coborî'; verb"],
+  ["a deschide", "Antonimul verbului 'a închide'; verb"],
+  ["a găsi",     "Antonimul verbului 'a pierde'; verb"],
+  ["a întări",   "Sinonimul verbului 'a consolida'; verb"],
+  ["a ajuta",    "Sinonimul verbului 'a sprijini'; verb"],
+  ["a întreba",  "Sinonimul verbului 'a chestiona'; verb"],
+  ["a răspunde", "Sinonimul verbului 'a replica'; verb"],
+  ["copil",      "Paronimul lui 'copil' este 'capil'; substantiv"],
+  ["școală",     "Loc unde înveți carte; substantiv"],
+  ["carte",      "Sinonimul lui 'volum'; substantiv"],
+  ["creion",     "Instrument de scris cu grafit; substantiv"],
+  ["masă",       "Paronimul lui 'masă' este 'rasă'; substantiv"],
+  ["casă",       "Sinonimul lui 'locuință'; substantiv"],
+  ["apă",        "Sinonimul lui 'undă'; substantiv"],
+  ["foc",        "Antonimul lui 'îngheț' ca efect; substantiv"],
+  ["pădure",     "Sinonimul lui 'codru'; substantiv"],
+  ["munte",      "Antonimul lui 'vale' ca formă de relief; substantiv"],
+  ["mare",       "Corp mare de apă sărată; substantiv"],
+  ["vânt",       "Sinonimul lui 'adierea aerului'; substantiv"],
+  ["ploaie",     "Antonimul lui 'secetă' ca fenomen; substantiv"],
+  ["iarnă",      "Anotimpul cu zăpadă; substantiv"],
+  ["primăvară",  "Antonimul toamnei; substantiv"],
+  ["vară",       "Anotimpul cel mai cald; substantiv"],
+  ["toamnă",     "Anotimpul în care cad frunzele; substantiv"],
+  ["animal",     "Sinonimul lui 'ființă'; substantiv"],
+  ["floare",     "Sinonimul lui 'blossom' în română; substantiv"],
+  ["culoare",    "Sinonimul lui 'nuanță'; substantiv"],
+  ["albastru",   "Culoarea cerului; adjectiv"],
+  ["roșu",       "Culoarea sângelui; adjectiv"],
+  ["galben",     "Culoarea soarelui; adjectiv"],
+  ["verde",      "Culoarea ierbii; adjectiv"],
+  ["negru",      "Antonimul lui 'alb'; adjectiv"],
+  ["alb",        "Antonimul lui 'negru'; adjectiv"],
+  ["mic",        "Antonimul lui 'mare' (dimensiune); adjectiv"],
+  ["mare",       "Antonimul lui 'mic' (dimensiune); adjectiv"],
+  ["greu",       "Antonimul lui 'ușor'; adjectiv"],
+  ["ușor",       "Antonimul lui 'greu'; adjectiv"],
+  ["vechi",      "Antonimul lui 'nou'; adjectiv"],
+  ["nou",        "Antonimul lui 'vechi'; adjectiv"],
+  ["bun",        "Antonimul lui 'rău'; adjectiv"],
+  ["rău",        "Antonimul lui 'bun'; adjectiv"],
+  ["larg",       "Antonimul lui 'îngust'; adjectiv"],
+  ["îngust",     "Antonimul lui 'larg'; adjectiv"],
+  ["înalt",      "Antonimul lui 'scund'; adjectiv"],
+  ["scund",      "Antonimul lui 'înalt'; adjectiv"],
+  ["tare",       "Antonimul lui 'moale'; adjectiv"],
+  ["moale",      "Antonimul lui 'tare'; adjectiv"],
+  ["dulce",      "Antonimul lui 'amar'; adjectiv"],
+  ["amar",       "Antonimul lui 'dulce'; adjectiv"],
+  ["curat",      "Antonimul lui 'murdar'; adjectiv"],
+  ["murdar",     "Antonimul lui 'curat'; adjectiv"],
+  ["plin",       "Antonimul lui 'gol'; adjectiv"],
+  ["gol",        "Antonimul lui 'plin'; adjectiv"],
+  ["viu",        "Antonimul lui 'mort'; adjectiv"],
+  ["a vedea",    "Sinonimul verbului 'a zări'; verb"],
+  ["a auzi",     "Sinonimul verbului 'a percepe sonor'; verb"],
+  ["a simți",    "Sinonimul verbului 'a percepe'; verb"],
+  ["a gândi",    "Sinonimul verbului 'a cugeta'; verb"],
+  ["a ști",      "Sinonimul verbului 'a cunoaște'; verb"],
+  ["a iubi",     "Sinonimul verbului 'a îndrăgi'; verb"],
+  ["a ura",      "Antonimul verbului 'a iubi'; verb"],
+  ["a vorbi",    "Sinonimul verbului 'a comunica'; verb"],
+  ["a tăcea",    "Antonimul verbului 'a vorbi'; verb"],
+  ["a merge",    "Sinonimul verbului 'a umbla'; verb"],
+  ["a veni",     "Antonimul verbului 'a pleca'; verb"],
+  ["a pleca",    "Antonimul verbului 'a veni'; verb"],
+  ["a începe",   "Antonimul verbului 'a termina'; verb"],
+  ["a termina",  "Antonimul verbului 'a începe'; verb"],
+  ["a câștiga",  "Antonimul verbului 'a pierde'; verb"],
+  ["a pierde",   "Antonimul verbului 'a câștiga'; verb"],
+  ["a naște",    "Antonimul verbului 'a muri'; verb"],
+  ["a ierta",    "Sinonimul verbului 'a scuza'; verb"],
+  ["a proteja",  "Sinonimul verbului 'a apăra'; verb"],
+  ["a înțelege", "Sinonimul verbului 'a pricepe'; verb"],
+  ["a aminti",   "Sinonimul verbului 'a rememora'; verb"],
+  ["a privi",    "Sinonimul verbului 'a se uita'; verb"],
+  ["a zâmbi",    "Sinonimul verbului 'a surâde'; verb"],
+  ["a plimba",   "Sinonimul verbului 'a se preumbla'; verb"],
+  ["a crește",   "Antonimul verbului 'a scădea'; verb"],
+  ["a scădea",   "Antonimul verbului 'a crește'; verb"],
+  ["a construi", "Sinonimul verbului 'a edifica'; verb"],
+  ["a distruge", "Antonimul verbului 'a construi'; verb"]
+];
+
+let hgWord = '';
+let hgHint = '';
+let hgGuessed = [];
+let hgWrong = 0;
+let hgMaxWrong = 6;
+let hgGameOver = false;
+
+function startHangman() {
+  const idx = Math.floor(Math.random() * HANGMAN_WORDS.length);
+  hgWord = HANGMAN_WORDS[idx][0].toLowerCase();
+  hgHint = HANGMAN_WORDS[idx][1];
+  hgGuessed = [];
+  hgWrong = 0;
+  hgGameOver = false;
+  drawHangman(0);
+  renderHangmanWord();
+  renderHangmanKeys();
+  document.getElementById('hg-hint').textContent = '💡 Indiciu: ' + hgHint;
+  document.getElementById('hg-message').textContent = '';
+  document.getElementById('hg-message').style.color = '#1e40af';
+}
+
+function renderHangmanWord() {
+  const display = hgWord.split('').map(ch => {
+    if (ch === ' ') return ' &nbsp; ';
+    return hgGuessed.includes(ch) ? `<span class="hg-letter revealed">${ch.toUpperCase()}</span>` : `<span class="hg-letter">_</span>`;
+  }).join(' ');
+  document.getElementById('hg-word').innerHTML = display;
+}
+
+function renderHangmanKeys() {
+  const letters = 'aăâbcdefghiîjklmnopqrsștțuvwxyz'.split('');
+  const container = document.getElementById('hg-keyboard');
+  container.innerHTML = '';
+  letters.forEach(letter => {
+    const btn = document.createElement('button');
+    btn.textContent = letter.toUpperCase();
+    btn.className = 'hg-key';
+    if (hgGuessed.includes(letter)) {
+      btn.disabled = true;
+      btn.classList.add(hgWord.includes(letter) ? 'correct' : 'wrong');
+    }
+    btn.onclick = () => guessLetter(letter);
+    container.appendChild(btn);
+  });
+}
+
+function guessLetter(letter) {
+  if (hgGameOver || hgGuessed.includes(letter)) return;
+  hgGuessed.push(letter);
+  if (!hgWord.includes(letter)) {
+    hgWrong++;
+    drawHangman(hgWrong);
+  }
+  renderHangmanWord();
+  renderHangmanKeys();
+  checkHangmanEnd();
+}
+
+function checkHangmanEnd() {
+  const wordLetters = hgWord.split('').filter(c => c !== ' ');
+  const allGuessed = wordLetters.every(c => hgGuessed.includes(c));
+  const msg = document.getElementById('hg-message');
+  if (allGuessed) {
+    hgGameOver = true;
+    msg.textContent = '🎉 Felicitări! Ai ghicit cuvântul: ' + hgWord.toUpperCase();
+    msg.style.color = '#059669';
+    playCorrectSound();
+  } else if (hgWrong >= hgMaxWrong) {
+    hgGameOver = true;
+    // Reveal word
+    const display = hgWord.split('').map(ch => ch === ' ' ? ' &nbsp; ' : `<span class="hg-letter revealed" style="color:#ef4444">${ch.toUpperCase()}</span>`).join(' ');
+    document.getElementById('hg-word').innerHTML = display;
+    msg.textContent = '😢 Ai pierdut! Cuvântul era: ' + hgWord.toUpperCase();
+    msg.style.color = '#ef4444';
+    playWrongSound();
+  }
+}
+
+function drawHangman(step) {
+  const canvas = document.getElementById('hg-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.strokeStyle = '#1e1b4b';
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+
+  // Gallows - baza
+  ctx.beginPath();
+  ctx.moveTo(20, 230); ctx.lineTo(180, 230);
+  ctx.stroke();
+  // Stâlp vertical
+  ctx.beginPath();
+  ctx.moveTo(60, 230); ctx.lineTo(60, 20);
+  ctx.stroke();
+  // Bara orizontală
+  ctx.beginPath();
+  ctx.moveTo(60, 20); ctx.lineTo(140, 20);
+  ctx.stroke();
+  // Ștreang
+  ctx.beginPath();
+  ctx.moveTo(140, 20); ctx.lineTo(140, 50);
+  ctx.stroke();
+
+  // Pasul 1: Cap
+  if (step >= 1) {
+    ctx.beginPath();
+    ctx.arc(140, 68, 18, 0, Math.PI * 2);
+    ctx.stroke();
+    // Fată tristă
+    ctx.beginPath();
+    ctx.arc(133, 63, 2, 0, Math.PI * 2); ctx.fill(); // ochi stâng
+    ctx.beginPath();
+    ctx.arc(147, 63, 2, 0, Math.PI * 2); ctx.fill(); // ochi drept
+    ctx.beginPath();
+    ctx.arc(140, 74, 5, 0, Math.PI, false); // gura tristă
+    ctx.stroke();
+  }
+
+  // Pasul 2: Trunchi
+  if (step >= 2) {
+    ctx.beginPath();
+    ctx.moveTo(140, 86); ctx.lineTo(140, 155);
+    ctx.stroke();
+  }
+
+  // Pasul 3: Mâna dreaptă
+  if (step >= 3) {
+    ctx.beginPath();
+    ctx.moveTo(140, 100); ctx.lineTo(110, 130);
+    ctx.stroke();
+  }
+
+  // Pasul 4: Mâna stângă
+  if (step >= 4) {
+    ctx.beginPath();
+    ctx.moveTo(140, 100); ctx.lineTo(170, 130);
+    ctx.stroke();
+  }
+
+  // Pasul 5: Piciorul drept
+  if (step >= 5) {
+    ctx.beginPath();
+    ctx.moveTo(140, 155); ctx.lineTo(115, 200);
+    ctx.stroke();
+  }
+
+  // Pasul 6: Piciorul stâng
+  if (step >= 6) {
+    ctx.beginPath();
+    ctx.moveTo(140, 155); ctx.lineTo(165, 200);
+    ctx.stroke();
+    // X eyes when dead
+    ctx.clearRect(127, 55, 28, 18);
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(130,58); ctx.lineTo(136,64); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(136,58); ctx.lineTo(130,64); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(144,58); ctx.lineTo(150,64); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(150,58); ctx.lineTo(144,64); ctx.stroke();
+    ctx.lineWidth = 4;
   }
 }
 

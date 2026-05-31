@@ -4345,9 +4345,19 @@ function startHangman() {
   drawHangman(0);
   renderHangmanWord();
   renderHangmanKeys();
+  updateWrongCount();
   document.getElementById('hg-hint').textContent = '💡 Indiciu: ' + hgHint;
   document.getElementById('hg-message').textContent = '';
   document.getElementById('hg-message').style.color = '#1e40af';
+}
+
+function updateWrongCount() {
+  const el = document.getElementById('hg-wrong-count');
+  if (el) {
+    const remaining = hgMaxWrong - hgWrong;
+    el.textContent = `Greșeli: ${hgWrong} / ${hgMaxWrong}  |  Mai ai ${remaining} șansă${remaining === 1 ? '' : 'e'}`;
+    el.style.color = hgWrong >= 4 ? '#ef4444' : '#7c3aed';
+  }
 }
 
 function renderHangmanWord() {
@@ -4370,6 +4380,7 @@ function renderHangmanKeys() {
       btn.disabled = true;
       btn.classList.add(hgWord.includes(letter) ? 'correct' : 'wrong');
     }
+    if (hgGameOver) btn.disabled = true;
     btn.onclick = () => guessLetter(letter);
     container.appendChild(btn);
   });
@@ -4381,7 +4392,11 @@ function guessLetter(letter) {
   if (!hgWord.includes(letter)) {
     hgWrong++;
     drawHangman(hgWrong);
+    soundWrong();
+  } else {
+    soundCorrect();
   }
+  updateWrongCount();
   renderHangmanWord();
   renderHangmanKeys();
   checkHangmanEnd();
@@ -4391,19 +4406,20 @@ function checkHangmanEnd() {
   const wordLetters = hgWord.split('').filter(c => c !== ' ');
   const allGuessed = wordLetters.every(c => hgGuessed.includes(c));
   const msg = document.getElementById('hg-message');
-  if (allGuessed) {
+
+  if (hgWrong >= hgMaxWrong) {
+    // Pierdut - prioritate față de verificarea victoriei
     hgGameOver = true;
-    msg.textContent = '🎉 Felicitări! Ai ghicit cuvântul: ' + hgWord.toUpperCase();
-    msg.style.color = '#059669';
-    playCorrectSound();
-  } else if (hgWrong >= hgMaxWrong) {
-    hgGameOver = true;
-    // Reveal word
     const display = hgWord.split('').map(ch => ch === ' ' ? ' &nbsp; ' : `<span class="hg-letter revealed" style="color:#ef4444">${ch.toUpperCase()}</span>`).join(' ');
     document.getElementById('hg-word').innerHTML = display;
     msg.textContent = '😢 Ai pierdut! Cuvântul era: ' + hgWord.toUpperCase();
     msg.style.color = '#ef4444';
-    playWrongSound();
+    renderHangmanKeys(); // dezactivează toate tastele
+  } else if (allGuessed) {
+    hgGameOver = true;
+    msg.textContent = '🎉 Felicitări! Ai ghicit cuvântul: ' + hgWord.toUpperCase();
+    msg.style.color = '#059669';
+    renderHangmanKeys(); // dezactivează toate tastele
   }
 }
 

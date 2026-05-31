@@ -3697,6 +3697,11 @@
     color:white; border-color:#ef4444;
     text-decoration:line-through;
   }
+  @keyframes hgFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
 </style>
 
 <script src="words.js"></script>
@@ -3737,6 +3742,36 @@ function soundWrong(){
 function soundFanfare(){
   const notes=[523,659,784,1046,784,1046];
   notes.forEach((f,i)=>setTimeout(()=>playTone(f,.2,'triangle',.3),i*130));
+}
+function soundApplause(){
+  // Simulare aplauze: rafale scurte de zgomot alb filtrat
+  try {
+    const duration = 2.5;
+    const bufferSize = AC.sampleRate * duration;
+    const buffer = AC.createBuffer(1, bufferSize, AC.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      // Zgomot cu envelope pulsatoriu (bătăi de palme)
+      const pulse = Math.abs(Math.sin(i / (AC.sampleRate * 0.12) * Math.PI));
+      data[i] = (Math.random() * 2 - 1) * pulse * 0.35;
+    }
+    const source = AC.createBufferSource();
+    source.buffer = buffer;
+    const filter = AC.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 1200;
+    filter.Q.value = 0.8;
+    const gainNode = AC.createGain();
+    gainNode.gain.setValueAtTime(0.6, AC.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, AC.currentTime + duration);
+    source.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(AC.destination);
+    source.start();
+    source.stop(AC.currentTime + duration);
+  } catch(e) {}
+  // Fanfara muzicala simultan cu aplauzele
+  setTimeout(()=>soundFanfare(), 200);
 }
 
 // ── BACKGROUND MUSIC (Calmantă, de studiu) ──
@@ -4420,8 +4455,44 @@ function checkHangmanEnd() {
     msg.textContent = '🎉 Felicitări! Ai ghicit cuvântul: ' + hgWord.toUpperCase();
     msg.style.color = '#059669';
     renderHangmanKeys(); // dezactivează toate tastele
+    // Aplauze + confetti la victorie
+    AC.resume().then(() => soundApplause());
+    hgLaunchConfetti();
   }
 }
+
+function hgLaunchConfetti() {
+  const colors = ['#7c3aed','#ec4899','#f59e0b','#10b981','#3b82f6','#ef4444','#fff'];
+  const emojis = ['🎉','⭐','🌟','✨','💜','🏆','🎊'];
+  const section = document.getElementById('spanzuratoarea');
+  if (!section) return;
+
+  for (let i = 0; i < 60; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      const useEmoji = Math.random() < 0.3;
+      el.style.cssText = `
+        position:fixed;
+        left:${Math.random()*100}vw;
+        top:-30px;
+        font-size:${useEmoji ? '1.5rem' : Math.random()*10+8 + 'px'};
+        color:${colors[Math.floor(Math.random()*colors.length)]};
+        background:${useEmoji ? 'transparent' : colors[Math.floor(Math.random()*colors.length)]};
+        width:${useEmoji ? 'auto' : Math.random()*10+6+'px'};
+        height:${useEmoji ? 'auto' : Math.random()*10+6+'px'};
+        border-radius:${Math.random()<0.5?'50%':'3px'};
+        pointer-events:none;
+        z-index:9999;
+        animation: hgFall ${Math.random()*2+1.5}s ease-in forwards;
+        animation-delay:${Math.random()*0.8}s;
+      `;
+      el.textContent = useEmoji ? emojis[Math.floor(Math.random()*emojis.length)] : '';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }, i * 30);
+  }
+}
+
 
 function drawHangman(step) {
   const canvas = document.getElementById('hg-canvas');

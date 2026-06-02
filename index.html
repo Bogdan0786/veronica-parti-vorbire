@@ -662,6 +662,184 @@
     .step-3 { height: 50px; background: linear-gradient(135deg, #b45309, #78350f); }
     .p-off { font-size: 3rem; margin-bottom: 0px; filter: grayscale(50%); display:flex; align-items:flex-end; padding-bottom:10px; }
 
+    /* ===== HARTA PROGRESULUI ===== */
+    .progress-map-section {
+      background: linear-gradient(180deg, #0c4a6e 0%, #0369a1 40%, #0ea5e9 100%);
+      border-radius: 24px;
+      padding: 30px 16px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-map-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.25"/></svg>') repeat;
+      pointer-events: none;
+    }
+    .pm-title {
+      text-align: center;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: #fef3c7;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      margin-bottom: 8px;
+      position: relative; z-index: 2;
+    }
+    .pm-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #bae6fd;
+      margin-bottom: 20px;
+      position: relative; z-index: 2;
+    }
+    .pm-trail {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 18px;
+      position: relative;
+      z-index: 2;
+    }
+    /* Each island on the progress map */
+    .pm-island {
+      width: clamp(120px, 16vw, 155px);
+      background: radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 90%, transparent 100%);
+      border: none;
+      border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+      padding: 18px 10px 14px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      font-family: 'Nunito', sans-serif;
+      transition: transform .25s, box-shadow .25s, filter .25s;
+      box-shadow:
+        0 0 0 3px #15803d,
+        0 0 0 5px #92400e,
+        0 6px 0 5px rgba(14,165,233,0.5),
+        0 10px 0 6px rgba(2,132,199,0.3),
+        0 14px 20px rgba(0,0,0,0.2);
+      filter: grayscale(60%) brightness(0.7);
+    }
+    .pm-island.unlocked {
+      filter: none;
+    }
+    .pm-island.completed {
+      filter: none;
+      box-shadow:
+        0 0 0 3px #15803d,
+        0 0 0 5px #fbbf24,
+        0 0 18px 6px rgba(250,204,21,0.5),
+        0 10px 0 6px rgba(2,132,199,0.3),
+        0 14px 20px rgba(0,0,0,0.2);
+    }
+    .pm-island:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+    .pm-island:nth-child(even) { border-radius: 55% 45% 50% 50% / 42% 58% 45% 55%; }
+    .pm-island:nth-child(3n) { border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; }
+    .pm-emoji { font-size: 1.8rem; line-height: 1.1; filter: drop-shadow(0 2px 0 rgba(0,0,0,0.25)); }
+    .pm-name {
+      font-family: 'Baloo 2', cursive;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fefce8;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      line-height: 1.15;
+      margin: 4px 0 2px;
+    }
+    .pm-progress {
+      font-size: 0.7rem;
+      color: #fef9c3;
+      font-weight: 700;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .pm-star {
+      position: absolute;
+      top: -10px; right: -4px;
+      font-size: 1.6rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+      animation: starPulse 1.5s ease-in-out infinite;
+      display: none;
+    }
+    .pm-island.completed .pm-star {
+      display: block;
+    }
+    @keyframes starPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.25) rotate(10deg); }
+    }
+    /* Dotted trail between islands */
+    .pm-island::after {
+      content: '· · ·';
+      position: absolute;
+      top: 50%; left: calc(100% + 2px);
+      font-size: 0.65rem; font-weight: 900;
+      color: #fef3c7; letter-spacing: 2px;
+      transform: translateY(-50%);
+      opacity: 0.5; pointer-events: none;
+    }
+    .pm-island:last-child::after { display: none; }
+    /* Palm tree deco */
+    .pm-island::before {
+      content: '🌴';
+      position: absolute; top: -6px; right: -2px;
+      font-size: 1.1rem; transform: rotate(12deg);
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+      pointer-events: none; z-index: 3;
+    }
+    /* Treasure chest at end */
+    .pm-treasure {
+      text-align: center;
+      margin-top: 20px;
+      position: relative; z-index: 2;
+    }
+    .pm-treasure-emoji {
+      font-size: 3rem;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+      display: inline-block;
+      transition: transform .3s;
+    }
+    .pm-treasure-emoji.unlocked {
+      animation: bounce 2s infinite;
+    }
+    .pm-treasure-emoji:not(.unlocked) {
+      filter: grayscale(80%) drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    }
+    .pm-treasure-text {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      color: #fde68a;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      margin-top: 6px;
+    }
+    /* Reset progress button */
+    .pm-reset {
+      display: block;
+      margin: 20px auto 0;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: #bae6fd;
+      border-radius: 50px;
+      padding: 8px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background .2s;
+      position: relative; z-index: 2;
+    }
+    .pm-reset:hover {
+      background: rgba(239,68,68,0.3);
+      border-color: #f87171;
+      color: #fecaca;
+    }
+    @media(max-width:600px) {
+      .pm-island { width: clamp(100px, 40vw, 140px); padding: 14px 8px 10px; }
+      .pm-emoji { font-size: 1.5rem; }
+      .pm-name { font-size: 0.75rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -730,6 +908,7 @@
     <button class="tab-btn" id="tab-problematice" style="background:linear-gradient(135deg,#ec4899,#be185d)" onclick="showSection('problematice')">⚠️ Cuvinte problematice !!!</button>
     <button class="tab-btn" id="tab-joc" style="background:linear-gradient(135deg,#3b82f6,#2563eb)" onclick="showSection('joc')">🎮 Provocarea Cuvintelor</button>
     <button class="tab-btn" id="tab-spanzuratoarea" style="background:linear-gradient(135deg,#7c3aed,#1e1b4b)" onclick="showSection('spanzuratoarea')">🪢 Spânzurătoarea</button>
+    <button class="tab-btn" id="tab-harta-progres" style="background:linear-gradient(135deg,#f59e0b,#b45309)" onclick="showSection('harta-progres')">🗺️ Harta Progresului</button>
   </div>
 </nav>
 
@@ -891,6 +1070,75 @@
       <div class="done-badge" id="done-vocabular">✅</div>
       <span class="big-emoji">📖</span><h2>Relații semantice</h2><p>Vocabular</p>
     </button>
+  </div>
+</section>
+
+<!-- ══════════════ HARTA PROGRESULUI ══════════════ -->
+<section class="section" id="harta-progres">
+  <div class="progress-map-section">
+    <h2 class="pm-title">🗺️ Harta Progresului 🏴‍☠️</h2>
+    <p class="pm-subtitle">Explorează insulele și completează exercițiile pentru a ajunge la comoară!</p>
+    <div class="pm-trail" id="pm-trail">
+      <button class="pm-island unlocked" id="pm-Substantiv" onclick="showSection('substantiv')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">💀</div>
+        <div class="pm-name">Insula Craniului<br>Substantivul</div>
+        <div class="pm-progress" id="pm-prog-Substantiv">0 / 4</div>
+      </button>
+      <button class="pm-island" id="pm-adjectiv" onclick="showSection('adjectiv')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🦈</div>
+        <div class="pm-name">Insula Rechinilor<br>Adjectivul</div>
+        <div class="pm-progress" id="pm-prog-adjectiv">0 / 3</div>
+      </button>
+      <button class="pm-island" id="pm-verb" onclick="showSection('verb')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🐳</div>
+        <div class="pm-name">Insula Balenelor<br>Verbul</div>
+        <div class="pm-progress" id="pm-prog-verb">0 / 4</div>
+      </button>
+      <button class="pm-island" id="pm-pronume" onclick="showSection('pronume')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🏴‍☠️</div>
+        <div class="pm-name">Corabia Piraților<br>Pronumele</div>
+        <div class="pm-progress" id="pm-prog-pronume">0 / 3</div>
+      </button>
+      <button class="pm-island" id="pm-Articol" onclick="showSection('articol')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🧜‍♀️</div>
+        <div class="pm-name">Insula Sirenelor<br>Articolul</div>
+        <div class="pm-progress" id="pm-prog-Articol">0 / 4</div>
+      </button>
+      <button class="pm-island" id="pm-prepozitie" onclick="showSection('prepozitie')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🌋</div>
+        <div class="pm-name">Vulcanul Adormit<br>Prepoziția</div>
+        <div class="pm-progress" id="pm-prog-prepozitie">0 / 3</div>
+      </button>
+      <button class="pm-island" id="pm-conjunctie" onclick="showSection('conjunctie')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🌉</div>
+        <div class="pm-name">Podul de Frânghie<br>Conjuncția</div>
+        <div class="pm-progress" id="pm-prog-conjunctie">0 / 3</div>
+      </button>
+      <button class="pm-island" id="pm-adverb" onclick="showSection('adverb')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">🐙</div>
+        <div class="pm-name">Monstrul Marin<br>Adverbul</div>
+        <div class="pm-progress" id="pm-prog-adverb">0 / 3</div>
+      </button>
+      <button class="pm-island" id="pm-interjectie" onclick="showSection('interjectie')">
+        <span class="pm-star">⭐</span>
+        <div class="pm-emoji">❌💰</div>
+        <div class="pm-name">Comoara Ascunsă<br>Interjecția</div>
+        <div class="pm-progress" id="pm-prog-interjectie">0 / 3</div>
+      </button>
+    </div>
+    <div class="pm-treasure">
+      <div class="pm-treasure-emoji" id="pm-chest">🏆</div>
+      <div class="pm-treasure-text" id="pm-chest-text">Completează toate insulele pentru a debloca comoara!</div>
+    </div>
+    <button class="pm-reset" onclick="resetAllProgress()">🗑️ Resetează tot progresul</button>
   </div>
 </section>
 
@@ -4100,14 +4348,148 @@ function showSection(id){
   }, 60);
 }
 
-// ── SCORE STATE ──
-const scores={},answered={};
+// ── SCORE STATE + LOCALSTORAGE ──
+let scores={},answered={};
 // section question counts
 const qCounts={
   Articol:4, Substantiv:4, pronume:3, verb:4, adjectiv:3,
   adverb:3, prepozitie:3, conjunctie:3, interjectie:3, exercitii:10,
   sinonime:10, antonime:10, omonime:10, paronime:10, omofone:10
 };
+
+// ── SAVE / LOAD PROGRESS ──
+function saveProgress() {
+  try {
+    localStorage.setItem('veronica_scores', JSON.stringify(scores));
+    localStorage.setItem('veronica_answered', JSON.stringify(answered));
+    // Save completed sections
+    const completed = {};
+    Object.keys(qCounts).forEach(sec => {
+      const secQs = Object.keys(answered).filter(k => sectionOf(k) === sec && answered[k] === true);
+      if (secQs.length >= getTotal(sec) && getTotal(sec) > 0) completed[sec] = true;
+    });
+    localStorage.setItem('veronica_completed', JSON.stringify(completed));
+  } catch(e) { /* silently fail if localStorage unavailable */ }
+}
+
+function loadProgress() {
+  try {
+    const savedScores = localStorage.getItem('veronica_scores');
+    const savedAnswered = localStorage.getItem('veronica_answered');
+    if (savedScores) scores = JSON.parse(savedScores);
+    if (savedAnswered) answered = JSON.parse(savedAnswered);
+    // Restore UI state for all sections
+    Object.keys(scores).forEach(sec => updateScore(sec));
+    // Restore answered buttons visual state
+    Object.keys(answered).forEach(qid => {
+      if (!answered[qid]) return;
+      // Disable answered option buttons
+      const fbEl = document.getElementById('fb-' + qid);
+      if (fbEl) {
+        const card = fbEl.closest('.exercise-card');
+        if (card) card.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
+      }
+      // Disable answered fill inputs
+      const fillEl = document.getElementById('fill-' + qid);
+      if (fillEl) fillEl.disabled = true;
+    });
+    // Restore completed badges
+    const savedCompleted = localStorage.getItem('veronica_completed');
+    if (savedCompleted) {
+      const completed = JSON.parse(savedCompleted);
+      Object.keys(completed).forEach(sec => {
+        if (completed[sec]) {
+          const badge = document.getElementById('done-' + sec.toLowerCase());
+          if (badge) badge.classList.add('show');
+          const tab = document.getElementById('tab-' + sec.toLowerCase());
+          if (tab && !tab.classList.contains('tab-done')) tab.classList.add('tab-done');
+          const reward = document.getElementById('reward-' + sec);
+          if (reward) reward.classList.add('show');
+        }
+      });
+    }
+    // Update progress map
+    updateProgressMap();
+  } catch(e) { /* silently fail */ }
+}
+
+// ── PROGRESS MAP UPDATE ──
+const mapSections = ['Substantiv','adjectiv','verb','pronume','Articol','prepozitie','conjunctie','adverb','interjectie'];
+
+function updateProgressMap() {
+  let allDone = true;
+  let prevDone = true; // first island is always unlocked
+  mapSections.forEach((sec, i) => {
+    const island = document.getElementById('pm-' + sec);
+    const progEl = document.getElementById('pm-prog-' + sec);
+    if (!island) return;
+    const pts = scores[sec] || 0;
+    const tot = getTotal(sec) || 0;
+    const secQs = Object.keys(answered).filter(k => sectionOf(k) === sec && answered[k] === true);
+    const isDone = secQs.length >= tot && tot > 0;
+
+    // Update progress text
+    if (progEl) progEl.textContent = pts + ' / ' + tot;
+
+    // Unlock if previous island is done, or it's the first
+    if (i === 0 || prevDone) {
+      island.classList.add('unlocked');
+    } else {
+      island.classList.remove('unlocked');
+    }
+
+    // Mark completed
+    if (isDone) {
+      island.classList.add('completed');
+    } else {
+      island.classList.remove('completed');
+      allDone = false;
+    }
+    prevDone = isDone;
+  });
+
+  // Treasure chest
+  const chest = document.getElementById('pm-chest');
+  const chestText = document.getElementById('pm-chest-text');
+  if (allDone) {
+    chest.classList.add('unlocked');
+    chest.textContent = '🏆🎉';
+    chestText.textContent = 'FELICITĂRI VERONICA! Ai cucerit toate insulele! 🌟';
+    chestText.style.color = '#fbbf24';
+  } else {
+    chest.classList.remove('unlocked');
+    chest.textContent = '🏆';
+    chestText.textContent = 'Completează toate insulele pentru a debloca comoara!';
+    chestText.style.color = '#fde68a';
+  }
+}
+
+function resetAllProgress() {
+  if (!confirm('Ești sigură că vrei să resetezi TOT progresul? Toate steluțele și scorurile vor fi șterse!')) return;
+  // Clear localStorage
+  localStorage.removeItem('veronica_scores');
+  localStorage.removeItem('veronica_answered');
+  localStorage.removeItem('veronica_completed');
+  // Clear in-memory state
+  Object.keys(scores).forEach(k => delete scores[k]);
+  Object.keys(answered).forEach(k => delete answered[k]);
+  // Reset all UI
+  document.querySelectorAll('.option-btn').forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
+  document.querySelectorAll('.fill-input').forEach(inp => { inp.disabled = false; inp.value = ''; inp.style.borderColor = ''; });
+  document.querySelectorAll('.feedback').forEach(f => { f.textContent = ''; f.classList.remove('show'); });
+  document.querySelectorAll('.done-badge').forEach(b => b.classList.remove('show'));
+  document.querySelectorAll('.tab-done').forEach(t => t.classList.remove('tab-done'));
+  document.querySelectorAll('.reward-box').forEach(r => r.classList.remove('show'));
+  // Reset scores display
+  Object.keys(qCounts).forEach(sec => updateScore(sec));
+  updateProgressMap();
+  alert('Progresul a fost resetat! Poți începe din nou aventura! 🏴‍☠️');
+}
+
+// Load saved progress on page load
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(loadProgress, 100);
+});
 
 function getTotal(sec){ return qCounts[sec]||0; }
 
@@ -4121,6 +4503,8 @@ function updateScore(sec){
   if(tel) tel.textContent=tot;
   if(bar) bar.style.width=(tot>0?Math.round(pts/tot*100):0)+'%';
   updateGlobalProgress();
+  updateProgressMap();
+  saveProgress();
 }
 
 function updateGlobalProgress(){

@@ -442,90 +442,167 @@
       display:block;margin:0 auto;
     }
 
-    /* ROWS */
+    /* ===== PIRATE TREASURE MAP ===== */
     .fairy-row{
       display:flex;flex-wrap:wrap;justify-content:center;
-      gap:28px;margin:14px 0;
-      background: linear-gradient(rgba(2, 132, 199, 0.6), rgba(2, 132, 199, 0.6)), url('bg-harta.png') center/cover no-repeat;
-      padding:40px 20px;
-      border-radius:16px;
-      border:12px solid #b45309;
-      box-shadow:inset 0 0 0 4px #78350f, 0 10px 20px rgba(0,0,0,0.3);
+      gap:18px 22px;margin:14px 0;
+      /* Parchment base with painted ocean */
+      background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.4"/></svg>') repeat,
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="30" viewBox="0 0 300 30"><path d="M0,15 Q37,5 75,15 T150,15 T225,15 T300,15" fill="none" stroke="%2360a5fa" stroke-width="1.5" opacity="0.3"/></svg>') repeat,
+        radial-gradient(ellipse at 30% 40%, #7dd3fc 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, #93c5fd 0%, transparent 40%),
+        linear-gradient(175deg, #38bdf8 0%, #0ea5e9 30%, #0284c7 60%, #0369a1 100%);
+      padding:60px 16px 40px;
+      border-radius:6px;
+      /* Parchment + wood double frame */
+      border:6px solid #92400e;
+      outline: 8px solid #78350f;
+      outline-offset: 0px;
+      box-shadow:
+        inset 0 0 60px rgba(0,0,0,0.15),
+        0 8px 30px rgba(0,0,0,0.4);
       position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+    /* Map title banner */
+    .fairy-row::before {
+      content: '🧭 HARTA COMOARII PIRAȚILOR 🏴‍☠️';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      text-align: center;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+      font-weight: 800;
+      color: #451a03;
+      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+      padding: 6px 10px;
+      border-bottom: 3px solid #92400e;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+      z-index: 10;
+    }
+    /* Dotted trail SVG overlay */
+    .fairy-row::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="3" stroke-dasharray="12,10" opacity="0.5"/><text x="700" y="500" font-size="40" fill="%23dc2626" font-weight="bold" text-anchor="middle">X</text></svg>') center/100% 100% no-repeat;
+      pointer-events: none;
       z-index: 1;
     }
 
-    /* CHARACTER CARDS as CARTOON ISLANDS */
+    /* ===== ISLAND CARDS ===== */
     .fairy-card{
-      background: #86efac;
-      border: 8px solid #fef08a;
-      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-      padding:24px 14px 18px;
-      width:clamp(140px,18vw,186px);
-      text-align:center;
-      cursor:pointer;
-      /* Hard vector-style strokes */
-      box-shadow: 
-        inset 0 0 0 3px #16a34a,
-        0 0 0 4px #78350f,
-        6px 8px 0px rgba(0,0,0,0.3);
-      transition:transform .2s;
-      position:relative;
-      font-family:'Nunito',sans-serif;
+      /* Each card IS a cartoon island */
+      background:
+        radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 85%, #d4a017 95%, transparent 100%);
+      border: none;
+      border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
+      padding: 20px 12px 16px;
+      width: clamp(130px, 17vw, 175px);
+      text-align: center;
+      cursor: pointer;
+      /* Hand-drawn island outline + water reflection */
+      box-shadow:
+        0 0 0 3px #15803d,
+        0 0 0 5px #92400e,
+        0 6px 0 5px rgba(14,165,233,0.5),
+        0 10px 0 6px rgba(2,132,199,0.3),
+        0 14px 20px rgba(0,0,0,0.2);
+      transition: transform .25s ease, box-shadow .25s ease;
+      position: relative;
+      font-family: 'Nunito', sans-serif;
       z-index: 2;
     }
-    .fairy-card:nth-child(even) {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    /* Palm tree decoration on each island */
+    .fairy-card::before {
+      content: '🌴';
+      position: absolute;
+      top: -8px;
+      right: -2px;
+      font-size: 1.4rem;
+      transform: rotate(15deg);
+      filter: drop-shadow(0 2px 1px rgba(0,0,0,0.3));
+      z-index: 3;
+      pointer-events: none;
     }
-    .fairy-card:nth-child(3n) {
-      border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%;
-    }
+    /* Vary island shapes per card */
+    .fairy-card:nth-child(1) { border-radius: 50% 42% 55% 48% / 45% 55% 40% 52%; }
+    .fairy-card:nth-child(2) { border-radius: 40% 58% 45% 62% / 55% 42% 58% 45%; }
+    .fairy-card:nth-child(2)::before { content: '🦈'; top: auto; bottom: -14px; right: auto; left: 5px; transform: rotate(-10deg); font-size: 1.2rem; }
+    .fairy-card:nth-child(3) { border-radius: 55% 45% 50% 50% / 42% 58% 45% 55%; }
+    .fairy-card:nth-child(3)::before { content: '🐋'; top: auto; bottom: -12px; right: 0; transform: rotate(5deg); }
+    .fairy-card:nth-child(4) { border-radius: 48% 52% 42% 58% / 52% 48% 55% 45%; }
+    .fairy-card:nth-child(4)::before { content: '⛵'; top: -10px; right: auto; left: -5px; transform: rotate(-8deg); }
+    .fairy-card:nth-child(5) { border-radius: 52% 48% 58% 42% / 45% 55% 48% 52%; }
+    .fairy-card:nth-child(5)::before { content: '🔭'; top: -6px; right: 2px; }
+    .fairy-card:nth-child(6) { border-radius: 42% 55% 48% 58% / 58% 42% 52% 48%; }
+    .fairy-card:nth-child(7) { border-radius: 58% 42% 52% 48% / 48% 52% 42% 58%; }
+    .fairy-card:nth-child(7)::before { content: '🌋'; top: -10px; right: auto; left: 0; font-size: 1.3rem; }
+    .fairy-card:nth-child(8) { border-radius: 45% 55% 42% 58% / 55% 45% 58% 42%; }
+    .fairy-card:nth-child(8)::before { content: '🪢'; }
+    .fairy-card:nth-child(9) { border-radius: 52% 48% 55% 45% / 42% 58% 45% 55%; }
+    .fairy-card:nth-child(9)::before { content: '🐙'; top: auto; bottom: -12px; right: auto; left: -5px; transform: scaleX(-1); }
+    .fairy-card:nth-child(10) { border-radius: 48% 52% 45% 55% / 55% 45% 52% 48%; }
+    .fairy-card:nth-child(10)::before { content: '💎'; top: -8px; right: 0; }
+
     .fairy-card:hover{
-      transform:translateY(-8px) scale(1.04);
+      transform: translateY(-6px) scale(1.06);
       box-shadow:
-        inset 0 0 0 3px #16a34a,
-        0 0 0 4px #78350f,
-        8px 12px 0px rgba(0,0,0,0.3);
+        0 0 0 3px #15803d,
+        0 0 0 5px #78350f,
+        0 0 12px 6px rgba(250,204,21,0.5),
+        0 16px 30px rgba(0,0,0,0.25);
     }
 
-    /* DOTTED TRAIL BETWEEN ISLANDS */
+    /* Dotted footprint trail between islands */
     .fairy-card::after {
-      content: '';
+      content: '· · ·';
       position: absolute;
       top: 50%;
-      left: 100%;
-      width: 32px;
-      height: 6px;
-      border-bottom: 6px dotted #1e293b;
+      left: calc(100% + 2px);
+      width: 24px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: #451a03;
+      letter-spacing: 2px;
       transform: translateY(-50%);
-      z-index: -1;
+      opacity: 0.6;
+      pointer-events: none;
     }
     .fairy-card:last-child::after {
       display: none;
     }
 
-    /* NUMBER BADGE as Map Marker */
+    /* NUMBER BADGE — red wax seal */
     .fc-num{
-      position:absolute;top:-16px;left:50%;transform:translateX(-50%);
-      width:36px;height:36px;border-radius:50%;
-      color:#fff !important;font-weight:900;font-size:1.2rem;
+      position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+      width:32px;height:32px;border-radius:50%;
+      color:#fef3c7 !important;font-weight:900;font-size:1.05rem;
       display:flex;align-items:center;justify-content:center;
-      border: 4px solid #78350f;
-      background: #ef4444 !important;
-      box-shadow: 2px 4px 0px rgba(0,0,0,0.25);
+      border: 3px solid #78350f;
+      background: radial-gradient(circle at 40% 35%, #ef4444, #991b1b) !important;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.35);
+      z-index: 4;
     }
-    .fc-char{font-size:2.4rem;line-height:1.2;margin:6px 0 4px; filter: drop-shadow(0 2px 0px rgba(0,0,0,0.3));}
+    .fc-char{font-size:2rem;line-height:1.1;margin:4px 0 2px; filter: drop-shadow(0 2px 0px rgba(0,0,0,0.25));}
     .fc-label{
-      font-family:'Baloo 2',cursive;font-size:1.15rem;font-weight:800;
-      margin-bottom:4px;
-      color: #1c1917 !important;
-      text-shadow: none;
+      font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:800;
+      margin-bottom:2px;
+      color: #fefce8 !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 0 6px rgba(0,0,0,0.3);
+      line-height: 1.2;
     }
-    .fc-desc{font-size:.85rem;color:#1c1917;line-height:1.35;font-weight:700; text-shadow: none;}
+    .fc-desc{
+      font-size:.75rem;color:#fef9c3;line-height:1.25;font-weight:700;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
     .fc-words{
-      margin-top:6px;font-size:.8rem;font-weight:900;
-      color:#6366f1;background:#ede9fe;
-      border-radius:8px;padding:3px 6px;display:inline-block;
+      margin-top:4px;font-size:.75rem;font-weight:900;
+      color:#451a03;background:rgba(254,243,199,0.85);
+      border-radius:6px;padding:2px 6px;display:inline-block;
     }
 
     /* MEADOW STRIP */

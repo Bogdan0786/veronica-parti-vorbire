@@ -445,50 +445,30 @@
     /* ===== PIRATE TREASURE MAP ===== */
     .fairy-row{
       display:flex;flex-wrap:wrap;justify-content:center;
-      gap:18px 22px;margin:14px 0;
-      /* Parchment base with painted ocean */
-      background:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.4"/></svg>') repeat,
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="30" viewBox="0 0 300 30"><path d="M0,15 Q37,5 75,15 T150,15 T225,15 T300,15" fill="none" stroke="%2360a5fa" stroke-width="1.5" opacity="0.3"/></svg>') repeat,
-        radial-gradient(ellipse at 30% 40%, #7dd3fc 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 60%, #93c5fd 0%, transparent 40%),
-        linear-gradient(175deg, #38bdf8 0%, #0ea5e9 30%, #0284c7 60%, #0369a1 100%);
-      padding:60px 16px 40px;
-      border-radius:6px;
-      /* Parchment + wood double frame */
-      border:6px solid #92400e;
-      outline: 8px solid #78350f;
-      outline-offset: 0px;
+      gap:24px 22px;margin:14px 0;
+      /* High-quality generated map background */
+      background: url('bg-harta.png') no-repeat center center;
+      background-size: cover;
+      padding: 95px 20px 45px; /* Leave space at top so the beautiful printed title "Harta Comorii Piratilor" is fully visible! */
+      border-radius:16px;
+      border: 5px solid #78350f;
       box-shadow:
-        inset 0 0 60px rgba(0,0,0,0.15),
-        0 8px 30px rgba(0,0,0,0.4);
+        inset 0 0 50px rgba(0,0,0,0.3),
+        0 10px 30px rgba(0,0,0,0.45);
       position: relative;
       z-index: 1;
-      overflow: hidden;
+      overflow: visible;
     }
-    /* Map title banner */
+    /* Map title banner - hidden because our bg-harta.png already has a magnificent cartoon scroll title */
     .fairy-row::before {
-      content: '🧭 HARTA COMOARII PIRAȚILOR 🏴‍☠️';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      text-align: center;
-      font-family: 'Baloo 2', cursive;
-      font-size: clamp(0.9rem, 2.5vw, 1.3rem);
-      font-weight: 800;
-      color: #451a03;
-      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
-      padding: 6px 10px;
-      border-bottom: 3px solid #92400e;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
-      z-index: 10;
+      display: none;
     }
-    /* Dotted trail SVG overlay */
+    /* Dotted trail SVG overlay - semi-transparent ordering helper */
     .fairy-row::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="3" stroke-dasharray="12,10" opacity="0.5"/><text x="700" y="500" font-size="40" fill="%23dc2626" font-weight="bold" text-anchor="middle">X</text></svg>') center/100% 100% no-repeat;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="2.5" stroke-dasharray="10,12" opacity="0.35"/></svg>') center/100% 100% no-repeat;
       pointer-events: none;
       z-index: 1;
     }
@@ -500,18 +480,18 @@
         radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 85%, #d4a017 95%, transparent 100%);
       border: none;
       border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
-      padding: 20px 12px 16px;
+      padding: 22px 14px 18px;
       width: clamp(130px, 17vw, 175px);
       text-align: center;
       cursor: pointer;
-      /* Hand-drawn island outline + water reflection */
+      /* Hand-drawn island outline + water reflection + 3D shadow */
       box-shadow:
         0 0 0 3px #15803d,
         0 0 0 5px #92400e,
         0 6px 0 5px rgba(14,165,233,0.5),
-        0 10px 0 6px rgba(2,132,199,0.3),
-        0 14px 20px rgba(0,0,0,0.2);
-      transition: transform .25s ease, box-shadow .25s ease;
+        0 10px 0 6px rgba(2,132,199,0.35),
+        0 8px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s;
       position: relative;
       font-family: 'Nunito', sans-serif;
       z-index: 2;
@@ -527,6 +507,7 @@
       filter: drop-shadow(0 2px 1px rgba(0,0,0,0.3));
       z-index: 3;
       pointer-events: none;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     /* Vary island shapes per card */
     .fairy-card:nth-child(1) { border-radius: 50% 42% 55% 48% / 45% 55% 40% 52%; }
@@ -548,13 +529,39 @@
     .fairy-card:nth-child(10) { border-radius: 48% 52% 45% 55% / 55% 45% 52% 48%; }
     .fairy-card:nth-child(10)::before { content: '💎'; top: -8px; right: 0; }
 
+    /* STUNNING 3D POP-OUT HOVER EFFECT: Elements float and cast dramatic depth shadow */
     .fairy-card:hover{
-      transform: translateY(-6px) scale(1.06);
+      transform: translateY(-22px) scale(1.16) rotate(1.5deg);
+      z-index: 50;
       box-shadow:
         0 0 0 3px #15803d,
-        0 0 0 5px #78350f,
-        0 0 12px 6px rgba(250,204,21,0.5),
-        0 16px 30px rgba(0,0,0,0.25);
+        0 0 0 5px #fbbf24,
+        0 28px 38px rgba(0,0,0,0.55), /* Deep liftoff shadow */
+        0 0 25px 8px rgba(250,204,21,0.65), /* Magical glow */
+        0 35px 50px rgba(2,132,199,0.35); /* Liquid/sea depth shadow */
+    }
+    
+    /* Parallax float-up for emojis inside card */
+    .fairy-card .fc-char {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fairy-card:hover .fc-char {
+      transform: scale(1.24) translateY(-10px);
+      filter: drop-shadow(0 8px 5px rgba(0,0,0,0.35));
+    }
+    
+    /* Wax seal badge pop-out */
+    .fairy-card .fc-num {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .fairy-card:hover .fc-num {
+      transform: translateX(-50%) scale(1.18) translateY(-6px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.45);
+    }
+    
+    /* Palm trees and custom graphics hover lift */
+    .fairy-card:hover::before {
+      transform: rotate(25deg) scale(1.25) translate(4px, -4px);
     }
 
     /* Dotted footprint trail between islands */
@@ -664,25 +671,26 @@
 
     /* ===== HARTA PROGRESULUI ===== */
     .progress-map-section {
-      background: linear-gradient(180deg, #0c4a6e 0%, #0369a1 40%, #0ea5e9 100%);
+      background: url('bg-harta.png') no-repeat center center;
+      background-size: cover;
       border-radius: 24px;
-      padding: 30px 16px 40px;
+      padding: 95px 16px 40px; /* Leave space at top so the beautiful printed title "Harta Comorii Piratilor" is fully visible! */
       position: relative;
-      overflow: hidden;
+      overflow: visible; /* Allow 3D islands to pop out clean */
+      border: 5px solid #78350f;
+      box-shadow:
+        inset 0 0 50px rgba(0,0,0,0.35),
+        0 12px 35px rgba(0,0,0,0.45);
     }
     .progress-map-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.25"/></svg>') repeat;
-      pointer-events: none;
+      display: none; /* Wave overlay not needed since we have a gorgeous watercolor map background */
     }
     .pm-title {
       text-align: center;
       font-family: 'Baloo 2', cursive;
       font-size: clamp(1.4rem, 4vw, 2rem);
       color: #fef3c7;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 0 10px rgba(0,0,0,0.4);
       margin-bottom: 8px;
       position: relative; z-index: 2;
     }
@@ -690,14 +698,15 @@
       text-align: center;
       font-size: 0.95rem;
       color: #bae6fd;
-      margin-bottom: 20px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      margin-bottom: 25px;
       position: relative; z-index: 2;
     }
     .pm-trail {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px 18px;
+      gap: 16px 20px;
       position: relative;
       z-index: 2;
     }
@@ -707,18 +716,18 @@
       background: radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 90%, transparent 100%);
       border: none;
       border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
-      padding: 18px 10px 14px;
+      padding: 20px 12px 16px;
       text-align: center;
       cursor: pointer;
       position: relative;
       font-family: 'Nunito', sans-serif;
-      transition: transform .25s, box-shadow .25s, filter .25s;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter .25s;
       box-shadow:
         0 0 0 3px #15803d,
         0 0 0 5px #92400e,
         0 6px 0 5px rgba(14,165,233,0.5),
         0 10px 0 6px rgba(2,132,199,0.3),
-        0 14px 20px rgba(0,0,0,0.2);
+        0 8px 15px rgba(0,0,0,0.3);
       filter: grayscale(60%) brightness(0.7);
     }
     .pm-island.unlocked {
@@ -731,11 +740,44 @@
         0 0 0 5px #fbbf24,
         0 0 18px 6px rgba(250,204,21,0.5),
         0 10px 0 6px rgba(2,132,199,0.3),
-        0 14px 20px rgba(0,0,0,0.2);
+        0 8px 15px rgba(0,0,0,0.3);
     }
+    
+    /* STUNNING 3D POP-OUT EFFECT: Progress map islands float up dramatically on hover */
     .pm-island:hover {
-      transform: translateY(-5px) scale(1.05);
+      transform: translateY(-22px) scale(1.15) rotate(-1.5deg);
+      z-index: 50;
+      box-shadow:
+        0 0 0 3px #15803d,
+        0 0 0 5px #fbbf24,
+        0 28px 38px rgba(0,0,0,0.55), /* Deep floating shadow */
+        0 0 25px 8px rgba(250,204,21,0.65), /* Glow */
+        0 35px 50px rgba(2,132,199,0.35); /* Sea depth */
     }
+    .pm-island.completed:hover {
+      box-shadow:
+        0 0 0 3px #15803d,
+        0 0 0 5px #fbbf24,
+        0 0 30px 10px rgba(250,204,21,0.8), /* Strong gold glow */
+        0 28px 38px rgba(0,0,0,0.55),
+        0 35px 50px rgba(2,132,199,0.35);
+    }
+    
+    .pm-island .pm-emoji {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pm-island:hover .pm-emoji {
+      transform: scale(1.24) translateY(-10px);
+      filter: drop-shadow(0 8px 5px rgba(0,0,0,0.35));
+    }
+    
+    .pm-island .pm-star {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pm-island:hover .pm-star {
+      transform: scale(1.3) translate(4px, -4px) rotate(15deg);
+    }
+
     .pm-island:nth-child(even) { border-radius: 55% 45% 50% 50% / 42% 58% 45% 55%; }
     .pm-island:nth-child(3n) { border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; }
     .pm-emoji { font-size: 1.8rem; line-height: 1.1; filter: drop-shadow(0 2px 0 rgba(0,0,0,0.25)); }
@@ -780,13 +822,18 @@
       opacity: 0.5; pointer-events: none;
     }
     .pm-island:last-child::after { display: none; }
-    /* Palm tree deco */
+    
+    /* Palm tree deco with hover support */
     .pm-island::before {
       content: '🌴';
       position: absolute; top: -6px; right: -2px;
       font-size: 1.1rem; transform: rotate(12deg);
       filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
       pointer-events: none; z-index: 3;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pm-island:hover::before {
+      transform: rotate(22deg) scale(1.25) translate(3px, -3px);
     }
     /* Treasure chest at end */
     .pm-treasure {

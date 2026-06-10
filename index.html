@@ -442,123 +442,122 @@
       display:block;margin:0 auto;
     }
 
-    /* ===== PIRATE TREASURE MAP ===== */
+    /* ===== MAGICAL DISNEY LAND ===== */
     .fairy-row{
       display:flex;flex-wrap:wrap;justify-content:center;
       gap:18px 22px;margin:14px 0;
-      /* Clean blue ocean background with CSS gradients and waves */
+      /* Magical Disney starry night background with sparkles */
       background:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.4"/></svg>') repeat,
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="30" viewBox="0 0 300 30"><path d="M0,15 Q37,5 75,15 T150,15 T225,15 T300,15" fill="none" stroke="%2360a5fa" stroke-width="1.5" opacity="0.3"/></svg>') repeat,
-        radial-gradient(ellipse at 30% 40%, #7dd3fc 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 60%, #93c5fd 0%, transparent 40%),
-        linear-gradient(175deg, #38bdf8 0%, #0ea5e9 30%, #0284c7 60%, #0369a1 100%);
-      padding:60px 16px 40px;
-      border-radius:12px;
-      /* Wooden border frame */
-      border:6px solid #92400e;
-      outline: 8px solid #78350f;
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="1.5" fill="%23ffffff" opacity="0.35"/><polygon points="20,10 21,13 24,14 21,15 20,18 19,15 16,14 19,13" fill="%23fde047" opacity="0.45"/><polygon points="60,50 61,53 64,54 61,55 60,58 59,55 56,54 59,53" fill="%23fde047" opacity="0.35"/></svg>') repeat,
+        radial-gradient(circle at 50% 30%, #6366f1 0%, #312e81 60%, #1e1b4b 100%);
+      padding:65px 16px 40px;
+      border-radius:16px;
+      /* Golden magical frame */
+      border:6px solid #fbbf24;
+      outline: 8px solid #d97706;
       outline-offset: 0px;
       box-shadow:
-        inset 0 0 60px rgba(0,0,0,0.15),
-        0 8px 30px rgba(0,0,0,0.4);
+        inset 0 0 40px rgba(0,0,0,0.3),
+        0 10px 30px rgba(0,0,0,0.35);
       position: relative;
       z-index: 1;
       overflow: visible;
     }
-    /* Map title banner - restored for the clean look */
+    /* Disney title banner */
     .fairy-row::before {
-      content: '🧭 HARTA COMOARII PIRAȚILOR 🏴‍☠️';
+      content: '🏰 TĂRÂMUL MAGIC DISNEY 🌟';
       position: absolute;
       top: 0; left: 0; right: 0;
       text-align: center;
       font-family: 'Baloo 2', cursive;
       font-size: clamp(0.9rem, 2.5vw, 1.3rem);
       font-weight: 800;
-      color: #451a03;
-      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+      color: #7c2d12;
+      background: linear-gradient(180deg, #fef08a 0%, #fde047 100%);
       padding: 6px 10px;
-      border-bottom: 3px solid #92400e;
+      border-bottom: 3px solid #d97706;
       letter-spacing: 2px;
       text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
       z-index: 10;
     }
-    /* Dotted trail SVG overlay */
+    /* Magical Golden Sparkle Trail */
     .fairy-row::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="3" stroke-dasharray="12,10" opacity="0.5"/><text x="700" y="500" font-size="40" fill="%23dc2626" font-weight="bold" text-anchor="middle">X</text></svg>') center/100% 100% no-repeat;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23fbbf24" stroke-width="3" stroke-dasharray="8,10" opacity="0.6"/></svg>') center/100% 100% no-repeat;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* ===== ISLAND CARDS ===== */
+    /* ===== DISNEY PORTAL CARDS ===== */
     .fairy-card{
-      /* Each card IS a cartoon island */
+      /* Each card IS a magical kingdom portal */
       background:
-        radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 85%, #d4a017 95%, transparent 100%);
+        radial-gradient(circle at 50% 30%, #fef08a 0%, #ec4899 45%, #8b5cf6 85%, #4f46e5 100%);
       border: none;
       border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
       padding: 22px 14px 18px;
       width: clamp(130px, 17vw, 175px);
       text-align: center;
       cursor: pointer;
-      /* Hand-drawn island outline + water reflection + 3D shadow */
+      /* Magical gold outline + glow + 3D shadow */
       box-shadow:
-        0 0 0 3px #15803d,
-        0 0 0 5px #92400e,
-        0 6px 0 5px rgba(14,165,233,0.5),
-        0 10px 0 6px rgba(2,132,199,0.35),
-        0 8px 15px rgba(0,0,0,0.3);
+        0 0 0 3px #fde047,
+        0 0 0 5px #d97706,
+        0 6px 0 5px rgba(236,72,153,0.4),
+        0 10px 0 6px rgba(99,102,241,0.3),
+        0 8px 15px rgba(0,0,0,0.35);
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), z-index 0s;
       position: relative;
       font-family: 'Nunito', sans-serif;
       z-index: 2;
     }
-    /* Palm tree decoration on each island */
+    /* Sparkle decoration on each card */
     .fairy-card::before {
-      content: '🌴';
+      content: '✨';
       position: absolute;
       top: -8px;
       right: -2px;
       font-size: 1.4rem;
       transform: rotate(15deg);
-      filter: drop-shadow(0 2px 1px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 2px 1px rgba(255,255,255,0.4));
       z-index: 3;
       pointer-events: none;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    /* Vary island shapes per card */
+    /* Vary card shapes and content decorations */
     .fairy-card:nth-child(1) { border-radius: 50% 42% 55% 48% / 45% 55% 40% 52%; }
+    .fairy-card:nth-child(1)::before { content: '🐭'; }
     .fairy-card:nth-child(2) { border-radius: 40% 58% 45% 62% / 55% 42% 58% 45%; }
-    .fairy-card:nth-child(2)::before { content: '🦈'; top: auto; bottom: -14px; right: auto; left: 5px; transform: rotate(-10deg); font-size: 1.2rem; }
+    .fairy-card:nth-child(2)::before { content: '🍎'; top: auto; bottom: -14px; right: auto; left: 5px; transform: rotate(-10deg); font-size: 1.2rem; }
     .fairy-card:nth-child(3) { border-radius: 55% 45% 50% 50% / 42% 58% 45% 55%; }
-    .fairy-card:nth-child(3)::before { content: '🐋'; top: auto; bottom: -12px; right: 0; transform: rotate(5deg); }
+    .fairy-card:nth-child(3)::before { content: '❄️'; top: auto; bottom: -12px; right: 0; transform: rotate(5deg); }
     .fairy-card:nth-child(4) { border-radius: 48% 52% 42% 58% / 52% 48% 55% 45%; }
-    .fairy-card:nth-child(4)::before { content: '⛵'; top: -10px; right: auto; left: -5px; transform: rotate(-8deg); }
+    .fairy-card:nth-child(4)::before { content: '🏰'; top: -10px; right: auto; left: -5px; transform: rotate(-8deg); }
     .fairy-card:nth-child(5) { border-radius: 52% 48% 58% 42% / 45% 55% 48% 52%; }
-    .fairy-card:nth-child(5)::before { content: '🔭'; top: -6px; right: 2px; }
+    .fairy-card:nth-child(5)::before { content: '💇‍♀️'; top: -6px; right: 2px; }
     .fairy-card:nth-child(6) { border-radius: 42% 55% 48% 58% / 58% 42% 52% 48%; }
+    .fairy-card:nth-child(6)::before { content: '🧜‍♀️'; }
     .fairy-card:nth-child(7) { border-radius: 58% 42% 52% 48% / 48% 52% 42% 58%; }
-    .fairy-card:nth-child(7)::before { content: '🌋'; top: -10px; right: auto; left: 0; font-size: 1.3rem; }
+    .fairy-card:nth-child(7)::before { content: '🌹'; top: -10px; right: auto; left: 0; font-size: 1.3rem; }
     .fairy-card:nth-child(8) { border-radius: 45% 55% 42% 58% / 55% 45% 58% 42%; }
-    .fairy-card:nth-child(8)::before { content: '🪢'; }
+    .fairy-card:nth-child(8)::before { content: '🧞‍♂️'; }
     .fairy-card:nth-child(9) { border-radius: 52% 48% 55% 45% / 42% 58% 45% 55%; }
-    .fairy-card:nth-child(9)::before { content: '🐙'; top: auto; bottom: -12px; right: auto; left: -5px; transform: scaleX(-1); }
+    .fairy-card:nth-child(9)::before { content: '🦁'; top: auto; bottom: -12px; right: auto; left: -5px; transform: scaleX(-1); }
     .fairy-card:nth-child(10) { border-radius: 48% 52% 45% 55% / 55% 45% 52% 48%; }
-    .fairy-card:nth-child(10)::before { content: '💎'; top: -8px; right: 0; }
+    .fairy-card:nth-child(10)::before { content: '✨'; top: -8px; right: 0; }
 
     /* STUNNING 3D POP-OUT HOVER EFFECT: Elements float and cast dramatic depth shadow */
     .fairy-card:hover{
       transform: translateY(-22px) scale(1.16) rotate(1.5deg);
       z-index: 50;
       box-shadow:
-        0 0 0 3px #15803d,
+        0 0 0 3px #fde047,
         0 0 0 5px #fbbf24,
-        0 28px 38px rgba(0,0,0,0.55), /* Deep liftoff shadow */
-        0 0 25px 8px rgba(250,204,21,0.65), /* Magical glow */
-        0 35px 50px rgba(2,132,199,0.35); /* Liquid/sea depth shadow */
+        0 28px 38px rgba(0,0,0,0.45), /* Deep liftoff shadow */
+        0 0 25px 8px rgba(253,224,71,0.8), /* Magical gold glow */
+        0 35px 50px rgba(99,102,241,0.45); /* Magical indigo depth */
     }
     
     /* Parallax float-up for emojis inside card */
@@ -593,10 +592,10 @@
       width: 24px;
       font-size: 0.7rem;
       font-weight: 900;
-      color: #451a03;
+      color: #fde047;
       letter-spacing: 2px;
       transform: translateY(-50%);
-      opacity: 0.6;
+      opacity: 0.8;
       pointer-events: none;
     }
     .fairy-card:last-child::after {
@@ -691,23 +690,23 @@
 
     /* ===== HARTA PROGRESULUI ===== */
     .progress-map-section {
-      background: linear-gradient(180deg, #0c4a6e 0%, #0369a1 40%, #0ea5e9 100%);
+      background: radial-gradient(circle at 50% 30%, #4f46e5 0%, #312e81 60%, #1e1b4b 100%);
       border-radius: 24px;
       padding: 30px 16px 40px;
       position: relative;
       overflow: visible; /* Allow 3D islands to pop out clean */
-      border: 6px solid #92400e;
-      outline: 8px solid #78350f;
+      border: 6px solid #fbbf24;
+      outline: 8px solid #d97706;
       outline-offset: 0px;
       box-shadow:
-        inset 0 0 60px rgba(0,0,0,0.15),
-        0 8px 30px rgba(0,0,0,0.4);
+        inset 0 0 60px rgba(0,0,0,0.3),
+        0 8px 30px rgba(0,0,0,0.45);
     }
     .progress-map-section::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.25"/></svg>') repeat;
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="1.5" fill="%23ffffff" opacity="0.3"/><polygon points="20,10 21,13 24,14 21,15 20,18 19,15 16,14 19,13" fill="%23fde047" opacity="0.45"/></svg>') repeat;
       pointer-events: none;
     }
     .pm-title {
@@ -738,7 +737,7 @@
     /* Each island on the progress map */
     .pm-island {
       width: clamp(120px, 16vw, 155px);
-      background: radial-gradient(ellipse at 50% 30%, #4ade80 0%, #22c55e 35%, #16a34a 55%, #fde047 75%, #fbbf24 90%, transparent 100%);
+      background: radial-gradient(circle at 50% 30%, #fef08a 0%, #ec4899 45%, #8b5cf6 85%, #4f46e5 100%);
       border: none;
       border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
       padding: 20px 12px 16px;
@@ -748,10 +747,10 @@
       font-family: 'Nunito', sans-serif;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter .25s;
       box-shadow:
-        0 0 0 3px #15803d,
-        0 0 0 5px #92400e,
-        0 6px 0 5px rgba(14,165,233,0.5),
-        0 10px 0 6px rgba(2,132,199,0.3),
+        0 0 0 3px #fde047,
+        0 0 0 5px #d97706,
+        0 6px 0 5px rgba(236,72,153,0.4),
+        0 10px 0 6px rgba(99,102,241,0.3),
         0 8px 15px rgba(0,0,0,0.3);
       filter: grayscale(60%) brightness(0.7);
     }
@@ -761,10 +760,10 @@
     .pm-island.completed {
       filter: none;
       box-shadow:
-        0 0 0 3px #15803d,
-        0 0 0 5px #fbbf24,
-        0 0 18px 6px rgba(250,204,21,0.5),
-        0 10px 0 6px rgba(2,132,199,0.3),
+        0 0 0 3px #fbbf24,
+        0 0 0 5px #d97706,
+        0 0 18px 6px rgba(250,204,21,0.65),
+        0 10px 0 6px rgba(99,102,241,0.3),
         0 8px 15px rgba(0,0,0,0.3);
     }
     
@@ -773,19 +772,19 @@
       transform: translateY(-22px) scale(1.15) rotate(-1.5deg);
       z-index: 50;
       box-shadow:
-        0 0 0 3px #15803d,
+        0 0 0 3px #fde047,
         0 0 0 5px #fbbf24,
-        0 28px 38px rgba(0,0,0,0.55), /* Deep floating shadow */
-        0 0 25px 8px rgba(250,204,21,0.65), /* Glow */
-        0 35px 50px rgba(2,132,199,0.35); /* Sea depth */
+        0 28px 38px rgba(0,0,0,0.45), /* Deep floating shadow */
+        0 0 25px 8px rgba(250,204,21,0.7), /* Glow */
+        0 35px 50px rgba(99,102,241,0.45); /* Sea depth */
     }
     .pm-island.completed:hover {
       box-shadow:
-        0 0 0 3px #15803d,
-        0 0 0 5px #fbbf24,
-        0 0 30px 10px rgba(250,204,21,0.8), /* Strong gold glow */
-        0 28px 38px rgba(0,0,0,0.55),
-        0 35px 50px rgba(2,132,199,0.35);
+        0 0 0 3px #fbbf24,
+        0 0 0 5px #d97706,
+        0 0 30px 10px rgba(250,204,21,0.85), /* Strong gold glow */
+        0 28px 38px rgba(0,0,0,0.45),
+        0 35px 50px rgba(99,102,241,0.45);
     }
     
     .pm-island .pm-emoji {
@@ -848,12 +847,12 @@
     }
     .pm-island:last-child::after { display: none; }
     
-    /* Palm tree deco with hover support */
+    /* Sparkle deco with hover support */
     .pm-island::before {
-      content: '🌴';
+      content: '✨';
       position: absolute; top: -6px; right: -2px;
       font-size: 1.1rem; transform: rotate(12deg);
-      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 1px 1px rgba(255,255,255,0.4));
       pointer-events: none; z-index: 3;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
@@ -1004,66 +1003,66 @@
     <div class="fairy-row" id="fairy-cards-container" style="display:none;">
       <button class="fairy-card" onclick="showSection('substantiv')">
         <div class="fc-num" style="background:#a855f7;">1</div>
-        <div class="fc-char">💀</div>
-        <div class="fc-label" style="color:#7e22ce;">Insula Craniului<br>Substantivul</div>
-        <div class="fc-desc">numește persoane, animale, lucruri și locuri.</div>
+        <div class="fc-char">🐭</div>
+        <div class="fc-label" style="color:#7e22ce;">Clubul lui Mickey<br>Substantivul</div>
+        <div class="fc-desc">numește personaje, jucării, locuri și prieteni.</div>
       </button>
       <button class="fairy-card" onclick="showSection('adjectiv')">
         <div class="fc-num" style="background:#22c55e;">2</div>
-        <div class="fc-char">🦈</div>
-        <div class="fc-label" style="color:#15803d;">Insula Rechinilor<br>Adjectivul</div>
-        <div class="fc-desc">adaugă frumusețe, culoare, mărime și calități.</div>
+        <div class="fc-char">🍎</div>
+        <div class="fc-label" style="color:#15803d;">Pădurea Albei ca Zăpada<br>Adjectivul</div>
+        <div class="fc-desc">adaugă frumusețe, culoare și calități magice.</div>
       </button>
       <button class="fairy-card" onclick="showSection('verb')">
         <div class="fc-num" style="background:#3b82f6;">3</div>
-        <div class="fc-char">🐳</div>
-        <div class="fc-label" style="color:#1d4ed8;">Insula Balenelor<br>Verbul</div>
-        <div class="fc-desc">arată acțiune, mișcare și viață.</div>
+        <div class="fc-char">❄️</div>
+        <div class="fc-label" style="color:#1d4ed8;">Regatul de Gheață<br>Verbul</div>
+        <div class="fc-desc">arată acțiuni: îngheață, cântă, zâmbește.</div>
       </button>
       <button class="fairy-card" onclick="showSection('pronume')">
         <div class="fc-num" style="background:#ec4899;">4</div>
-        <div class="fc-char">🏴‍☠️</div>
-        <div class="fc-label" style="color:#9d174d;">Corabia Piraților<br>Pronumele</div>
-        <div class="fc-desc">înlocuiește un substantiv și poate lua locul lui.</div>
+        <div class="fc-char">🏰</div>
+        <div class="fc-label" style="color:#9d174d;">Castelul Cenușăresei<br>Pronumele</div>
+        <div class="fc-desc">înlocuiește numele personajelor (el, ea, ei, ele).</div>
       </button>
       <button class="fairy-card" onclick="showSection('numeral')">
         <div class="fc-num" style="background:#f59e0b;">5</div>
-        <div class="fc-char">🗼</div>
-        <div class="fc-label" style="color:#92400e;">Farul Călăuzitor<br>Numeralul</div>
-        <div class="fc-desc">arată numărul, ordinea sau cantitatea.</div>
+        <div class="fc-char">💇‍♀️</div>
+        <div class="fc-label" style="color:#92400e;">Turnul lui Rapunzel<br>Numeralul</div>
+        <div class="fc-desc">arată numărul de lampioane sau ordinea lor.</div>
       </button>
       <button class="fairy-card" onclick="showSection('articol')">
         <div class="fc-num" style="background:#8b5cf6;">6</div>
         <div class="fc-char">🧜‍♀️</div>
-        <div class="fc-label" style="color:#5b21b6;">Insula Sirenelor<br>Articolul</div>
-        <div class="fc-desc">însoțește substantivul și îl face să se potrivească în propoziție.</div>
+        <div class="fc-label" style="color:#5b21b6;">Regatul Micăi Sirene<br>Articolul</div>
+        <div class="fc-desc">însoțește substantivul și îl ajută să se exprime.</div>
       </button>
       <button class="fairy-card" onclick="showSection('prepozitie')">
         <div class="fc-num" style="background:#10b981;">7</div>
-        <div class="fc-char">🌋</div>
-        <div class="fc-label" style="color:#065f46;">Vulcanul Adormit<br>Prepoziția</div>
-        <div class="fc-desc">arată poziția: pe, sub, lângă, în spatele, între...</div>
+        <div class="fc-char">🌹</div>
+        <div class="fc-label" style="color:#065f46;">Castelul Bestiei<br>Prepoziția</div>
+        <div class="fc-desc">arată poziția trandafirului: pe, sub, lângă cupolă.</div>
         <div class="fc-words">pe &nbsp; sub &nbsp; lângă</div>
       </button>
       <button class="fairy-card" onclick="showSection('conjunctie')">
         <div class="fc-num" style="background:#f59e0b;">8</div>
-        <div class="fc-char">🌉</div>
-        <div class="fc-label" style="color:#78350f;">Podul de Frânghie<br>Conjuncția</div>
-        <div class="fc-desc">leagă cuvinte, propoziții și idei.</div>
+        <div class="fc-char">🧞‍♂️</div>
+        <div class="fc-label" style="color:#78350f;">Covorul Fermecat<br>Conjuncția</div>
+        <div class="fc-desc">leagă cuvinte, propoziții și gânduri magice.</div>
         <div class="fc-words">și &nbsp; dar &nbsp; sau</div>
       </button>
       <button class="fairy-card" onclick="showSection('adverb')">
         <div class="fc-num" style="background:#06b6d4;">9</div>
-        <div class="fc-char">🐙</div>
-        <div class="fc-label" style="color:#164e63;">Monstrul Marin<br>Adverbul</div>
-        <div class="fc-desc">arată cum, când, unde, cât de mult.</div>
+        <div class="fc-char">🦁</div>
+        <div class="fc-label" style="color:#164e63;">Jungla lui Simba<br>Adverbul</div>
+        <div class="fc-desc">arată cum, când și unde se joacă animalele.</div>
       </button>
       <button class="fairy-card" onclick="showSection('interjectie')">
         <div class="fc-num" style="background:#ef4444;">10</div>
-        <div class="fc-char">❌💰</div>
-        <div class="fc-label" style="color:#7f1d1d;">Comoara Ascunsă<br>Interjecția</div>
-        <div class="fc-desc">exprimă emoții puternice și reacții spontane.</div>
-        <div class="fc-words">Ura! &nbsp; Bravo! &nbsp; Ah!</div>
+        <div class="fc-char">✨</div>
+        <div class="fc-label" style="color:#7f1d1d;">Lampa lui Genie<br>Interjecția</div>
+        <div class="fc-desc">exprimă uimire, emoții și magie.</div>
+        <div class="fc-words">Uau! &nbsp; Oho! &nbsp; Ura!</div>
       </button>
     </div>
     <!-- MEADOW STRIP -->
@@ -1148,67 +1147,67 @@
 <!-- ══════════════ HARTA PROGRESULUI ══════════════ -->
 <section class="section" id="harta-progres">
   <div class="progress-map-section">
-    <h2 class="pm-title">🗺️ Harta Progresului 🏴‍☠️</h2>
-    <p class="pm-subtitle">Explorează insulele și completează exercițiile pentru a ajunge la comoară!</p>
+    <h2 class="pm-title">🏰 Harta Progresului Disney 🌟</h2>
+    <p class="pm-subtitle">Călătorește prin regatele magice și ajută personajele tale preferate!</p>
     <div class="pm-trail" id="pm-trail">
       <button class="pm-island unlocked" id="pm-Substantiv" onclick="showSection('substantiv')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">💀</div>
-        <div class="pm-name">Insula Craniului<br>Substantivul</div>
+        <div class="pm-emoji">🐭</div>
+        <div class="pm-name">Clubul lui Mickey<br>Substantivul</div>
         <div class="pm-progress" id="pm-prog-Substantiv">0 / 4</div>
       </button>
       <button class="pm-island" id="pm-adjectiv" onclick="showSection('adjectiv')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🦈</div>
-        <div class="pm-name">Insula Rechinilor<br>Adjectivul</div>
+        <div class="pm-emoji">🍎</div>
+        <div class="pm-name">Pădurea Albei ca Zăpada<br>Adjectivul</div>
         <div class="pm-progress" id="pm-prog-adjectiv">0 / 3</div>
       </button>
       <button class="pm-island" id="pm-verb" onclick="showSection('verb')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🐳</div>
-        <div class="pm-name">Insula Balenelor<br>Verbul</div>
+        <div class="pm-emoji">❄️</div>
+        <div class="pm-name">Regatul de Gheață<br>Verbul</div>
         <div class="pm-progress" id="pm-prog-verb">0 / 4</div>
       </button>
       <button class="pm-island" id="pm-pronume" onclick="showSection('pronume')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🏴‍☠️</div>
-        <div class="pm-name">Corabia Piraților<br>Pronumele</div>
+        <div class="pm-emoji">🏰</div>
+        <div class="pm-name">Castelul Cenușăresei<br>Pronumele</div>
         <div class="pm-progress" id="pm-prog-pronume">0 / 3</div>
       </button>
       <button class="pm-island" id="pm-Articol" onclick="showSection('articol')">
         <span class="pm-star">⭐</span>
         <div class="pm-emoji">🧜‍♀️</div>
-        <div class="pm-name">Insula Sirenelor<br>Articolul</div>
+        <div class="pm-name">Regatul Micăi Sirene<br>Articolul</div>
         <div class="pm-progress" id="pm-prog-Articol">0 / 4</div>
       </button>
       <button class="pm-island" id="pm-prepozitie" onclick="showSection('prepozitie')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🌋</div>
-        <div class="pm-name">Vulcanul Adormit<br>Prepoziția</div>
+        <div class="pm-emoji">🌹</div>
+        <div class="pm-name">Castelul Bestiei<br>Prepoziția</div>
         <div class="pm-progress" id="pm-prog-prepozitie">0 / 3</div>
       </button>
       <button class="pm-island" id="pm-conjunctie" onclick="showSection('conjunctie')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🌉</div>
-        <div class="pm-name">Podul de Frânghie<br>Conjuncția</div>
+        <div class="pm-emoji">🧞‍♂️</div>
+        <div class="pm-name">Covorul Fermecat<br>Conjuncția</div>
         <div class="pm-progress" id="pm-prog-conjunctie">0 / 3</div>
       </button>
       <button class="pm-island" id="pm-adverb" onclick="showSection('adverb')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">🐙</div>
-        <div class="pm-name">Monstrul Marin<br>Adverbul</div>
+        <div class="pm-emoji">🦁</div>
+        <div class="pm-name">Jungla lui Simba<br>Adverbul</div>
         <div class="pm-progress" id="pm-prog-adverb">0 / 3</div>
       </button>
       <button class="pm-island" id="pm-interjectie" onclick="showSection('interjectie')">
         <span class="pm-star">⭐</span>
-        <div class="pm-emoji">❌💰</div>
-        <div class="pm-name">Comoara Ascunsă<br>Interjecția</div>
+        <div class="pm-emoji">✨</div>
+        <div class="pm-name">Lampa lui Genie<br>Interjecția</div>
         <div class="pm-progress" id="pm-prog-interjectie">0 / 3</div>
       </button>
     </div>
     <div class="pm-treasure">
       <div class="pm-treasure-emoji" id="pm-chest">🏆</div>
-      <div class="pm-treasure-text" id="pm-chest-text">Completează toate insulele pentru a debloca comoara!</div>
+      <div class="pm-treasure-text" id="pm-chest-text">Ajută toate personajele pentru a debloca magia Disney!</div>
     </div>
     <button class="pm-reset" onclick="resetAllProgress()">🗑️ Resetează tot progresul</button>
   </div>
@@ -4525,13 +4524,13 @@ function updateProgressMap() {
   const chestText = document.getElementById('pm-chest-text');
   if (allDone) {
     chest.classList.add('unlocked');
-    chest.textContent = '🏆🎉';
-    chestText.textContent = 'FELICITĂRI VERONICA! Ai cucerit toate insulele! 🌟';
+    chest.textContent = '🏆🎉🏰';
+    chestText.textContent = 'FELICITĂRI VERONICA! Ai deblocat magia Disney! 🌟🏰';
     chestText.style.color = '#fbbf24';
   } else {
     chest.classList.remove('unlocked');
     chest.textContent = '🏆';
-    chestText.textContent = 'Completează toate insulele pentru a debloca comoara!';
+    chestText.textContent = 'Ajută toate personajele pentru a debloca magia Disney!';
     chestText.style.color = '#fde68a';
   }
 }

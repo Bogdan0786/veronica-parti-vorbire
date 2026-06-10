@@ -445,30 +445,50 @@
     /* ===== PIRATE TREASURE MAP ===== */
     .fairy-row{
       display:flex;flex-wrap:wrap;justify-content:center;
-      gap:24px 22px;margin:14px 0;
-      /* High-quality generated map background */
-      background: url('bg-harta.png') no-repeat center center;
-      background-size: cover;
-      padding: 95px 20px 45px; /* Leave space at top so the beautiful printed title "Harta Comorii Piratilor" is fully visible! */
-      border-radius:16px;
-      border: 5px solid #78350f;
+      gap:18px 22px;margin:14px 0;
+      /* Clean blue ocean background with CSS gradients and waves */
+      background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.4"/></svg>') repeat,
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="30" viewBox="0 0 300 30"><path d="M0,15 Q37,5 75,15 T150,15 T225,15 T300,15" fill="none" stroke="%2360a5fa" stroke-width="1.5" opacity="0.3"/></svg>') repeat,
+        radial-gradient(ellipse at 30% 40%, #7dd3fc 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, #93c5fd 0%, transparent 40%),
+        linear-gradient(175deg, #38bdf8 0%, #0ea5e9 30%, #0284c7 60%, #0369a1 100%);
+      padding:60px 16px 40px;
+      border-radius:12px;
+      /* Wooden border frame */
+      border:6px solid #92400e;
+      outline: 8px solid #78350f;
+      outline-offset: 0px;
       box-shadow:
-        inset 0 0 50px rgba(0,0,0,0.3),
-        0 10px 30px rgba(0,0,0,0.45);
+        inset 0 0 60px rgba(0,0,0,0.15),
+        0 8px 30px rgba(0,0,0,0.4);
       position: relative;
       z-index: 1;
       overflow: visible;
     }
-    /* Map title banner - hidden because our bg-harta.png already has a magnificent cartoon scroll title */
+    /* Map title banner - restored for the clean look */
     .fairy-row::before {
-      display: none;
+      content: '🧭 HARTA COMOARII PIRAȚILOR 🏴‍☠️';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      text-align: center;
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+      font-weight: 800;
+      color: #451a03;
+      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+      padding: 6px 10px;
+      border-bottom: 3px solid #92400e;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+      z-index: 10;
     }
-    /* Dotted trail SVG overlay - semi-transparent ordering helper */
+    /* Dotted trail SVG overlay */
     .fairy-row::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="2.5" stroke-dasharray="10,12" opacity="0.35"/></svg>') center/100% 100% no-repeat;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="none"><path d="M80,120 C200,80 180,280 350,200 S450,350 550,250 S650,400 720,480" fill="none" stroke="%23451a03" stroke-width="3" stroke-dasharray="12,10" opacity="0.5"/><text x="700" y="500" font-size="40" fill="%23dc2626" font-weight="bold" text-anchor="middle">X</text></svg>') center/100% 100% no-repeat;
       pointer-events: none;
       z-index: 1;
     }
@@ -671,19 +691,24 @@
 
     /* ===== HARTA PROGRESULUI ===== */
     .progress-map-section {
-      background: url('bg-harta.png') no-repeat center center;
-      background-size: cover;
+      background: linear-gradient(180deg, #0c4a6e 0%, #0369a1 40%, #0ea5e9 100%);
       border-radius: 24px;
-      padding: 95px 16px 40px; /* Leave space at top so the beautiful printed title "Harta Comorii Piratilor" is fully visible! */
+      padding: 30px 16px 40px;
       position: relative;
       overflow: visible; /* Allow 3D islands to pop out clean */
-      border: 5px solid #78350f;
+      border: 6px solid #92400e;
+      outline: 8px solid #78350f;
+      outline-offset: 0px;
       box-shadow:
-        inset 0 0 50px rgba(0,0,0,0.35),
-        0 12px 35px rgba(0,0,0,0.45);
+        inset 0 0 60px rgba(0,0,0,0.15),
+        0 8px 30px rgba(0,0,0,0.4);
     }
     .progress-map-section::before {
-      display: none; /* Wave overlay not needed since we have a gorgeous watercolor map background */
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" viewBox="0 0 200 20"><path d="M0,10 Q25,0 50,10 T100,10 T150,10 T200,10" fill="none" stroke="%2393c5fd" stroke-width="2" opacity="0.25"/></svg>') repeat;
+      pointer-events: none;
     }
     .pm-title {
       text-align: center;
